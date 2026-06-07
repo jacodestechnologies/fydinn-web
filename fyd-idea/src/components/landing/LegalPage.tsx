@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/landing/SiteFooter";
+import { APP_CONFIG } from "@/lib/config";
 
 export function LegalPage({
   title,
@@ -14,15 +14,15 @@ export function LegalPage({
     <div className="flex flex-col min-h-dvh bg-surface text-text-main">
       <header className="sticky top-0 z-50 bg-surface/80 backdrop-blur-md ring-1 ring-black/5">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="size-6 bg-brand rounded-md flex items-center justify-center">
-              <div className="size-2 bg-surface rounded-full" />
+          <a href="/" className="flex items-center gap-2">
+            <div className="size-5 bg-brand flex items-center justify-center">
+              <div className="size-1.5 bg-surface" />
             </div>
-            <span className="font-semibold text-lg tracking-tight">FirstDate</span>
-          </Link>
-          <Link to="/" className="text-sm text-text-muted hover:text-brand">
+            <span className="font-semibold text-lg tracking-tight">{APP_CONFIG.name}</span>
+          </a>
+          <a href="/" className="text-sm text-text-muted hover:text-brand transition-colors">
             ← Back home
-          </Link>
+          </a>
         </div>
       </header>
       <main className="flex-1">

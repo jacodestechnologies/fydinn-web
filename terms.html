@@ -1,135 +1,355 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Terms of Service — FirstDate</title>
-<meta name="description" content="The terms and conditions for using the FirstDate dating app." />
-<link rel="canonical" href="/terms" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --brand: #e11d48; --brand-light: #fb7185;
-    --surface: #09090b; --surface-muted: #18181b; --surface-elevated: #27272a;
-    --text-main: #fafafa; --text-muted: #a1a1aa; --text-subtle: #71717a;
-    --hairline: rgba(255,255,255,0.08);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--surface); color: var(--text-main); font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; min-height: 100dvh; display: flex; flex-direction: column; }
-  h1,h2,h3 { font-family: 'Playfair Display', serif; letter-spacing: -0.02em; }
-  a { color: inherit; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Service — Fydinn</title>
+    <meta
+      name="description"
+      content="The terms and conditions for using the Fydinn dating app."
+    />
+    <link rel="canonical" href="/terms" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand: #e11d48;
+        --brand-light: #fb7185;
+        --surface: #09090b;
+        --surface-muted: #18181b;
+        --surface-elevated: #27272a;
+        --text-main: #fafafa;
+        --text-muted: #a1a1aa;
+        --text-subtle: #71717a;
+        --hairline: rgba(255, 255, 255, 0.08);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--surface);
+        color: var(--text-main);
+        font-family: "DM Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", serif;
+        letter-spacing: -0.02em;
+      }
+      a {
+        color: inherit;
+      }
 
-  /* HEADER */
-  .page-header {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(9,9,11,0.85); backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--hairline);
-  }
-  .page-header-inner {
-    max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;
-    height: 4rem; display: flex; align-items: center; justify-content: space-between;
-  }
-  .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-  .logo-dot { width: 1.5rem; height: 1.5rem; background: var(--brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .logo-dot::after { content: ''; width: 0.5rem; height: 0.5rem; background: #fff; border-radius: 50%; }
-  .logo-text { font-family: 'Playfair Display', serif; font-size: 1.125rem; font-weight: 700; letter-spacing: -0.03em; color: var(--text-main); }
-  .back-link { font-size: 0.875rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-  .back-link:hover { color: var(--brand); }
+      /* HEADER */
+      .page-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(9, 9, 11, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--hairline);
+      }
+      .page-header-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+      }
+      .logo-dot {
+        width: 1.5rem;
+        height: 1.5rem;
+        background: var(--brand);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .logo-dot::after {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        background: #fff;
+        border-radius: 50%;
+      }
+      .logo-text {
+        font-family: "Playfair Display", serif;
+        font-size: 1.125rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: var(--text-main);
+      }
+      .back-link {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .back-link:hover {
+        color: var(--brand);
+      }
 
-  /* ARTICLE */
-  main { flex: 1; }
-  article { max-width: 48rem; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
-  .legal-h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem; }
-  .legal-intro { font-size: 1.125rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; margin-bottom: 3rem; }
-  .legal-sections { display: flex; flex-direction: column; gap: 2.5rem; }
-  .legal-section h2 { font-size: 1.25rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.75rem; letter-spacing: -0.01em; }
-  .legal-section p { font-size: 0.9375rem; font-weight: 300; color: var(--text-muted); line-height: 1.8; }
-  .legal-placeholder { margin-top: 4rem; font-size: 0.75rem; color: var(--text-subtle); border-top: 1px solid var(--hairline); padding-top: 1.5rem; }
+      /* ARTICLE */
+      main {
+        flex: 1;
+      }
+      article {
+        max-width: 48rem;
+        margin: 0 auto;
+        padding: 4rem 1.5rem 6rem;
+      }
+      .legal-h1 {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 1.5rem;
+      }
+      .legal-intro {
+        font-size: 1.125rem;
+        font-weight: 300;
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin-bottom: 3rem;
+      }
+      .legal-sections {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+      .legal-section h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.01em;
+      }
+      .legal-section p {
+        font-size: 0.9375rem;
+        font-weight: 300;
+        color: var(--text-muted);
+        line-height: 1.8;
+      }
+      .legal-placeholder {
+        margin-top: 4rem;
+        font-size: 0.75rem;
+        color: var(--text-subtle);
+        border-top: 1px solid var(--hairline);
+        padding-top: 1.5rem;
+      }
 
-  /* FOOTER */
-  footer { border-top: 1px solid var(--hairline); padding: 3rem 1.5rem; }
-  .footer-bottom { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-  .footer-bottom span { font-size: 0.625rem; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.3em; font-weight: 700; }
-  .footer-links { display: flex; gap: 2rem; }
-  .footer-links a { font-size: 0.8125rem; font-weight: 300; color: var(--text-subtle); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--brand); }
-  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-</style>
-</head>
-<body>
-<header class="page-header">
-  <div class="page-header-inner">
-    <a href="index.html" class="logo" aria-label="FirstDate home">
-      <div class="logo-dot" aria-hidden="true"></div>
-      <span class="logo-text">FirstDate</span>
-    </a>
-    <a href="index.html" class="back-link">← Back home</a>
-  </div>
-</header>
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--hairline);
+        padding: 3rem 1.5rem;
+      }
+      .footer-bottom {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .footer-bottom span {
+        font-size: 0.625rem;
+        color: var(--text-subtle);
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        font-weight: 700;
+      }
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+      .footer-links a {
+        font-size: 0.8125rem;
+        font-weight: 300;
+        color: var(--text-subtle);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--brand);
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-header-inner">
+        <a href="index.html" class="logo" aria-label="Fydinn home">
+          <div class="logo-dot" aria-hidden="true"></div>
+          <span class="logo-text">Fydinn</span>
+        </a>
+        <a href="index.html" class="back-link">← Back home</a>
+      </div>
+    </header>
 
-<main>
-  <article>
-    <h1 class="legal-h1">Terms of Service</h1>
-    <p class="legal-intro">By using FirstDate you agree to these terms. They cover account use, community rules, and our responsibilities to you.</p>
-    <div class="legal-sections">
-      <section class="legal-section">
-        <h2>1. Eligibility</h2>
-        <p>You must be 18 or older and legally able to enter a contract in your jurisdiction to use FirstDate. By creating an account you confirm that all information you provide is accurate and complete. We reserve the right to refuse service to anyone who misrepresents their identity or eligibility.</p>
-      </section>
-      <section class="legal-section">
-        <h2>2. Your Account</h2>
-        <p>Keep your credentials confidential and your profile accurate. You are responsible for all activity that occurs on your account, whether or not authorized by you. If you suspect unauthorized access, notify us immediately at security@firstdate.app. You may not create more than one account per person.</p>
-      </section>
-      <section class="legal-section">
-        <h2>3. Community Rules</h2>
-        <p>No harassment, impersonation, hate speech, nudity, or unlawful behavior is permitted on FirstDate. We may suspend or permanently ban accounts that violate these rules without prior notice. We also reserve the right to remove content that we determine is harmful or inconsistent with our values, even if not expressly prohibited.</p>
-      </section>
-      <section class="legal-section">
-        <h2>4. Identity Verification</h2>
-        <p>All members are required to complete identity verification before accessing certain features of the platform. Verification data is processed by our trusted third-party partner and is handled in accordance with our Privacy Policy. Attempting to circumvent verification or providing false documents is grounds for immediate termination.</p>
-      </section>
-      <section class="legal-section">
-        <h2>5. Subscriptions &amp; Payments</h2>
-        <p>Premium plans renew automatically at the end of each billing period until cancelled. You can manage billing and cancellation in your account settings at any time. Refunds are processed at our discretion in accordance with applicable consumer protection laws in your jurisdiction. Prices may change with 30 days' notice.</p>
-      </section>
-      <section class="legal-section">
-        <h2>6. Intellectual Property</h2>
-        <p>FirstDate and all its original content, features, and functionality are owned by FirstDate App Ltd. and are protected by international copyright, trademark, and other intellectual property laws. You retain ownership of any content you submit, but grant us a worldwide, royalty-free licence to use, display, and distribute that content on the platform.</p>
-      </section>
-      <section class="legal-section">
-        <h2>7. Limitation of Liability</h2>
-        <p>FirstDate is provided on an "as is" basis. We make no warranties, express or implied, regarding safety of in-person meetings arranged through the platform. You agree to take reasonable precautions when meeting anyone for the first time. To the maximum extent permitted by law, FirstDate is not liable for indirect, incidental, or consequential damages.</p>
-      </section>
-      <section class="legal-section">
-        <h2>8. Termination</h2>
-        <p>You can delete your account at any time through the app settings. We can suspend or terminate your access for safety or policy reasons. Upon termination, your right to use the service immediately ceases. Provisions that by their nature should survive termination shall survive, including intellectual property rights and limitation of liability clauses.</p>
-      </section>
-      <section class="legal-section">
-        <h2>9. Governing Law</h2>
-        <p>These terms are governed by the laws of England and Wales. Any disputes arising from these terms or your use of FirstDate will be subject to the exclusive jurisdiction of the courts of England and Wales, unless mandatory local consumer protection laws apply in your country of residence.</p>
-      </section>
-      <section class="legal-section">
-        <h2>10. Changes to These Terms</h2>
-        <p>We may update these terms from time to time. We will notify you of material changes via in-app notice or email at least 30 days before they take effect. Your continued use of the service after the effective date constitutes acceptance of the revised terms.</p>
-      </section>
-    </div>
-    <p class="legal-placeholder">This is placeholder copy. Replace with your finalized legal language before launch. Last updated: January 2025.</p>
-  </article>
-</main>
+    <main>
+      <article>
+        <h1 class="legal-h1">Terms of Service</h1>
+        <p class="legal-intro">
+          By using Fydinn you agree to these terms. They cover account use,
+          community rules, and our responsibilities to you.
+        </p>
+        <div class="legal-sections">
+          <section class="legal-section">
+            <h2>1. Eligibility</h2>
+            <p>
+              You must be 18 or older and legally able to enter a contract in
+              your jurisdiction to use Fydinn. By creating an account you
+              confirm that all information you provide is accurate and complete.
+              We reserve the right to refuse service to anyone who misrepresents
+              their identity or eligibility.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>2. Your Account</h2>
+            <p>
+              Keep your credentials confidential and your profile accurate. You
+              are responsible for all activity that occurs on your account,
+              whether or not authorized by you. If you suspect unauthorized
+              access, notify us immediately at security@fydinn.app. You may not
+              create more than one account per person.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>3. Community Rules</h2>
+            <p>
+              No harassment, impersonation, hate speech, nudity, or unlawful
+              behavior is permitted on Fydinn. We may suspend or permanently ban
+              accounts that violate these rules without prior notice. We also
+              reserve the right to remove content that we determine is harmful
+              or inconsistent with our values, even if not expressly prohibited.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>4. Identity Verification</h2>
+            <p>
+              All members are required to complete identity verification before
+              accessing certain features of the platform. Verification data is
+              processed by our trusted third-party partner and is handled in
+              accordance with our Privacy Policy. Attempting to circumvent
+              verification or providing false documents is grounds for immediate
+              termination.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>5. Subscriptions &amp; Payments</h2>
+            <p>
+              Premium plans renew automatically at the end of each billing
+              period until cancelled. You can manage billing and cancellation in
+              your account settings at any time. Refunds are processed at our
+              discretion in accordance with applicable consumer protection laws
+              in your jurisdiction. Prices may change with 30 days' notice.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>6. Intellectual Property</h2>
+            <p>
+              Fydinn and all its original content, features, and functionality
+              are owned by Fydinn App Ltd. and are protected by international
+              copyright, trademark, and other intellectual property laws. You
+              retain ownership of any content you submit, but grant us a
+              worldwide, royalty-free licence to use, display, and distribute
+              that content on the platform.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>7. Limitation of Liability</h2>
+            <p>
+              Fydinn is provided on an "as is" basis. We make no warranties,
+              express or implied, regarding safety of in-person meetings
+              arranged through the platform. You agree to take reasonable
+              precautions when meeting anyone for the first time. To the maximum
+              extent permitted by law, Fydinn is not liable for indirect,
+              incidental, or consequential damages.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>8. Termination</h2>
+            <p>
+              You can delete your account at any time through the app settings.
+              We can suspend or terminate your access for safety or policy
+              reasons. Upon termination, your right to use the service
+              immediately ceases. Provisions that by their nature should survive
+              termination shall survive, including intellectual property rights
+              and limitation of liability clauses.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>9. Governing Law</h2>
+            <p>
+              These terms are governed by the laws of England and Wales. Any
+              disputes arising from these terms or your use of Fydinn will be
+              subject to the exclusive jurisdiction of the courts of England and
+              Wales, unless mandatory local consumer protection laws apply in
+              your country of residence.
+            </p>
+          </section>
+          <section class="legal-section">
+            <h2>10. Changes to These Terms</h2>
+            <p>
+              We may update these terms from time to time. We will notify you of
+              material changes via in-app notice or email at least 30 days
+              before they take effect. Your continued use of the service after
+              the effective date constitutes acceptance of the revised terms.
+            </p>
+          </section>
+        </div>
+        <p class="legal-placeholder">
+          This is placeholder copy. Replace with your finalized legal language
+          before launch. Last updated: January 2025.
+        </p>
+      </article>
+    </main>
 
-<footer>
-  <div class="footer-bottom">
-    <span>© 2025 FirstDate App. All rights reserved.</span>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="cookies.html">Cookies</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-</body>
+    <footer>
+      <div class="footer-bottom">
+        <span>© 2025 Fydinn App. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

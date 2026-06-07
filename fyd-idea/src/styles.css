@@ -60,7 +60,14 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
   --color-brand-light: var(--brand-light);
+  --color-warm-cream: var(--warm-cream);
+  --color-mint: var(--mint);
+  --color-lilac: var(--lilac);
+  --color-peach: var(--peach);
+  --color-ink: var(--ink);
+  --color-deep-purple: var(--deep-purple);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
   --color-surface-elevated: var(--surface-elevated);
@@ -69,11 +76,11 @@
   --color-text-subtle: var(--text-subtle);
   --color-hairline: var(--hairline);
   --font-display: "Playfair Display", ui-serif, Georgia, serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
@@ -106,16 +113,23 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
-  /* FirstDate brand tokens — Noir editorial chic */
-  --brand: #e11d48;
-  --brand-light: #fb7185;
-  --surface: #09090b;            /* zinc-950 */
-  --surface-muted: #18181b;      /* zinc-900 */
-  --surface-elevated: #27272a;   /* zinc-800 */
-  --text-main: #fafafa;          /* zinc-50 */
-  --text-muted: #a1a1aa;         /* zinc-400 */
-  --text-subtle: #71717a;        /* zinc-500 */
-  --hairline: rgba(255,255,255,0.08);
+  --brand: #9b5bff;
+  --brand-deep: #6d35d7;
+  --brand-light: #c9a8ff;
+  --warm-cream: #f6f5f1;
+  --mint: #e5e9e0;
+  --lilac: #eedbea;
+  --peach: #ffe1cf;
+  --ink: #221c40;
+  --deep-purple: #1a1640;
+  --surface: #f6f5f1;
+  --surface-muted: #e5e9e0;
+  --surface-elevated: #ffffff;
+  --text-main: #221c40;
+  --text-muted: rgba(34, 28, 64, 0.68);
+  --text-subtle: rgba(34, 28, 64, 0.52);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --shadow-soft: 0 28px 80px rgba(34, 28, 64, 0.14);
 }
 
 .dark {
@@ -151,6 +165,21 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  /* Dark-mode overrides for the app palette */
+  --warm-cream: #1c1828;
+  --ink: #f0ecfa;
+  --deep-purple: #0e0c1e;
+  --surface: #1c1828;
+  --surface-muted: #2a2540;
+  --surface-elevated: #332e50;
+  --text-main: #f0ecfa;
+  --text-muted: rgba(240, 236, 250, 0.68);
+  --text-subtle: rgba(240, 236, 250, 0.48);
+  --hairline: rgba(255, 255, 255, 0.1);
+  --lilac: #2d2450;
+  --mint: #162e28;
+  --peach: #2e1a12;
+  --shadow-soft: 0 28px 80px rgba(0, 0, 0, 0.4);
 }
 
 @layer base {
@@ -161,13 +190,17 @@
   body {
     background-color: var(--surface);
     color: var(--text-main);
-    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-family: "DM Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: "Playfair Display", ui-serif, Georgia, serif;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 
   html {
@@ -175,10 +208,18 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.001ms !important;
       transition-duration: 0.001ms !important;
     }
   }
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
 }
