@@ -9,11 +9,11 @@ const sections = [
   },
   {
     heading: "Sharing Your Information",
-    body: "Your profile is visible to other verified Fydinn members based on your visibility settings. We may share data with trusted service providers who assist us in operating the platform, always under strict confidentiality agreements.",
+    body: "Your profile is visible to other verified MeantGo members based on your visibility settings. We may share data with trusted service providers who assist us in operating the platform, always under strict confidentiality agreements.",
   },
   {
     heading: "Data Security",
-    body: "We use industry-standard encryption and security practices to protect your data. All messages on Fydinn are end-to-end encrypted. We conduct regular security audits and respond promptly to any identified vulnerabilities.",
+    body: "We use industry-standard encryption and security practices to protect your data. All messages on MeantGo are end-to-end encrypted. We conduct regular security audits and respond promptly to any identified vulnerabilities.",
   },
   {
     heading: "Your Rights",
@@ -25,7 +25,7 @@ const sections = [
   },
   {
     heading: "Contact",
-    body: "For any privacy-related questions or requests, reach out to privacy@fydinn.app. We aim to respond within 72 hours.",
+    body: "For any privacy-related questions or requests, reach out to privacy@meantgo.app. We aim to respond within 72 hours.",
   },
 ];
 

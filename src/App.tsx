@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import Home from "@/pages/Home";
@@ -16,8 +16,14 @@ function ScrollToTop() {
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
+  const { theme } = useTheme();
+  
   return (
-    <div className="flex flex-col min-h-dvh bg-warm-cream text-ink transition-colors duration-300">
+    <div className={`flex flex-col min-h-dvh transition-colors duration-300 ${
+      theme === "dark" 
+        ? "bg-surface text-text-main" 
+        : "bg-warm-cream text-ink"
+    }`}>
       <Nav />
       <main className="flex-1">{children}</main>
       <Footer />

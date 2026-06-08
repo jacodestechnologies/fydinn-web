@@ -32,3 +32,4 @@ dist-ssr
 *.sw?
 *.tsbuildinfo
 node_modules/
+design-idea.md

@@ -41,7 +41,7 @@ export function Footer() {
                 <MessageCircleHeart className="size-5" aria-hidden="true" />
               </span>
               <span className="font-display text-2xl font-black text-ink">
-                Fydinn
+                MeantGo
               </span>
             </div>
             <p className="max-w-sm text-ink/62">
@@ -94,7 +94,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-ink/8 pt-6 text-sm font-semibold text-ink/52 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} Fydinn. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} MeantGo. All rights reserved.</span>
           <span>Made with intention.</span>
         </div>
       </div>

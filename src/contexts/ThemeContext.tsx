@@ -16,7 +16,13 @@ const ThemeContext = createContext<{
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") return "light";
-    return (localStorage.getItem("fydinn-theme") as Theme) ?? "light";
+    const saved = localStorage.getItem("meantgo-theme") as Theme | null;
+    if (saved) return saved;
+    // Check system preference
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
   });
 
   useEffect(() => {
@@ -26,7 +32,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     } else {
       root.classList.remove("dark");
     }
-    localStorage.setItem("fydinn-theme", theme);
+    localStorage.setItem("meantgo-theme", theme);
   }, [theme]);
 
   const toggle = () => setTheme((t) => (t === "light" ? "dark" : "light"));

@@ -36,7 +36,7 @@ export function Hero() {
         {/* Left — copy */}
         <div className="space-y-10">
           <p className="hero-eyebrow text-[11px] font-bold uppercase tracking-[0.4em] text-brand">
-            Intentional Connections
+            Explore with Intent
           </p>
 
           <h1 className="hero-h1 font-display text-[clamp(4rem,8vw,6.5rem)] font-bold leading-[0.88] tracking-[-0.03em] text-text-main">
@@ -48,8 +48,7 @@ export function Hero() {
           </h1>
 
           <p className="hero-p text-lg text-text-muted font-light max-w-md leading-relaxed">
-            Skip the endless swiping. Fydinn uses value-based matching and identity verification to
-            connect you with someone who genuinely shares your vision.
+            Send your intent. MeantGo finds you with people who are looking for exactly what you are. Real connections, same vision.
           </p>
 
           <div className="hero-badges">

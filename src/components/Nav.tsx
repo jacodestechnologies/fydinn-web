@@ -23,7 +23,7 @@ export function Nav() {
             <MessageCircleHeart className="size-5" aria-hidden="true" />
           </span>
           <span className="font-display text-2xl tracking-normal text-ink">
-            Fydinn
+            MeantGo
           </span>
         </Link>
 

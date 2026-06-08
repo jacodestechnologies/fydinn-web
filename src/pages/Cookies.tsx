@@ -5,7 +5,7 @@ const sections = [
   },
   {
     heading: "Essential Cookies",
-    body: "These cookies are necessary for Fydinn to function. They keep you logged in, maintain your session, and ensure security features work correctly. You cannot opt out of essential cookies while using the app.",
+    body: "These cookies are necessary for MeantGo to function. They keep you logged in, maintain your session, and ensure security features work correctly. You cannot opt out of essential cookies while using the app.",
   },
   {
     heading: "Analytics Cookies",
@@ -33,7 +33,7 @@ export default function Cookies() {
         Cookie Policy
       </h1>
       <p className="text-xl leading-8 text-ink/65 mb-16">
-        A plain-language explanation of how and why we use cookies on Fydinn.
+        A plain-language explanation of how and why we use cookies on MeantGo.
       </p>
 
       <div className="space-y-12">

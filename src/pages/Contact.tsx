@@ -28,8 +28,8 @@ export default function Contact() {
             </div>
             <div>
               <p className="font-bold text-ink mb-1">General Enquiries</p>
-              <a href="mailto:hello@fydinn.app" className="text-ink/65 hover:text-brand transition-colors">
-                hello@fydinn.app
+              <a href="mailto:hello@meantgo.app" className="text-ink/65 hover:text-brand transition-colors">
+                hello@meantgo.app
               </a>
             </div>
           </div>
@@ -40,8 +40,8 @@ export default function Contact() {
             </div>
             <div>
               <p className="font-bold text-ink mb-1">Privacy &amp; Support</p>
-              <a href="mailto:privacy@fydinn.app" className="text-ink/65 hover:text-brand transition-colors">
-                privacy@fydinn.app
+              <a href="mailto:privacy@meantgo.app" className="text-ink/65 hover:text-brand transition-colors">
+                privacy@meantgo.app
               </a>
             </div>
           </div>
