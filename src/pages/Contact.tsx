@@ -1,5 +1,36 @@
 import { useState } from "react";
-import { Mail, MapPin, MessageSquare } from "lucide-react";
+import { Mail, MapPin, Shield, Clock, Send, Check } from "lucide-react";
+
+const contactChannels = [
+  {
+    icon: Mail,
+    title: "General Enquiries",
+    desc: "Questions, feedback, or partnership ideas.",
+    value: "support@meantgo.com",
+    href: "mailto:support@meantgo.com",
+  },
+  {
+    icon: Shield,
+    title: "Privacy & Data",
+    desc: "Data requests, deletion, or privacy concerns.",
+    value: "privacy@meantgo.com",
+    href: "mailto:privacy@meantgo.com",
+  },
+  {
+    icon: MapPin,
+    title: "Headquarters",
+    desc: "Where we build MeantGo.",
+    value: "Lagos, Nigeria",
+  },
+];
+
+const subjects = [
+  "General question",
+  "Account or login help",
+  "Report a problem",
+  "Privacy request",
+  "Partnership or press",
+];
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -10,57 +41,70 @@ export default function Contact() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-6 pt-16 pb-32">
-      <p className="text-xs font-bold uppercase tracking-[0.24em] text-brand mb-6">Get in Touch</p>
-      <h1 className="font-display text-5xl md:text-6xl font-black leading-[1] text-ink mb-6 tracking-tight">
-        We'd love to hear from you.
-      </h1>
-      <p className="text-xl leading-8 text-ink/65 mb-16 max-w-xl">
-        Questions, feedback, partnership ideas, or just a hello — our inbox is always open.
-      </p>
+    <div className="max-w-5xl mx-auto px-5 sm:px-6 py-16 pb-24">
+      {/* Header */}
+      <div className="mb-14 max-w-2xl">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand mb-5">
+          Get in Touch
+        </p>
+        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-ink mb-5">
+          We'd love to hear from you
+        </h1>
+        <p className="text-base sm:text-lg leading-relaxed text-ink/60">
+          Questions, feedback, partnership ideas, or just a hello — our inbox is always open and
+          we read every message.
+        </p>
+      </div>
 
-      <div className="grid md:grid-cols-[1fr_1.5fr] gap-16">
+      <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-14">
         {/* Contact details */}
-        <div className="space-y-10">
-          <div className="flex gap-4">
-            <div className="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
-              <Mail className="size-5" aria-hidden="true" />
+        <div className="space-y-3">
+          {contactChannels.map(({ icon: Icon, title, desc, value, href }) => (
+            <div
+              key={title}
+              className="rounded-xl border border-ink/10 bg-surface-muted/40 p-5 flex gap-4"
+            >
+              <div className="grid size-10 shrink-0 place-items-center rounded-lg bg-brand/10 text-brand">
+                <Icon className="size-5" aria-hidden="true" />
+              </div>
+              <div>
+                <p className="font-semibold text-ink mb-0.5">{title}</p>
+                <p className="text-xs text-ink/50 mb-2 leading-relaxed">{desc}</p>
+                {href ? (
+                  <a
+                    href={href}
+                    className="text-sm font-medium text-brand hover:underline break-all"
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <p className="text-sm font-medium text-ink/75">{value}</p>
+                )}
+              </div>
             </div>
-            <div>
-              <p className="font-bold text-ink mb-1">General Enquiries</p>
-              <a href="mailto:hello@meantgo.app" className="text-ink/65 hover:text-brand transition-colors">
-                hello@meantgo.app
-              </a>
-            </div>
+          ))}
+
+          {/* Response time */}
+          <div className="rounded-xl border border-brand/20 bg-brand/5 p-5 flex gap-3 items-center">
+            <Clock className="size-5 shrink-0 text-brand" aria-hidden="true" />
+            <p className="text-sm text-ink/70">
+              We typically respond within{" "}
+              <strong className="font-semibold text-ink">24–48 hours</strong>.
+            </p>
           </div>
 
-          <div className="flex gap-4">
-            <div className="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
-              <MessageSquare className="size-5" aria-hidden="true" />
-            </div>
-            <div>
-              <p className="font-bold text-ink mb-1">Privacy &amp; Support</p>
-              <a href="mailto:privacy@meantgo.app" className="text-ink/65 hover:text-brand transition-colors">
-                privacy@meantgo.app
-              </a>
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <div className="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
-              <MapPin className="size-5" aria-hidden="true" />
-            </div>
-            <div>
-              <p className="font-bold text-ink mb-1">Headquarters</p>
-              <p className="text-ink/65">Lagos, Nigeria</p>
-            </div>
-          </div>
-
-          <div className="border-t border-ink/10 pt-8">
-            <p className="text-sm font-semibold text-ink/55 mb-3">Follow Us</p>
-            <div className="flex gap-4">
-              {["Instagram", "TikTok", "Twitter/X"].map((platform) => (
-                <a key={platform} href="#" className="text-sm font-bold text-brand-deep hover:text-brand transition-colors">
+          {/* Social */}
+          <div className="pt-4 px-1">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/40 mb-3">
+              Follow Us
+            </p>
+            <div className="flex gap-5">
+              {["Instagram", "TikTok", "X"].map((platform) => (
+                <a
+                  key={platform}
+                  href="#"
+                  className="text-sm font-semibold text-ink/55 hover:text-brand transition-colors"
+                >
                   {platform}
                 </a>
               ))}
@@ -71,70 +115,115 @@ export default function Contact() {
         {/* Form */}
         <div>
           {sent ? (
-            <div className="rounded-[2rem] bg-brand/8 border border-brand/20 p-10 text-center">
-              <div className="grid size-16 place-items-center rounded-full bg-brand/15 text-brand mx-auto mb-4">
-                <Mail className="size-7" aria-hidden="true" />
+            <div className="rounded-2xl border border-brand/20 bg-brand/5 p-10 sm:p-12 text-center h-full flex flex-col justify-center min-h-[24rem]">
+              <div className="grid size-14 place-items-center rounded-full bg-brand/15 text-brand mx-auto mb-5">
+                <Check className="size-7" aria-hidden="true" />
               </div>
-              <h2 className="font-display text-2xl font-black text-ink mb-2">Message sent!</h2>
-              <p className="text-ink/65">We'll get back to you within 24–48 hours.</p>
+              <h2 className="text-2xl font-semibold tracking-tight text-ink mb-2">
+                Message sent
+              </h2>
+              <p className="text-ink/60 max-w-sm mx-auto">
+                Thanks for reaching out. We'll get back to you within 24–48 hours at the email you
+                provided.
+              </p>
+              <button
+                onClick={() => setSent(false)}
+                className="mt-6 mx-auto text-sm font-semibold text-brand hover:underline"
+              >
+                Send another message
+              </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              onSubmit={handleSubmit}
+              className="rounded-2xl border border-ink/10 bg-surface-muted/30 p-6 sm:p-8 space-y-5"
+            >
               <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-bold text-ink mb-2">Name</label>
+                <Field label="Name" htmlFor="name">
                   <input
                     id="name"
                     type="text"
                     required
                     placeholder="Your name"
-                    className="w-full rounded-2xl border border-ink/15 bg-white/70 px-5 py-4 text-ink placeholder:text-ink/35 focus:border-brand focus:outline-none transition-colors"
+                    className={inputClass}
                   />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-bold text-ink mb-2">Email</label>
+                </Field>
+                <Field label="Email" htmlFor="email">
                   <input
                     id="email"
                     type="email"
                     required
                     placeholder="you@example.com"
-                    className="w-full rounded-2xl border border-ink/15 bg-white/70 px-5 py-4 text-ink placeholder:text-ink/35 focus:border-brand focus:outline-none transition-colors"
+                    className={inputClass}
                   />
-                </div>
+                </Field>
               </div>
 
-              <div>
-                <label htmlFor="subject" className="block text-sm font-bold text-ink mb-2">Subject</label>
-                <input
-                  id="subject"
-                  type="text"
-                  required
-                  placeholder="What's this about?"
-                  className="w-full rounded-2xl border border-ink/15 bg-white/70 px-5 py-4 text-ink placeholder:text-ink/35 focus:border-brand focus:outline-none transition-colors"
-                />
-              </div>
+              <Field label="Subject" htmlFor="subject">
+                <select id="subject" required defaultValue="" className={inputClass}>
+                  <option value="" disabled>
+                    Choose a topic
+                  </option>
+                  {subjects.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </Field>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-bold text-ink mb-2">Message</label>
+              <Field label="Message" htmlFor="message">
                 <textarea
                   id="message"
                   required
                   rows={6}
                   placeholder="Tell us what's on your mind..."
-                  className="w-full rounded-2xl border border-ink/15 bg-white/70 px-5 py-4 text-ink placeholder:text-ink/35 focus:border-brand focus:outline-none transition-colors resize-none"
+                  className={`${inputClass} resize-none`}
                 />
-              </div>
+              </Field>
 
-              <button
-                type="submit"
-                className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-brand px-8 py-3 text-sm font-bold text-white shadow-[0_18px_45px_rgba(155,91,255,0.28)] transition hover:-translate-y-0.5 hover:bg-brand-deep w-full sm:w-auto"
-              >
-                Send Message
-              </button>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-1">
+                <button
+                  type="submit"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,180,216,0.35)] transition-all hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(0,180,216,0.45)]"
+                >
+                  <Send className="size-4" aria-hidden="true" />
+                  Send Message
+                </button>
+                <p className="text-xs text-ink/45">
+                  By sending, you agree to our{" "}
+                  <a href="/privacy" className="text-brand hover:underline">
+                    Privacy Policy
+                  </a>
+                  .
+                </p>
+              </div>
             </form>
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+const inputClass =
+  "w-full rounded-lg border border-ink/15 bg-surface px-4 py-3 text-sm text-ink placeholder:text-ink/35 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none transition-colors";
+
+function Field({
+  label,
+  htmlFor,
+  children,
+}: {
+  label: string;
+  htmlFor: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label htmlFor={htmlFor} className="block text-sm font-semibold text-ink mb-2">
+        {label}
+      </label>
+      {children}
     </div>
   );
 }

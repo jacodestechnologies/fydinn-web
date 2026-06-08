@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Bell,
+  Check,
   Compass,
   EyeOff,
   Flag,
@@ -26,7 +27,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
   { value: "500K+", label: "Connections Made", detail: "real starts, not endless swipes" },
-  { value: "4.8", label: "App Store Rating", detail: "loved for calmer discovery", stars: true },
+  { value: "4.3", label: "App Store Rating", detail: "loved for calmer discovery", stars: true },
   { value: "60+", label: "Shared Interests", detail: "ways to find common ground" },
   { value: "3", label: "Relationship Goals", detail: "clear intent from day one" },
 ];
@@ -176,7 +177,10 @@ function StarFilled({ className }: { className?: string }) {
 
 function Stars({ count = 5 }: { count?: number }) {
   return (
-    <div className="flex items-center gap-0.5 text-amber-400" aria-label={`${count} out of 5 stars`}>
+    <div
+      className="flex items-center gap-0.5 text-amber-400"
+      aria-label={`${count} out of 5 stars`}
+    >
       {Array.from({ length: count }).map((_, i) => (
         <StarFilled key={i} />
       ))}
@@ -192,12 +196,41 @@ function AppStoreBadges({ align = "start" }: { align?: "start" | "center" }) {
         className="inline-block rounded-lg transition hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
         aria-label="Download on the App Store"
       >
-        <svg width="148" height="48" viewBox="0 0 148 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="148"
+          height="48"
+          viewBox="0 0 148 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <rect width="148" height="48" rx="8" fill="#000" />
-          <path d="M23.4 10.4C22.6 11.4 21.5 12.1 20.4 12.0C20.2 10.9 20.8 9.8 21.5 9.0C22.3 8.1 23.5 7.5 24.5 7.4C24.6 8.6 24.1 9.7 23.4 10.4Z" fill="white" />
-          <path d="M24.5 12.3C22.7 12.2 21.1 13.3 20.2 13.3C19.2 13.3 17.8 12.4 16.4 12.4C14.3 12.5 12.4 13.7 11.4 15.5C9.3 19.3 10.7 24.9 12.8 27.9C13.8 29.4 15.0 31.0 16.6 31.0C18.1 30.9 18.7 30.0 20.4 30.0C22.2 30.0 22.7 31.0 24.3 30.9C25.9 30.9 27.0 29.4 28.1 27.9C29.2 26.3 29.6 24.8 29.6 24.7C29.6 24.6 26.9 23.6 26.9 20.5C26.9 17.8 29.1 16.5 29.1 16.5C27.8 14.5 25.6 12.4 24.5 12.3Z" fill="white" />
-          <text x="40" y="20" fill="white" fontSize="9" fontFamily="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif">Download on the</text>
-          <text x="40" y="36" fill="white" fontSize="17" fontFamily="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif" fontWeight="600">App Store</text>
+          <path
+            d="M23.4 10.4C22.6 11.4 21.5 12.1 20.4 12.0C20.2 10.9 20.8 9.8 21.5 9.0C22.3 8.1 23.5 7.5 24.5 7.4C24.6 8.6 24.1 9.7 23.4 10.4Z"
+            fill="white"
+          />
+          <path
+            d="M24.5 12.3C22.7 12.2 21.1 13.3 20.2 13.3C19.2 13.3 17.8 12.4 16.4 12.4C14.3 12.5 12.4 13.7 11.4 15.5C9.3 19.3 10.7 24.9 12.8 27.9C13.8 29.4 15.0 31.0 16.6 31.0C18.1 30.9 18.7 30.0 20.4 30.0C22.2 30.0 22.7 31.0 24.3 30.9C25.9 30.9 27.0 29.4 28.1 27.9C29.2 26.3 29.6 24.8 29.6 24.7C29.6 24.6 26.9 23.6 26.9 20.5C26.9 17.8 29.1 16.5 29.1 16.5C27.8 14.5 25.6 12.4 24.5 12.3Z"
+            fill="white"
+          />
+          <text
+            x="40"
+            y="20"
+            fill="white"
+            fontSize="9"
+            fontFamily="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif"
+          >
+            Download on the
+          </text>
+          <text
+            x="40"
+            y="36"
+            fill="white"
+            fontSize="17"
+            fontFamily="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif"
+            fontWeight="600"
+          >
+            App Store
+          </text>
         </svg>
       </a>
       <a
@@ -205,17 +238,64 @@ function AppStoreBadges({ align = "start" }: { align?: "start" | "center" }) {
         className="inline-block rounded-lg transition hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
         aria-label="Get it on Google Play"
       >
-        <svg width="162" height="48" viewBox="0 0 162 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="162"
+          height="48"
+          viewBox="0 0 162 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <rect width="162" height="48" rx="8" fill="#000" />
           <path d="M11.5 15.5L11.5 32.5L23.0 24.0Z" fill="#01875F" />
           <path d="M11.5 15.5L23.0 24.0L28.0 19.2L17.5 12.5Z" fill="#FBBC04" />
           <path d="M11.5 32.5L23.0 24.0L28.0 28.8L17.5 35.5Z" fill="#EA4335" />
           <path d="M23.0 24.0L28.0 19.2L33.0 24.0L28.0 28.8Z" fill="#4285F4" />
-          <text x="44" y="20" fill="white" fontSize="9" fontFamily="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif">Get it on</text>
-          <text x="44" y="36" fill="white" fontSize="17" fontFamily="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif" fontWeight="600">Google Play</text>
+          <text
+            x="44"
+            y="20"
+            fill="white"
+            fontSize="9"
+            fontFamily="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif"
+          >
+            Get it on
+          </text>
+          <text
+            x="44"
+            y="36"
+            fill="white"
+            fontSize="17"
+            fontFamily="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif"
+            fontWeight="600"
+          >
+            Google Play
+          </text>
         </svg>
       </a>
     </div>
+  );
+}
+
+/* Animated grid backdrop — drifts slowly, fades out via a mask. */
+function GridBackdrop({
+  line = "var(--hairline)",
+  mask = "radial-gradient(ellipse 80% 60% at 50% 0%, #000 25%, transparent 100%)",
+  size = 64,
+}: {
+  line?: string;
+  mask?: string;
+  size?: number;
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className="animate-grid pointer-events-none absolute inset-0"
+      style={{
+        backgroundImage: `linear-gradient(${line} 1px, transparent 1px), linear-gradient(to right, ${line} 1px, transparent 1px)`,
+        backgroundSize: `${size}px ${size}px`,
+        maskImage: mask,
+        WebkitMaskImage: mask,
+      }}
+    />
   );
 }
 
@@ -273,7 +353,9 @@ function IntentionsVisual() {
             />
             <div className="flex-1 min-w-0">
               <p className="font-semibold leading-tight">{title}</p>
-              <p className={`text-sm mt-0.5 ${i === active ? "text-white/80" : "text-ink/55"}`}>{copy}</p>
+              <p className={`text-sm mt-0.5 ${i === active ? "text-white/80" : "text-ink/55"}`}>
+                {copy}
+              </p>
             </div>
             <div
               className={`size-2 shrink-0 rounded-full transition-all duration-500 ${i === active ? "bg-white/60 scale-100" : "scale-0"}`}
@@ -331,14 +413,19 @@ function IntentsVisual() {
       </div>
       <div className={`transition-opacity duration-300 ${fading ? "opacity-0" : "opacity-100"}`}>
         {items.map(({ text, timing, isNew }) => (
-          <div key={text} className="flex items-center justify-between border-t border-ink/8 py-4 first:border-t-0">
+          <div
+            key={text}
+            className="flex items-center justify-between border-t border-ink/8 py-4 first:border-t-0"
+          >
             <div className="flex items-center gap-3">
               <div className="grid size-9 shrink-0 place-items-center rounded-full bg-mint">
                 <Heart className="size-4 text-brand" aria-hidden="true" />
               </div>
               <span className="text-sm font-medium text-ink">{text}</span>
             </div>
-            <span className={`text-xs font-semibold shrink-0 ${isNew ? "text-brand" : "text-ink/40"}`}>
+            <span
+              className={`text-xs font-semibold shrink-0 ${isNew ? "text-brand" : "text-ink/40"}`}
+            >
               {timing}
             </span>
           </div>
@@ -354,19 +441,26 @@ function FeatureVisual({ type }: { type: string }) {
       <div className="rounded-2xl bg-warm-cream/80 p-6 shadow-soft border border-ink/6">
         <div className="mb-5 flex items-center justify-between">
           <span className="text-sm font-semibold text-ink">Common ground</span>
-          <span className="rounded-full bg-mint px-3 py-1 text-xs font-semibold text-ink">87% overlap</span>
+          <span className="rounded-full bg-mint px-3 py-1 text-xs font-semibold text-ink">
+            87% overlap
+          </span>
         </div>
         <div className="flex flex-wrap gap-2.5">
-          {["Studio Ghibli", "Sunrise hikes", "Good coffee", "Indie films", "Sourdough", "Live music"].map(
-            (tag, i) => (
-              <span
-                key={tag}
-                className={`rounded-full px-4 py-2 text-sm font-medium ${i % 2 === 0 ? "bg-brand text-white" : "bg-lilac text-ink"}`}
-              >
-                {tag}
-              </span>
-            ),
-          )}
+          {[
+            "Studio Ghibli",
+            "Sunrise hikes",
+            "Good coffee",
+            "Indie films",
+            "Sourdough",
+            "Live music",
+          ].map((tag, i) => (
+            <span
+              key={tag}
+              className={`rounded-full px-4 py-2 text-sm font-medium ${i % 2 === 0 ? "bg-brand text-white" : "bg-lilac text-ink"}`}
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
     );
@@ -402,12 +496,19 @@ function FeatureVisual({ type }: { type: string }) {
           <div className="space-y-3 p-3 pt-4">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-bold text-ink">Tomi, 30</h3>
-              <span className="rounded-full bg-mint px-3 py-1 text-xs font-semibold text-ink">92%</span>
+              <span className="rounded-full bg-mint px-3 py-1 text-xs font-semibold text-ink">
+                92%
+              </span>
             </div>
-            <p className="text-sm text-ink/60">Architect. Coffee loyalist. Looking for a soft place to land.</p>
+            <p className="text-sm text-ink/60">
+              Architect. Coffee loyalist. Looking for a soft place to land.
+            </p>
             <div className="flex flex-wrap gap-1.5">
               {["Architecture", "Jazz", "Cooking"].map((tag) => (
-                <span key={tag} className="rounded-full bg-lilac px-3 py-1 text-xs font-semibold text-ink">
+                <span
+                  key={tag}
+                  className="rounded-full bg-lilac px-3 py-1 text-xs font-semibold text-ink"
+                >
                   {tag}
                 </span>
               ))}
@@ -445,40 +546,66 @@ export default function Home() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".stat-item", {
-        opacity: 0, y: 24, duration: 0.6, ease: "power3.out", stagger: 0.08,
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: { trigger: ".stat-item", start: "top 88%" },
       });
 
       Array.from(document.querySelectorAll<HTMLElement>(".feature-article")).forEach((el, i) => {
         gsap.from(el, {
-          opacity: 0, x: i % 2 === 0 ? -40 : 40, duration: 0.8, ease: "power3.out",
+          opacity: 0,
+          x: i % 2 === 0 ? -40 : 40,
+          duration: 0.8,
+          ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 82%" },
         });
       });
 
       gsap.from(".step-card", {
-        opacity: 0, y: 32, duration: 0.6, ease: "power3.out", stagger: 0.1,
+        opacity: 0,
+        y: 32,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.1,
         scrollTrigger: { trigger: ".step-card", start: "top 85%" },
       });
 
       gsap.from(".interest-tag", {
-        opacity: 0, scale: 0.92, duration: 0.5, ease: "back.out(1.4)", stagger: 0.05,
+        opacity: 0,
+        scale: 0.92,
+        duration: 0.5,
+        ease: "back.out(1.4)",
+        stagger: 0.05,
         scrollTrigger: { trigger: ".interest-tag", start: "top 88%" },
       });
 
       gsap.from(".testimonial-card", {
-        opacity: 0, y: 40, duration: 0.7, ease: "power3.out", stagger: 0.12,
+        opacity: 0,
+        y: 40,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.12,
         scrollTrigger: { trigger: ".testimonial-card", start: "top 85%" },
       });
 
       gsap.from(".trust-point", {
-        opacity: 0, y: 24, duration: 0.6, ease: "power3.out", stagger: 0.08,
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: { trigger: ".trust-point", start: "top 85%" },
       });
 
       Array.from(document.querySelectorAll<HTMLElement>(".reveal-heading")).forEach((el) => {
         gsap.from(el, {
-          opacity: 0, y: 32, duration: 0.7, ease: "power3.out",
+          opacity: 0,
+          y: 32,
+          duration: 0.7,
+          ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 86%" },
         });
       });
@@ -488,43 +615,47 @@ export default function Home() {
 
   return (
     <div ref={mainRef} className="min-h-dvh overflow-hidden bg-surface text-ink">
-
       {/* ── Hero ── */}
       <section ref={heroRef} id="top" className="relative bg-surface overflow-hidden">
-        {/* Subtle grid */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-50 [background-image:linear-gradient(var(--hairline)_1px,transparent_1px),linear-gradient(to_right,var(--hairline)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_65%_55%_at_50%_0%,black_30%,transparent_100%)]"
-        />
+        {/* Animated grid */}
+        <GridBackdrop mask="radial-gradient(ellipse 65% 55% at 50% 0%, #000 30%, transparent 100%)" />
 
         <div className="relative mx-auto grid max-w-7xl min-h-[calc(86svh-4rem)] items-center gap-12 px-5 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:py-24">
           <div className="max-w-2xl">
             {/* Label */}
-            <div className="hero-label mb-6">
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/6 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-brand">
-                <span className="size-1.5 animate-pulse rounded-full bg-brand" aria-hidden="true" />
+            {/* <div className="hero-label mb-7 flex items-center gap-3">
+              <span className="relative flex size-2 items-center justify-center" aria-hidden="true">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand/60" />
+                <span className="relative inline-flex size-1.5 rounded-full bg-brand" />
+              </span>
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-brand">
                 Where meaningful connections begin
               </span>
-            </div>
+            </div> */}
 
             {/* Headline */}
             <h1 className="hero-h1 font-bold leading-[1.05] tracking-[-0.025em] text-ink text-[clamp(2.75rem,5.5vw,5.5rem)]">
-              Explore with{" "}
-              <span className="text-brand">Intent.</span>
+              Explore with <span className="text-brand">Intent.</span>
             </h1>
 
             <p className="hero-sub mt-6 max-w-lg text-lg leading-relaxed text-ink/58">
-              Not just a face in the crowd. Someone who shares your world, your passions, and your vision for what comes next.
+              Not just a face in the crowd. Someone who shares your world, your passions, and your
+              vision for what comes next.
             </p>
 
-            {/* Feature pills */}
-            <div className="hero-sub mt-7 flex flex-wrap gap-2">
+            {/* Feature highlights */}
+            <div className="hero-sub mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
               {["Intent first", "Shared interests", "No pressure"].map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-surface px-3.5 py-1.5 text-sm font-medium text-ink/65 shadow-sm"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-ink/70"
                 >
-                  <span className="size-1.5 rounded-full bg-brand/60" aria-hidden="true" />
+                  <span
+                    className="grid size-5 place-items-center rounded-full bg-brand/12 text-brand"
+                    aria-hidden="true"
+                  >
+                    <Check className="size-3" strokeWidth={3} />
+                  </span>
                   {item}
                 </span>
               ))}
@@ -553,7 +684,12 @@ export default function Home() {
             <div className="hero-card animate-float absolute -bottom-6 left-2 w-60 rounded-xl border border-ink/8 bg-surface p-4 shadow-[0_12px_40px_rgba(10,22,40,0.12)] sm:left-5">
               <div className="flex items-center gap-3">
                 <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand/10">
-                  <svg className="size-5 text-brand" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <svg
+                    className="size-5 text-brand"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                   </svg>
                 </div>
@@ -587,8 +723,12 @@ export default function Home() {
                     <Stars count={5} />
                   </div>
                 )}
-                <p className="text-4xl font-bold tracking-tight text-ink md:text-5xl">{stat.value}</p>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink/50">{stat.label}</p>
+                <p className="text-4xl font-bold tracking-tight text-ink md:text-5xl">
+                  {stat.value}
+                </p>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink/50">
+                  {stat.label}
+                </p>
                 <p className="mt-1 text-xs text-ink/35">{stat.detail}</p>
               </div>
             ))}
@@ -597,33 +737,43 @@ export default function Home() {
       </section>
 
       {/* ── Why MeantGo ── */}
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:py-32">
-        <div>
-          <SectionLabel>Why MeantGo Exists</SectionLabel>
-          <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
-            Dating apps were not built for depth.
-          </h2>
-          <div className="mt-7 h-px w-12 bg-brand/40" />
-        </div>
-        <div className="space-y-5 text-lg leading-relaxed text-ink/60">
-          <p>
-            Most apps hand you a photo and ask you to decide. No context, no common ground, no real
-            reason to reach out.
-          </p>
-          <p>
-            The result? Awkward conversations that go nowhere. Matches that ghost. A feed that feels
-            more like a chore than a chance.
-          </p>
-          <p className="font-semibold text-ink">
-            MeantGo was built on a different belief: the best connections start with intent. People
-            who know what they want and are not afraid to say it.
-          </p>
+      <section className="relative overflow-hidden bg-surface">
+        <GridBackdrop mask="radial-gradient(ellipse 70% 80% at 50% 50%, #000 10%, transparent 80%)" />
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:py-32">
+          <div>
+            <SectionLabel>Why MeantGo Exists</SectionLabel>
+            <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
+              Dating apps were not built for depth.
+            </h2>
+            <div className="mt-7 h-px w-12 bg-brand/40" />
+          </div>
+          <div className="space-y-5 text-lg leading-relaxed text-ink/60">
+            <p>
+              Most apps hand you a photo and ask you to decide. No context, no common ground, no
+              real reason to reach out.
+            </p>
+            <p>
+              The result? Awkward conversations that go nowhere. Matches that ghost. A feed that
+              feels more like a chore than a chance.
+            </p>
+            <p className="font-semibold text-ink">
+              MeantGo was built on a different belief: the best connections start with intent.
+              People who know what they want and are not afraid to say it.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* ── Features ── */}
-      <section id="features" className="bg-deep-purple py-24 text-white lg:py-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+      <section
+        id="features"
+        className="relative overflow-hidden bg-deep-purple py-24 text-white lg:py-32"
+      >
+        <GridBackdrop
+          line="rgba(255,255,255,0.05)"
+          mask="radial-gradient(ellipse 80% 50% at 50% 0%, #000 20%, transparent 100%)"
+        />
+        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
           <div className="mb-14 max-w-2xl">
             <SectionLabel light>How MeantGo Works</SectionLabel>
             <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl">
@@ -646,7 +796,10 @@ export default function Home() {
                   <p className="mt-5 text-base leading-relaxed text-white/55">{feature.body}</p>
                 </div>
                 <div className="relative">
-                  <div aria-hidden="true" className="absolute -inset-3 rounded-2xl bg-brand/10 blur-2xl" />
+                  <div
+                    aria-hidden="true"
+                    className="absolute -inset-3 rounded-2xl bg-brand/10 blur-2xl"
+                  />
                   <div className="relative">
                     <FeatureVisual type={feature.visual} />
                   </div>
@@ -658,8 +811,12 @@ export default function Home() {
       </section>
 
       {/* ── How it works ── */}
-      <section id="how-it-works" className="bg-surface-muted py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+      <section
+        id="how-it-works"
+        className="relative overflow-hidden bg-surface-muted py-24 lg:py-32"
+      >
+        <GridBackdrop mask="radial-gradient(ellipse 75% 70% at 50% 30%, #000 15%, transparent 85%)" />
+        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.7fr_1fr] lg:items-end">
             <div>
               <SectionLabel>Get Started in Minutes</SectionLabel>
@@ -693,7 +850,10 @@ export default function Home() {
                   <p className="mt-3 text-sm leading-relaxed text-ink/50">{step.body}</p>
                   <div className="mt-6 flex items-center justify-between border-t border-ink/8 pt-4">
                     <span className="text-xs font-semibold text-ink/40">{step.cue}</span>
-                    <Icon className="size-4 text-brand/40 transition-colors group-hover:text-brand" aria-hidden="true" />
+                    <Icon
+                      className="size-4 text-brand/40 transition-colors group-hover:text-brand"
+                      aria-hidden="true"
+                    />
                   </div>
                 </li>
               );
@@ -703,8 +863,9 @@ export default function Home() {
       </section>
 
       {/* ── Interests ── */}
-      <section className="bg-surface py-24 lg:py-32">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+      <section className="relative overflow-hidden bg-surface py-24 lg:py-32">
+        <GridBackdrop mask="radial-gradient(ellipse 70% 75% at 50% 50%, #000 12%, transparent 82%)" />
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-5 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
           <div>
             <SectionLabel>What Are You Into?</SectionLabel>
             <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
@@ -722,7 +883,9 @@ export default function Home() {
               ].map(([value, label]) => (
                 <div key={label} className="bg-surface p-5 text-center">
                   <p className="text-2xl font-bold tracking-tight text-brand">{value}</p>
-                  <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-ink/40">{label}</p>
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-ink/40">
+                    {label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -790,7 +953,9 @@ export default function Home() {
 
                 <div className="mb-6 flex items-center justify-between">
                   <Stars count={5} />
-                  <span className="text-3xl font-bold leading-none text-brand/12 select-none">"</span>
+                  <span className="text-3xl font-bold leading-none text-brand/12 select-none">
+                    "
+                  </span>
                 </div>
 
                 <blockquote className="min-h-40 text-base leading-relaxed text-ink/68">
@@ -815,8 +980,15 @@ export default function Home() {
       </section>
 
       {/* ── Safety ── */}
-      <section id="safety" className="bg-deep-purple py-24 text-white lg:py-32">
-        <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <section
+        id="safety"
+        className="relative overflow-hidden bg-deep-purple py-24 text-white lg:py-32"
+      >
+        <GridBackdrop
+          line="rgba(255,255,255,0.05)"
+          mask="radial-gradient(ellipse 75% 70% at 50% 40%, #000 15%, transparent 90%)"
+        />
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <SectionLabel light>Your Safety. Our Priority.</SectionLabel>
             <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl">
@@ -836,7 +1008,10 @@ export default function Home() {
                   className="trust-point group rounded-2xl border border-white/8 bg-white/[0.05] p-7 transition-all duration-200 hover:border-brand/30 hover:bg-white/[0.08]"
                 >
                   <div className="mb-6 grid size-11 place-items-center rounded-xl bg-brand/20 transition-colors group-hover:bg-brand">
-                    <Icon className="size-5 text-brand-light transition-colors group-hover:text-white" aria-hidden="true" />
+                    <Icon
+                      className="size-5 text-brand-light transition-colors group-hover:text-white"
+                      aria-hidden="true"
+                    />
                   </div>
                   <h3 className="font-semibold text-white">{point.label}</h3>
                   <p className="mt-2.5 text-sm leading-relaxed text-white/50">{point.copy}</p>
@@ -848,12 +1023,21 @@ export default function Home() {
       </section>
 
       {/* ── Download CTA ── */}
-      <section id="download" className="relative overflow-hidden px-5 py-28 text-center sm:px-6 lg:py-36 bg-gradient-to-br from-brand to-brand-deep">
+      <section
+        id="download"
+        className="relative overflow-hidden px-5 py-28 text-center sm:px-6 lg:py-36 bg-gradient-to-br from-brand to-brand-deep"
+      >
         {/* Subtle ring decorations */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
+        >
           <div className="size-[500px] animate-spin-slow rounded-full border border-white/8" />
         </div>
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
+        >
           <div className="size-[750px] animate-spin-slow-reverse rounded-full border border-white/5" />
         </div>
 

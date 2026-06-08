@@ -254,6 +254,11 @@
   to { transform: rotate(-360deg); }
 }
 
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to { background-position: 64px 64px; }
+}
+
 @utility animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -268,4 +273,8 @@
 
 @utility animate-spin-slow-reverse {
   animation: spin-ccw 45s linear infinite;
+}
+
+@utility animate-grid {
+  animation: grid-drift 20s linear infinite;
 }
