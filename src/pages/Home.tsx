@@ -53,12 +53,6 @@ const features = [
   },
   {
     eyebrow: "04",
-    title: "A feed that feels like possibility, not pressure.",
-    body: "No frantic swiping. No split-second judgements. Take the space to read a bio, watch a video, see what someone is about, and then decide if you want to connect.",
-    visual: "feed",
-  },
-  {
-    eyebrow: "05",
     title: "Show genuine interest. No games, no guessing.",
     body: "Send an Intent to someone you are genuinely interested in. They will see it, think it over, and respond when they are ready. It is connection, not competition.",
     visual: "intents",
@@ -68,14 +62,9 @@ const features = [
 // Per-card fills for the feature grid (checkerboard of light tints / dark panels).
 const featureStyles = [
   { card: "bg-lilac", title: "text-ink", body: "text-ink/60" },
-  {
-    card: "bg-[linear-gradient(140deg,#4B2FA8,#3A2585)]",
-    title: "text-white",
-    body: "text-white/65",
-  },
+  { card: "bg-[#2C2466]", title: "text-white", body: "text-white/65" },
   { card: "bg-[#F2ECDD]", title: "text-ink", body: "text-ink/60" },
-  { card: "bg-[#15111F]", title: "text-white", body: "text-white/65" },
-  { card: "bg-lilac", title: "text-ink", body: "text-ink/60" },
+  { card: "bg-[#141118]", title: "text-white", body: "text-white/65" },
 ];
 
 const steps = [
@@ -518,116 +507,69 @@ function PhoneShell({ children }: { children: ReactNode }) {
 /* ── animated feature visuals ───────────────────────────── */
 
 function IntentionsVisual() {
-  const [active, setActive] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setActive((i) => (i + 1) % 3), 2200);
-    return () => clearInterval(id);
-  }, []);
-
-  const options = [
-    { title: "Serious Relationship", copy: "Looking for something lasting" },
-    { title: "Casual Dating", copy: "Open, honest, easygoing" },
-    { title: "Friendship", copy: "Build community first" },
-  ];
-
   return (
-    <div className="grid gap-3">
-      {options.map(({ title, copy }, i) => (
-        <div
-          key={title}
-          style={{
-            transform: i === active ? "translateY(-2px) scale(1.015)" : "translateY(0) scale(1)",
-          }}
-          className={`rounded-2xl border p-5 transition-all duration-500 ${
-            i === active
-              ? "border-brand bg-brand text-white shadow-[0_16px_40px_rgba(124,58,237,0.28)]"
-              : "border-ink/10 bg-warm-cream/70 text-ink"
-          }`}
-        >
-          <div className="flex items-center gap-3">
-            <Target
-              className={`size-5 shrink-0 transition-transform duration-500 ${i === active ? "scale-110" : "scale-100"}`}
-              aria-hidden="true"
-            />
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold leading-tight">{title}</p>
-              <p className={`text-sm mt-0.5 ${i === active ? "text-white/80" : "text-ink/55"}`}>
-                {copy}
-              </p>
-            </div>
-            <div
-              className={`size-2 shrink-0 rounded-full transition-all duration-500 ${i === active ? "bg-white/60 scale-100" : "scale-0"}`}
-            />
+    <div className="relative mx-auto h-52 max-w-md sm:h-56">
+      {/* Serious — purple, lower-left */}
+      <div className="animate-float absolute bottom-1 left-0 w-56 rounded-2xl bg-brand p-4 text-white shadow-[0_18px_42px_rgba(124,58,237,0.4)]">
+        <div className="flex items-center gap-3">
+          <Target className="size-5 shrink-0" aria-hidden="true" />
+          <div>
+            <p className="text-sm font-semibold leading-tight">Serious Relationship</p>
+            <p className="mt-0.5 text-xs text-white/75">Looking for something lasting</p>
           </div>
         </div>
-      ))}
+      </div>
+      {/* Casual — white, upper-right */}
+      <div className="animate-float-alt absolute right-1 top-0 w-52 rounded-2xl bg-white p-4 text-ink shadow-[0_18px_42px_rgba(0,0,0,0.28)]">
+        <div className="flex items-center gap-3">
+          <Target className="size-5 shrink-0 text-ink/70" aria-hidden="true" />
+          <div>
+            <p className="text-sm font-semibold leading-tight">Casual Dating</p>
+            <p className="mt-0.5 text-xs text-ink/55">Open, honest, easygoing</p>
+          </div>
+        </div>
+      </div>
+      {/* Friendship — lavender, bottom-right */}
+      <div className="animate-float absolute bottom-0 right-2 w-52 rounded-2xl bg-[#C6B4EE] p-4 text-ink shadow-[0_18px_42px_rgba(124,58,237,0.25)]">
+        <div className="flex items-center gap-3">
+          <Target className="size-5 shrink-0 text-brand-deep" aria-hidden="true" />
+          <div>
+            <p className="text-sm font-semibold leading-tight">Friendship</p>
+            <p className="mt-0.5 text-xs text-ink/65">Build community first</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 function IntentsVisual() {
-  const [tab, setTab] = useState(0);
-  const [fading, setFading] = useState(false);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setFading(true);
-      setTimeout(() => {
-        setTab((t) => (t + 1) % 2);
-        setFading(false);
-      }, 300);
-    }, 3000);
-    return () => clearInterval(id);
-  }, []);
-
-  const receivedItems = [
-    { text: "Ada sent an Intent", timing: "New", isNew: true },
-    { text: "Nora is thinking it over", timing: "Today", isNew: false },
-    { text: "Kele accepted", timing: "Today", isNew: false },
-  ];
-  const sentItems = [
-    { text: "You sent to Temi", timing: "New", isNew: true },
-    { text: "Waiting on Zara", timing: "Yesterday", isNew: false },
-    { text: "Lola accepted", timing: "Today", isNew: false },
-  ];
-  const items = tab === 0 ? receivedItems : sentItems;
-
   return (
-    <div className="rounded-2xl bg-warm-cream/80 p-5 shadow-soft border border-ink/6">
-      <div className="relative mb-5 grid grid-cols-2 rounded-full bg-surface-muted p-1 text-sm font-semibold">
-        <div
-          className="absolute inset-y-1 rounded-full bg-brand transition-all duration-500"
-          style={{ left: tab === 0 ? "4px" : "calc(50%)", width: "calc(50% - 4px)" }}
-        />
-        {["Received", "Sent"].map((label, i) => (
-          <button
-            key={label}
-            onClick={() => setTab(i)}
-            className={`relative z-10 px-4 py-2 text-center transition-colors duration-300 ${tab === i ? "text-white" : "text-ink/60"}`}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-      <div className={`transition-opacity duration-300 ${fading ? "opacity-0" : "opacity-100"}`}>
-        {items.map(({ text, timing, isNew }) => (
-          <div
-            key={text}
-            className="flex items-center justify-between border-t border-ink/8 py-4 first:border-t-0"
-          >
-            <div className="flex items-center gap-3">
-              <div className="grid size-9 shrink-0 place-items-center rounded-full bg-mint">
-                <Heart className="size-4 text-brand" aria-hidden="true" />
-              </div>
-              <span className="text-sm font-medium text-ink">{text}</span>
-            </div>
-            <span
-              className={`text-xs font-semibold shrink-0 ${isNew ? "text-brand" : "text-ink/40"}`}
-            >
-              {timing}
-            </span>
+    <div className="space-y-4">
+      {/* Intent notification */}
+      <div className="animate-float mr-auto w-[92%] rounded-2xl bg-white p-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.30)]">
+        <div className="flex items-center gap-3">
+          <div className="grid size-10 shrink-0 place-items-center rounded-full bg-brand text-white">
+            <Send className="size-4" aria-hidden="true" />
           </div>
-        ))}
+          <div>
+            <p className="text-sm font-semibold text-ink">New Intent from Rene</p>
+            <p className="text-xs text-ink/50">Today 10:36AM</p>
+          </div>
+        </div>
+      </div>
+      {/* Message */}
+      <div className="animate-float-alt ml-auto w-[96%] rounded-2xl bg-white p-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.30)]">
+        <div className="flex gap-3">
+          <img src={dayo} alt="" className="size-9 shrink-0 rounded-full object-cover" />
+          <div>
+            <p className="text-sm font-semibold text-ink">Rene, 30</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-ink/60">
+              Hey! I saw that we both enjoy traveling. If you could book a flight anywhere this
+              weekend, where would you go and why?
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -666,54 +608,29 @@ function FeatureVisual({ type }: { type: string }) {
   if (type === "intentions") return <IntentionsVisual />;
   if (type === "video") {
     return (
-      <PhoneShell>
-        <div className="relative aspect-[9/13]">
-          <img src={heroCouple} alt="" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
-          <button className="absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-brand shadow-xl">
-            <Play className="ml-1 size-6 fill-current" aria-hidden="true" />
-            <span className="sr-only">Play introduction video</span>
-          </button>
-          <div className="absolute inset-x-5 bottom-5 text-white">
-            <p className="text-lg font-bold">Maya, 28</p>
-            <p className="text-sm text-white/75">Talking about film, food, and Lagos sunsets</p>
-          </div>
-        </div>
-      </PhoneShell>
-    );
-  }
-  if (type === "feed") {
-    return (
-      <PhoneShell>
-        <div className="p-4">
-          <div className="mb-3 flex items-center justify-between text-xs font-semibold text-ink/50">
-            <span>Discover</span>
-            <span>12 km away</span>
-          </div>
-          <img src={heroCouple} alt="" className="aspect-[4/5] w-full rounded-2xl object-cover" />
-          <div className="space-y-3 p-3 pt-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-ink">Tomi, 30</h3>
-              <span className="rounded-full bg-mint px-3 py-1 text-xs font-semibold text-ink">
-                92%
-              </span>
-            </div>
-            <p className="text-sm text-ink/60">
-              Architect. Coffee loyalist. Looking for a soft place to land.
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-              {["Architecture", "Jazz", "Cooking"].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full bg-lilac px-3 py-1 text-xs font-semibold text-ink"
-                >
-                  {tag}
-                </span>
-              ))}
+      <div className="relative mx-auto h-64 max-w-sm">
+        {/* Maya — left, tilted, with caption */}
+        <div className="absolute left-0 top-0 w-40 -rotate-3 overflow-hidden rounded-2xl shadow-[0_18px_42px_rgba(0,0,0,0.22)]">
+          <div className="relative aspect-[3/4]">
+            <img src={chidinma} alt="" className="size-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+            <button className="absolute right-2 top-2 grid size-8 place-items-center rounded-full bg-white/90 text-brand shadow">
+              <Play className="ml-0.5 size-3.5 fill-current" aria-hidden="true" />
+              <span className="sr-only">Play introduction video</span>
+            </button>
+            <div className="absolute inset-x-3 bottom-3 text-white">
+              <p className="text-sm font-bold">Maya, 28</p>
+              <p className="text-[10px] leading-tight text-white/80">
+                Talking about film, food, and Lagos sunsets
+              </p>
             </div>
           </div>
         </div>
-      </PhoneShell>
+        {/* Second clip — right, lower, tilted */}
+        <div className="absolute bottom-0 right-0 w-40 rotate-3 overflow-hidden rounded-2xl shadow-[0_18px_42px_rgba(0,0,0,0.22)]">
+          <img src={dayo} alt="" className="aspect-[3/4] size-full object-cover" />
+        </div>
+      </div>
     );
   }
   if (type === "intents") return <IntentsVisual />;
@@ -966,21 +883,18 @@ export default function Home() {
           <div className="grid gap-5 md:grid-cols-2">
             {features.map((feature, index) => {
               const s = featureStyles[index % featureStyles.length];
-              const wide = index === features.length - 1 && features.length % 2 === 1;
               return (
                 <article
                   key={feature.title}
-                  className={`feature-article flex flex-col rounded-[2rem] p-7 lg:p-9 ${s.card} ${
-                    wide ? "md:col-span-2 md:flex-row md:items-center md:gap-10" : ""
-                  }`}
+                  className={`feature-article flex flex-col rounded-[2rem] p-7 lg:p-9 ${s.card}`}
                 >
-                  <div className={wide ? "md:flex-1" : ""}>
-                    <h3 className={`text-2xl font-bold leading-snug ${s.title}`}>
-                      {feature.title}
-                    </h3>
-                    <p className={`mt-3 text-sm leading-relaxed ${s.body}`}>{feature.body}</p>
-                  </div>
-                  <div className={`mt-6 ${wide ? "md:mt-0 md:flex-1" : ""}`}>
+                  <h3
+                    className={`text-2xl font-bold leading-tight tracking-tight md:text-3xl ${s.title}`}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p className={`mt-4 text-base leading-relaxed ${s.body}`}>{feature.body}</p>
+                  <div className="mt-8 flex-1">
                     <FeatureVisual type={feature.visual} />
                   </div>
                 </article>
@@ -1144,21 +1058,14 @@ export default function Home() {
       )}
 
       {/* ── Safety ── */}
-      <section
-        id="safety"
-        className="relative overflow-hidden bg-deep-purple py-24 text-white lg:py-32"
-      >
-        <GridBackdrop
-          line="rgba(255,255,255,0.05)"
-          mask="radial-gradient(ellipse 75% 70% at 50% 40%, #000 15%, transparent 90%)"
-        />
-        <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <section id="safety" className="bg-surface py-24 lg:py-32">
+        <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <SectionLabel light>Your Safety. Our Priority.</SectionLabel>
-            <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl">
+            <SectionLabel>Your Safety. Our Priority.</SectionLabel>
+            <h2 className="reveal-heading text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.05] tracking-tight text-ink">
               Connect freely. Stay protected.
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-white/55">
+            <p className="mt-6 max-w-md text-base leading-relaxed text-ink/55">
               MeantGo is designed to put you in control at every step. Safety is not an afterthought
               here. It is the foundation.
             </p>
@@ -1169,16 +1076,16 @@ export default function Home() {
               return (
                 <div
                   key={point.label}
-                  className="trust-point group rounded-3xl border border-white/8 bg-white/[0.05] p-7 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:bg-white/[0.08]"
+                  className="trust-point group rounded-3xl bg-lilac/60 p-7 transition-all duration-200 hover:-translate-y-1 hover:bg-lilac hover:shadow-[0_16px_40px_rgba(124,58,237,0.12)]"
                 >
-                  <div className="mb-6 grid size-11 place-items-center rounded-2xl bg-brand/20 transition-colors group-hover:bg-brand">
+                  <div className="mb-6 grid size-11 place-items-center rounded-2xl bg-brand/15 transition-colors group-hover:bg-brand">
                     <Icon
-                      className="size-5 text-brand-light transition-colors group-hover:text-white"
+                      className="size-5 text-brand transition-colors group-hover:text-white"
                       aria-hidden="true"
                     />
                   </div>
-                  <h3 className="font-semibold text-white">{point.label}</h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-white/50">{point.copy}</p>
+                  <h3 className="font-semibold text-ink">{point.label}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-ink/55">{point.copy}</p>
                 </div>
               );
             })}
