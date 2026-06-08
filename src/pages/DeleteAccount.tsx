@@ -21,7 +21,7 @@ export default function DeleteAccount() {
   return (
     <div className="bg-surface-muted/40">
       {/* Hero band */}
-      <div className="bg-gradient-to-br from-brand to-brand-deep px-5 py-16 text-center sm:px-6 lg:py-20">
+      <div className="bg-[linear-gradient(135deg,#7C3AED_0%,#5B21B6_100%)] px-5 py-16 text-center sm:px-6 lg:py-20">
         <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           Delete Account
         </h1>

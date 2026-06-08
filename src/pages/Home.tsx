@@ -388,11 +388,17 @@ function FloatingPhotoCard({
 
 function SectionLabel({ children, light }: { children: string; light?: boolean }) {
   return (
-    <p
-      className={`mb-4 text-xs font-semibold uppercase tracking-[0.16em] ${light ? "text-brand-light" : "text-brand"}`}
+    <span
+      className={`mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${
+        light ? "bg-white/10 text-brand-light ring-1 ring-white/15" : "bg-brand/10 text-brand"
+      }`}
     >
+      <span
+        className={`size-1.5 rounded-full ${light ? "bg-brand-light" : "bg-brand"}`}
+        aria-hidden="true"
+      />
       {children}
-    </p>
+    </span>
   );
 }
 
@@ -720,7 +726,7 @@ export default function Home() {
       <section
         ref={heroRef}
         id="top"
-        className="relative overflow-hidden bg-gradient-to-b from-brand via-brand to-brand-deep text-white"
+        className="relative overflow-hidden bg-[linear-gradient(180deg,#7C3AED_0%,#6D28D9_55%,#5B21B6_100%)] text-white"
       >
         {/* Concentric circle backdrop */}
         <div
@@ -775,13 +781,17 @@ export default function Home() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="border-y border-ink/8 bg-surface">
+      <section className="bg-surface py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6">
-          <div className="grid grid-cols-2 gap-px bg-ink/8 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="stat-item group bg-surface px-7 py-10 text-center transition-colors hover:bg-surface-muted sm:px-10"
+                className={`stat-item group rounded-3xl border px-6 py-9 text-center transition-all duration-200 hover:-translate-y-1 sm:px-8 ${
+                  stat.stars
+                    ? "border-brand/20 bg-brand/8 hover:shadow-[0_16px_40px_rgba(124,58,237,0.18)]"
+                    : "border-ink/8 bg-surface-muted/50 hover:border-brand/25 hover:shadow-[0_16px_40px_rgba(124,58,237,0.10)]"
+                }`}
               >
                 {stat.stars && (
                   <div className="mb-2 flex justify-center">
@@ -849,47 +859,63 @@ export default function Home() {
       </section>
 
       {/* ── Features ── */}
-      <section
-        id="features"
-        className="relative overflow-hidden bg-deep-purple py-24 text-white lg:py-32"
-      >
-        <GridBackdrop
-          line="rgba(255,255,255,0.05)"
-          mask="radial-gradient(ellipse 80% 50% at 50% 0%, #000 20%, transparent 100%)"
-        />
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
-          <div className="mb-14 max-w-2xl">
-            <SectionLabel light>How MeantGo Works</SectionLabel>
-            <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl">
+      <section id="features" className="bg-surface py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="mx-auto mb-14 max-w-2xl text-center">
+            <SectionLabel>How MeantGo Works</SectionLabel>
+            <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-[#1F8A4C] md:text-5xl">
               Built around the things that actually matter.
             </h2>
+            <p className="mt-5 text-base leading-relaxed text-ink/55">
+              MeantGo was built on a different belief: the best connections start with intent.
+              People who know what they want and are not afraid to say it.
+            </p>
           </div>
           <div className="space-y-6">
-            {features.map((feature, index) => (
-              <article
-                key={feature.title}
-                className={`feature-article grid items-center gap-10 rounded-2xl border border-white/8 bg-white/[0.04] p-7 lg:grid-cols-2 lg:p-12 ${index % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}
-              >
-                <div>
-                  <p className="mb-4 text-7xl font-bold leading-none text-white/8 select-none">
-                    {feature.eyebrow}
-                  </p>
-                  <h3 className="text-2xl font-bold leading-snug text-white md:text-3xl">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-5 text-base leading-relaxed text-white/55">{feature.body}</p>
-                </div>
-                <div className="relative">
-                  <div
-                    aria-hidden="true"
-                    className="absolute -inset-3 rounded-2xl bg-brand/10 blur-2xl"
-                  />
-                  <div className="relative">
-                    <FeatureVisual type={feature.visual} />
+            {features.map((feature, index) => {
+              const dark = index % 2 === 1;
+              return (
+                <article
+                  key={feature.title}
+                  className={`feature-article grid items-center gap-10 rounded-[2rem] p-7 lg:grid-cols-2 lg:p-12 ${
+                    dark ? "bg-deep-purple text-white" : "bg-lilac text-ink"
+                  } ${index % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}
+                >
+                  <div>
+                    <p
+                      className={`mb-4 text-7xl font-bold leading-none select-none ${
+                        dark ? "text-white/10" : "text-brand/15"
+                      }`}
+                    >
+                      {feature.eyebrow}
+                    </p>
+                    <h3
+                      className={`text-2xl font-bold leading-snug md:text-3xl ${
+                        dark ? "text-white" : "text-ink"
+                      }`}
+                    >
+                      {feature.title}
+                    </h3>
+                    <p
+                      className={`mt-5 text-base leading-relaxed ${
+                        dark ? "text-white/55" : "text-ink/60"
+                      }`}
+                    >
+                      {feature.body}
+                    </p>
                   </div>
-                </div>
-              </article>
-            ))}
+                  <div className="relative">
+                    <div
+                      aria-hidden="true"
+                      className="absolute -inset-3 rounded-2xl bg-brand/10 blur-2xl"
+                    />
+                    <div className="relative">
+                      <FeatureVisual type={feature.visual} />
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -920,7 +946,7 @@ export default function Home() {
               return (
                 <li
                   key={step.title}
-                  className="step-card group relative rounded-2xl border border-ink/8 bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_8px_32px_rgba(10,22,40,0.08)]"
+                  className="step-card group relative rounded-3xl border border-ink/8 bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_12px_36px_rgba(124,58,237,0.12)]"
                 >
                   <div className="mb-6 flex items-center gap-3">
                     <span className="grid size-9 place-items-center rounded-full bg-brand text-white text-sm font-bold shadow-[0_4px_12px_rgba(124,58,237,0.35)]">
@@ -959,13 +985,16 @@ export default function Home() {
               MeantGo turns interests into useful discovery signals, so someone can find the parts
               of you that usually take three dates to explain.
             </p>
-            <div className="mt-8 grid max-w-xs grid-cols-3 gap-px bg-ink/8">
+            <div className="mt-8 grid max-w-sm grid-cols-3 gap-3">
               {[
                 ["60+", "interests"],
                 ["4", "categories"],
                 ["1", "clear intent"],
               ].map(([value, label]) => (
-                <div key={label} className="bg-surface p-5 text-center">
+                <div
+                  key={label}
+                  className="rounded-2xl border border-ink/8 bg-surface-muted/50 p-4 text-center"
+                >
                   <p className="text-2xl font-bold tracking-tight text-brand">{value}</p>
                   <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-ink/40">
                     {label}
@@ -978,11 +1007,11 @@ export default function Home() {
             {interestCategories.map((category, categoryIndex) => (
               <div
                 key={category.label}
-                className="interest-tag group rounded-2xl border border-ink/8 bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/25 hover:shadow-[0_8px_32px_rgba(10,22,40,0.07)]"
+                className="interest-tag group rounded-3xl border border-ink/8 bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:border-brand/25 hover:shadow-[0_12px_36px_rgba(124,58,237,0.10)]"
               >
                 <div className="mb-5 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="grid size-10 place-items-center rounded-xl bg-brand/10 text-lg text-brand transition-colors group-hover:bg-brand group-hover:text-white">
+                    <span className="grid size-10 place-items-center rounded-2xl bg-brand/10 text-lg text-brand transition-colors group-hover:bg-brand group-hover:text-white">
                       <i className={category.icon} aria-hidden="true" />
                     </span>
                     <h3 className="font-semibold text-ink">{category.label}</h3>
@@ -1030,7 +1059,7 @@ export default function Home() {
             {testimonials.map((item) => (
               <figure
                 key={item.name}
-                className="testimonial-card group relative overflow-hidden rounded-2xl border border-ink/8 bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(10,22,40,0.08)]"
+                className="testimonial-card group relative overflow-hidden rounded-3xl border border-ink/8 bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(124,58,237,0.12)]"
               >
                 {/* Gradient top border on hover */}
                 <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-brand to-brand-light opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -1089,9 +1118,9 @@ export default function Home() {
               return (
                 <div
                   key={point.label}
-                  className="trust-point group rounded-2xl border border-white/8 bg-white/[0.05] p-7 transition-all duration-200 hover:border-brand/30 hover:bg-white/[0.08]"
+                  className="trust-point group rounded-3xl border border-white/8 bg-white/[0.05] p-7 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:bg-white/[0.08]"
                 >
-                  <div className="mb-6 grid size-11 place-items-center rounded-xl bg-brand/20 transition-colors group-hover:bg-brand">
+                  <div className="mb-6 grid size-11 place-items-center rounded-2xl bg-brand/20 transition-colors group-hover:bg-brand">
                     <Icon
                       className="size-5 text-brand-light transition-colors group-hover:text-white"
                       aria-hidden="true"
@@ -1109,7 +1138,7 @@ export default function Home() {
       {/* ── Download CTA ── */}
       <section
         id="download"
-        className="relative overflow-hidden px-5 py-28 text-center sm:px-6 lg:py-36 bg-gradient-to-br from-brand to-brand-deep"
+        className="relative overflow-hidden px-5 py-28 text-center sm:px-6 lg:py-36 bg-[linear-gradient(135deg,#7C3AED_0%,#5B21B6_100%)]"
       >
         {/* Subtle ring decorations */}
         <div
