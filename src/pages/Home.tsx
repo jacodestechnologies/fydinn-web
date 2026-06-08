@@ -3,13 +3,12 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Bell,
-  Check,
   Compass,
   EyeOff,
   Flag,
   Heart,
+  Image as ImageIcon,
   Lock,
-  MapPinned,
   Play,
   Send,
   ShieldCheck,
@@ -299,6 +298,94 @@ function GridBackdrop({
   );
 }
 
+/*
+ * Tilted polaroid photo placeholder. Drop a real image in via `src` later —
+ * until then it shows a labeled placeholder sized to the final frame.
+ */
+function HeroPhoto({
+  className = "",
+  rotate = 0,
+  label,
+  src,
+  width = "w-44",
+}: {
+  className?: string;
+  rotate?: number;
+  label: string;
+  src?: string;
+  width?: string;
+}) {
+  return (
+    <div className={`hero-photo absolute hidden lg:block ${className}`}>
+      <div
+        style={{ transform: `rotate(${rotate}deg)` }}
+        className={`${width} overflow-hidden rounded-2xl border-[5px] border-white bg-white shadow-[0_24px_60px_rgba(20,12,40,0.30)]`}
+      >
+        <div className="relative aspect-[3/4] bg-gradient-to-br from-lilac to-mint">
+          {src ? (
+            <img src={src} alt="" className="absolute inset-0 size-full object-cover" />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-ink/30">
+              <ImageIcon className="size-7" aria-hidden="true" />
+              <span className="text-[10px] font-bold uppercase tracking-wider">{label}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* Floating labeled photo card used in the "Dating apps" section. */
+function FloatingPhotoCard({
+  rotate = 0,
+  label,
+  chips,
+  src,
+  className = "",
+}: {
+  rotate?: number;
+  label: string;
+  chips: string[];
+  src?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      style={{ transform: `rotate(${rotate}deg)` }}
+      className={`depth-card w-52 rounded-2xl border border-ink/8 bg-surface p-2.5 shadow-[0_24px_60px_rgba(20,12,40,0.18)] ${className}`}
+    >
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-lilac to-mint">
+        <div className="aspect-[4/3] w-full">
+          {src ? (
+            <img src={src} alt="" className="size-full object-cover" />
+          ) : (
+            <div className="flex size-full flex-col items-center justify-center gap-1.5 text-ink/30">
+              <ImageIcon className="size-6" aria-hidden="true" />
+              <span className="text-[10px] font-bold uppercase tracking-wider">Photo</span>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="px-1.5 pb-1 pt-2.5">
+        <p className="text-sm font-semibold text-ink">{label}</p>
+        <div className="mt-2 flex flex-wrap gap-1">
+          {chips.map((chip, i) => (
+            <span
+              key={chip}
+              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                i % 2 === 0 ? "bg-brand/12 text-brand" : "bg-lilac text-ink/70"
+              }`}
+            >
+              {chip}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SectionLabel({ children, light }: { children: string; light?: boolean }) {
   return (
     <p
@@ -342,7 +429,7 @@ function IntentionsVisual() {
           }}
           className={`rounded-2xl border p-5 transition-all duration-500 ${
             i === active
-              ? "border-brand bg-brand text-white shadow-[0_16px_40px_rgba(0,180,216,0.28)]"
+              ? "border-brand bg-brand text-white shadow-[0_16px_40px_rgba(124,58,237,0.28)]"
               : "border-ink/10 bg-warm-cream/70 text-ink"
           }`}
         >
@@ -532,13 +619,17 @@ export default function Home() {
     const ctx = gsap.context(() => {
       gsap
         .timeline({ defaults: { ease: "power3.out" } })
-        .from(".hero-label", { opacity: 0, y: 12, duration: 0.5 })
-        .from(".hero-h1", { opacity: 0, y: 40, duration: 0.8 }, "-=0.3")
-        .from(".hero-sub", { opacity: 0, y: 24, duration: 0.6 }, "-=0.4")
+        .from(".hero-eyebrow", { opacity: 0, y: 12, duration: 0.5 })
+        .from(".hero-card-1", { opacity: 0, y: 28, scale: 0.92, duration: 0.6 }, "-=0.2")
+        .from(".hero-card-2", { opacity: 0, y: 28, scale: 0.92, duration: 0.6 }, "-=0.4")
+        .from(".hero-sub", { opacity: 0, y: 24, duration: 0.6 }, "-=0.3")
         .from(".hero-btns", { opacity: 0, y: 16, duration: 0.5 }, "-=0.3")
         .from(".hero-note", { opacity: 0, duration: 0.4 }, "-=0.2")
-        .from(".hero-img", { opacity: 0, x: 40, duration: 1.0, ease: "power2.out" }, "-=0.8")
-        .from(".hero-card", { opacity: 0, y: 24, duration: 0.5 }, "-=0.3");
+        .from(
+          ".hero-photo",
+          { opacity: 0, scale: 0.8, duration: 0.7, stagger: 0.12, ease: "back.out(1.4)" },
+          "-=0.7",
+        );
     }, heroRef);
     return () => ctx.revert();
   }, []);
@@ -562,6 +653,16 @@ export default function Home() {
           ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 82%" },
         });
+      });
+
+      gsap.from(".depth-card-wrap", {
+        opacity: 0,
+        y: 40,
+        scale: 0.9,
+        duration: 0.7,
+        ease: "back.out(1.3)",
+        stagger: 0.12,
+        scrollTrigger: { trigger: ".depth-card-wrap", start: "top 85%" },
       });
 
       gsap.from(".step-card", {
@@ -616,96 +717,60 @@ export default function Home() {
   return (
     <div ref={mainRef} className="min-h-dvh overflow-hidden bg-surface text-ink">
       {/* ── Hero ── */}
-      <section ref={heroRef} id="top" className="relative bg-surface overflow-hidden">
-        {/* Animated grid */}
-        <GridBackdrop mask="radial-gradient(ellipse 65% 55% at 50% 0%, #000 30%, transparent 100%)" />
+      <section
+        ref={heroRef}
+        id="top"
+        className="relative overflow-hidden bg-gradient-to-b from-brand via-brand to-brand-deep text-white"
+      >
+        {/* Concentric circle backdrop */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        >
+          <div className="absolute size-[34rem] rounded-full border border-white/10" />
+          <div className="absolute size-[48rem] rounded-full border border-white/[0.07]" />
+          <div className="absolute size-[64rem] rounded-full border border-white/5" />
+          <div className="absolute size-[80rem] rounded-full border border-white/[0.03]" />
+        </div>
 
-        <div className="relative mx-auto grid max-w-7xl min-h-[calc(86svh-4rem)] items-center gap-12 px-5 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:py-24">
-          <div className="max-w-2xl">
-            {/* Label */}
-            {/* <div className="hero-label mb-7 flex items-center gap-3">
-              <span className="relative flex size-2 items-center justify-center" aria-hidden="true">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand/60" />
-                <span className="relative inline-flex size-1.5 rounded-full bg-brand" />
-              </span>
-              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-brand">
-                Where meaningful connections begin
-              </span>
-            </div> */}
+        {/* Scattered photo placeholders — swap `src` with real images */}
+        <HeroPhoto className="left-[3%] top-[14%]" rotate={-9} label="People" width="w-44" />
+        <HeroPhoto className="left-[8%] top-[48%]" rotate={7} label="Moments" width="w-36" />
+        <HeroPhoto className="right-[4%] top-[17%]" rotate={9} label="Connect" width="w-44" />
+        <HeroPhoto className="right-[7%] top-[52%]" rotate={-7} label="Interests" width="w-36" />
 
-            {/* Headline */}
-            <h1 className="hero-h1 font-bold leading-[1.05] tracking-[-0.025em] text-ink text-[clamp(2.75rem,5.5vw,5.5rem)]">
-              Explore with <span className="text-brand">Intent.</span>
-            </h1>
-
-            <p className="hero-sub mt-6 max-w-lg text-lg leading-relaxed text-ink/58">
-              Not just a face in the crowd. Someone who shares your world, your passions, and your
-              vision for what comes next.
-            </p>
-
-            {/* Feature highlights */}
-            <div className="hero-sub mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
-              {["Intent first", "Shared interests", "No pressure"].map((item) => (
-                <span
-                  key={item}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-ink/70"
-                >
-                  <span
-                    className="grid size-5 place-items-center rounded-full bg-brand/12 text-brand"
-                    aria-hidden="true"
-                  >
-                    <Check className="size-3" strokeWidth={3} />
-                  </span>
-                  {item}
-                </span>
-              ))}
-            </div>
-
-            <div className="hero-btns mt-10">
-              <AppStoreBadges />
-            </div>
-
-            <p className="hero-note mt-5 text-sm leading-relaxed text-ink/40">
-              Free to download. Match by intent, not just looks.
-            </p>
+        <div className="relative z-10 mx-auto flex min-h-[calc(88svh-4rem)] max-w-3xl flex-col items-center justify-center px-5 py-20 text-center sm:px-6 lg:py-28">
+          {/* Eyebrow */}
+          <div className="hero-eyebrow mb-8 flex items-center gap-3">
+            <span className="h-px w-8 bg-white/40" aria-hidden="true" />
+            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
+              Where meaningful connections begin
+            </span>
+            <span className="h-px w-8 bg-white/40" aria-hidden="true" />
           </div>
 
-          {/* Right: image */}
-          <div className="hero-img relative">
-            <div className="overflow-hidden rounded-2xl border border-ink/8 bg-surface-muted shadow-[0_24px_64px_rgba(10,22,40,0.10)]">
-              <img
-                src={heroCouple}
-                alt="Two people laughing together"
-                className="aspect-[4/4.55] w-full object-cover"
-              />
-            </div>
+          {/* Stacked title cards */}
+          <h1 className="flex flex-col items-center gap-3 text-[clamp(2.75rem,8vw,5.5rem)] font-bold leading-none tracking-tight">
+            <span className="hero-card-1 inline-block rounded-[1.5rem] bg-white px-7 py-3 text-brand shadow-[0_16px_48px_rgba(20,12,40,0.25)]">
+              Explore
+            </span>
+            <span className="hero-card-2 inline-block rounded-[1.5rem] bg-deep-purple px-7 py-3 text-white shadow-[0_16px_48px_rgba(20,12,40,0.35)]">
+              with Intent
+            </span>
+          </h1>
 
-            {/* Floating card */}
-            <div className="hero-card animate-float absolute -bottom-6 left-2 w-60 rounded-xl border border-ink/8 bg-surface p-4 shadow-[0_12px_40px_rgba(10,22,40,0.12)] sm:left-5">
-              <div className="flex items-center gap-3">
-                <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand/10">
-                  <svg
-                    className="size-5 text-brand"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-ink">3 shared interests</p>
-                  <p className="text-xs text-ink/45">found nearby</p>
-                </div>
-              </div>
-            </div>
+          <p className="hero-sub mx-auto mt-9 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
+            You have potential connections waiting. Discover people who share your world, your
+            passions, and your vision for what comes next.
+          </p>
 
-            {/* Location badge */}
-            <div className="animate-float-alt absolute right-4 top-4 hidden items-center gap-2 rounded-full bg-ink/85 px-3.5 py-2 text-xs font-semibold text-white backdrop-blur-sm sm:flex">
-              <MapPinned className="size-3.5 text-brand-light" aria-hidden="true" />
-              Explore nearby
-            </div>
+          <div className="hero-btns mt-9">
+            <AppStoreBadges align="center" />
           </div>
+
+          <p className="hero-note mt-5 text-sm text-white/55">
+            Free to download. Match by intent, not just looks.
+          </p>
         </div>
       </section>
 
@@ -737,29 +802,48 @@ export default function Home() {
       </section>
 
       {/* ── Why MeantGo ── */}
-      <section className="relative overflow-hidden bg-surface">
-        <GridBackdrop mask="radial-gradient(ellipse 70% 80% at 50% 50%, #000 10%, transparent 80%)" />
-        <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:py-32">
+      <section className="relative overflow-hidden bg-lilac">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 sm:px-6 lg:grid-cols-[1fr_1fr] lg:py-32">
+          {/* Left: heading + copy */}
           <div>
             <SectionLabel>Why MeantGo Exists</SectionLabel>
-            <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
+            <h2 className="reveal-heading flex flex-wrap items-center gap-3 text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
               Dating apps were not built for depth.
+              <span className="grid size-10 place-items-center rounded-xl bg-brand text-white shadow-[0_8px_24px_rgba(124,58,237,0.35)]">
+                <Heart className="size-5" fill="currentColor" aria-hidden="true" />
+              </span>
             </h2>
-            <div className="mt-7 h-px w-12 bg-brand/40" />
+            <div className="mt-7 space-y-5 text-lg leading-relaxed text-ink/60">
+              <p>
+                Most apps hand you a photo and ask you to decide. No context, no common ground, no
+                real reason to reach out.
+              </p>
+              <p className="font-semibold text-ink">
+                MeantGo was built on a different belief: the best connections start with intent.
+                People who know what they want and are not afraid to say it.
+              </p>
+            </div>
           </div>
-          <div className="space-y-5 text-lg leading-relaxed text-ink/60">
-            <p>
-              Most apps hand you a photo and ask you to decide. No context, no common ground, no
-              real reason to reach out.
-            </p>
-            <p>
-              The result? Awkward conversations that go nowhere. Matches that ghost. A feed that
-              feels more like a chore than a chance.
-            </p>
-            <p className="font-semibold text-ink">
-              MeantGo was built on a different belief: the best connections start with intent.
-              People who know what they want and are not afraid to say it.
-            </p>
+
+          {/* Right: scattered floating photo cards */}
+          <div className="relative h-[26rem] sm:h-[30rem]">
+            <div className="depth-card-wrap absolute left-0 top-2 sm:left-4">
+              <FloatingPhotoCard rotate={-6} label="People near you" chips={["2.4 km", "Online"]} />
+            </div>
+            <div className="depth-card-wrap absolute right-0 top-16 sm:right-6">
+              <FloatingPhotoCard
+                rotate={5}
+                label="Shared interests"
+                chips={["Hiking", "Film", "Coffee"]}
+              />
+            </div>
+            <div className="depth-card-wrap absolute bottom-2 left-8 sm:left-20">
+              <FloatingPhotoCard
+                rotate={4}
+                label="Shared goals"
+                chips={["Serious", "Friendship"]}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -839,7 +923,7 @@ export default function Home() {
                   className="step-card group relative rounded-2xl border border-ink/8 bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_8px_32px_rgba(10,22,40,0.08)]"
                 >
                   <div className="mb-6 flex items-center gap-3">
-                    <span className="grid size-9 place-items-center rounded-full bg-brand text-white text-sm font-bold shadow-[0_4px_12px_rgba(0,180,216,0.35)]">
+                    <span className="grid size-9 place-items-center rounded-full bg-brand text-white text-sm font-bold shadow-[0_4px_12px_rgba(124,58,237,0.35)]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand/70">

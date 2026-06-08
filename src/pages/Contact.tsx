@@ -185,7 +185,7 @@ export default function Contact() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-1">
                 <button
                   type="submit"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,180,216,0.35)] transition-all hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(0,180,216,0.45)]"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(124,58,237,0.35)] transition-all hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(124,58,237,0.45)]"
                 >
                   <Send className="size-4" aria-hidden="true" />
                   Send Message

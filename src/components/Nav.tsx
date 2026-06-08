@@ -19,7 +19,7 @@ export function Nav() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 font-semibold">
-          <span className="grid size-8 place-items-center rounded-lg bg-brand text-white shadow-[0_4px_12px_rgba(0,180,216,0.35)]">
+          <span className="grid size-8 place-items-center rounded-lg bg-brand text-white shadow-[0_4px_12px_rgba(124,58,237,0.35)]">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               <path d="M8 10h.01M12 10h.01M16 10h.01" />
@@ -59,7 +59,7 @@ export function Nav() {
 
           <a
             href="/#download"
-            className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,180,216,0.35)] transition-all hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(0,180,216,0.45)]"
+            className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(124,58,237,0.35)] transition-all hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(124,58,237,0.45)]"
           >
             Get the App
           </a>
