@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Sparkles,
   Target,
+  Users,
 } from "lucide-react";
 import heroCouple from "@/assets/hero-couple.jpg";
 import amara from "@/assets/avatar-elena.jpg";
@@ -62,6 +63,19 @@ const features = [
     body: "Send an Intent to someone you are genuinely interested in. They will see it, think it over, and respond when they are ready. It is connection, not competition.",
     visual: "intents",
   },
+];
+
+// Per-card fills for the feature grid (checkerboard of light tints / dark panels).
+const featureStyles = [
+  { card: "bg-lilac", title: "text-ink", body: "text-ink/60" },
+  {
+    card: "bg-[linear-gradient(140deg,#4B2FA8,#3A2585)]",
+    title: "text-white",
+    body: "text-white/65",
+  },
+  { card: "bg-[#F2ECDD]", title: "text-ink", body: "text-ink/60" },
+  { card: "bg-[#15111F]", title: "text-white", body: "text-white/65" },
+  { card: "bg-lilac", title: "text-ink", body: "text-ink/60" },
 ];
 
 const steps = [
@@ -184,6 +198,107 @@ function Stars({ count = 5 }: { count?: number }) {
         <StarFilled key={i} />
       ))}
     </div>
+  );
+}
+
+/* Chat-bubble shaped avatar used in the stats band. */
+function StatAvatar({
+  className = "",
+  src,
+  size = "size-16",
+}: {
+  className?: string;
+  src: string;
+  size?: string;
+}) {
+  return (
+    <div className={`stat-avatar absolute hidden md:block ${className}`}>
+      <div
+        className={`${size} overflow-hidden rounded-[42%_42%_42%_8px] border-[3px] border-white/90 bg-white/10 shadow-[0_14px_34px_rgba(0,0,0,0.35)]`}
+      >
+        <img src={src} alt="" className="size-full object-cover" />
+      </div>
+    </div>
+  );
+}
+
+const statFaces = [amara, chidinma, dayo, heroCouple, amara, chidinma, dayo, heroCouple];
+const statPositions = [
+  "left-[10%] top-[15%]",
+  "left-[5%] top-[46%]",
+  "left-[18%] bottom-[14%]",
+  "left-[40%] bottom-[7%]",
+  "right-[9%] top-[11%]",
+  "right-[18%] top-[24%]",
+  "right-[7%] bottom-[22%]",
+  "right-[28%] bottom-[9%]",
+];
+const statSizes = [
+  "size-16",
+  "size-20",
+  "size-16",
+  "size-14",
+  "size-20",
+  "size-14",
+  "size-16",
+  "size-14",
+];
+
+/* Stats band — one big cycling stat over a dotted map with scattered avatars. */
+function StatsBand() {
+  const [i, setI] = useState(0);
+  const [fade, setFade] = useState(false);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setFade(true);
+      setTimeout(() => {
+        setI((p) => (p + 1) % stats.length);
+        setFade(false);
+      }, 350);
+    }, 3200);
+    return () => clearInterval(id);
+  }, []);
+  const stat = stats[i];
+
+  return (
+    <section className="relative flex min-h-[30rem] items-center overflow-hidden bg-[#2C2466] py-24 text-white lg:min-h-[34rem]">
+      {/* Dotted map texture */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.18]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.7) 1.3px, transparent 1.3px)",
+          backgroundSize: "22px 22px",
+          maskImage: "radial-gradient(ellipse 62% 62% at 50% 50%, #000 10%, transparent 78%)",
+          WebkitMaskImage: "radial-gradient(ellipse 62% 62% at 50% 50%, #000 10%, transparent 78%)",
+        }}
+      />
+
+      {/* Scattered avatar bubbles */}
+      {statPositions.map((pos, idx) => (
+        <StatAvatar key={idx} className={pos} src={statFaces[idx]} size={statSizes[idx]} />
+      ))}
+
+      <div
+        className={`relative z-10 mx-auto max-w-3xl px-5 text-center transition-opacity duration-300 ${
+          fade ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        {stat.stars && (
+          <div className="mb-4 flex justify-center">
+            <Stars count={5} />
+          </div>
+        )}
+        <p className="text-[clamp(3.5rem,10vw,7rem)] font-bold leading-[0.95] tracking-tight text-brand-light">
+          {stat.value}
+        </p>
+        <p className="mt-1 text-[clamp(2rem,6vw,4.25rem)] font-bold leading-[1.05] tracking-tight text-brand-light">
+          {stat.label}
+        </p>
+        <p className="mt-5 text-lg text-white/55">{stat.detail}</p>
+      </div>
+    </section>
   );
 }
 
@@ -337,50 +452,40 @@ function HeroPhoto({
 }
 
 /* Floating labeled photo card used in the "Dating apps" section. */
-function FloatingPhotoCard({
+function DepthCard({
   rotate = 0,
   label,
-  chips,
   src,
+  overlay,
   className = "",
 }: {
   rotate?: number;
   label: string;
-  chips: string[];
   src?: string;
+  overlay?: ReactNode;
   className?: string;
 }) {
   return (
-    <div
-      style={{ transform: `rotate(${rotate}deg)` }}
-      className={`depth-card w-52 rounded-2xl border border-ink/8 bg-surface p-2.5 shadow-[0_24px_60px_rgba(20,12,40,0.18)] ${className}`}
-    >
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-lilac to-mint">
-        <div className="aspect-[4/3] w-full">
-          {src ? (
-            <img src={src} alt="" className="size-full object-cover" />
-          ) : (
-            <div className="flex size-full flex-col items-center justify-center gap-1.5 text-ink/30">
-              <ImageIcon className="size-6" aria-hidden="true" />
-              <span className="text-[10px] font-bold uppercase tracking-wider">Photo</span>
+    <div className={`depth-card-wrap md:absolute ${className}`}>
+      <div style={{ transform: `rotate(${rotate}deg)` }}>
+        <div className="w-[18rem] rounded-3xl bg-white p-2.5 shadow-[0_28px_64px_rgba(20,12,40,0.20)] sm:w-[20rem]">
+          <div className="relative overflow-hidden rounded-[1.25rem]">
+            <div className="aspect-[16/11] w-full bg-gradient-to-br from-lilac to-mint">
+              {src ? (
+                <img src={src} alt="" className="size-full object-cover" />
+              ) : (
+                <div className="flex size-full flex-col items-center justify-center gap-1.5 text-ink/30">
+                  <ImageIcon className="size-7" aria-hidden="true" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider">Photo</span>
+                </div>
+              )}
             </div>
-          )}
+            {overlay && (
+              <div className="absolute inset-x-3 bottom-3 flex flex-wrap gap-1.5">{overlay}</div>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="px-1.5 pb-1 pt-2.5">
-        <p className="text-sm font-semibold text-ink">{label}</p>
-        <div className="mt-2 flex flex-wrap gap-1">
-          {chips.map((chip, i) => (
-            <span
-              key={chip}
-              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                i % 2 === 0 ? "bg-brand/12 text-brand" : "bg-lilac text-ink/70"
-              }`}
-            >
-              {chip}
-            </span>
-          ))}
-        </div>
+        <p className="mt-3 px-1 text-sm font-semibold text-ink">{label}</p>
       </div>
     </div>
   );
@@ -617,6 +722,9 @@ function FeatureVisual({ type }: { type: string }) {
 
 /* ── page ────────────────────────────────────────────────── */
 
+// Testimonials section is hidden to match the reference design. Flip to true to restore.
+const SHOW_TESTIMONIALS = false;
+
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
@@ -766,8 +874,8 @@ export default function Home() {
           </h1>
 
           <p className="hero-sub mx-auto mt-9 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
-            You have potential connections waiting. Discover people who share your world, your
-            passions, and your vision for what comes next.
+            You have potential new connections waiting. Unlock premium to see who has already
+            reached out to you.
           </p>
 
           <div className="hero-btns mt-9">
@@ -780,80 +888,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Stats ── */}
-      <section className="bg-surface py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6">
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className={`stat-item group rounded-3xl border px-6 py-9 text-center transition-all duration-200 hover:-translate-y-1 sm:px-8 ${
-                  stat.stars
-                    ? "border-brand/20 bg-brand/8 hover:shadow-[0_16px_40px_rgba(124,58,237,0.18)]"
-                    : "border-ink/8 bg-surface-muted/50 hover:border-brand/25 hover:shadow-[0_16px_40px_rgba(124,58,237,0.10)]"
-                }`}
-              >
-                {stat.stars && (
-                  <div className="mb-2 flex justify-center">
-                    <Stars count={5} />
-                  </div>
-                )}
-                <p className="text-4xl font-bold tracking-tight text-ink md:text-5xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink/50">
-                  {stat.label}
-                </p>
-                <p className="mt-1 text-xs text-ink/35">{stat.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Why MeantGo ── */}
-      <section className="relative overflow-hidden bg-lilac">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 sm:px-6 lg:grid-cols-[1fr_1fr] lg:py-32">
-          {/* Left: heading + copy */}
-          <div>
-            <SectionLabel>Why MeantGo Exists</SectionLabel>
-            <h2 className="reveal-heading flex flex-wrap items-center gap-3 text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
-              Dating apps were not built for depth.
-              <span className="grid size-10 place-items-center rounded-xl bg-brand text-white shadow-[0_8px_24px_rgba(124,58,237,0.35)]">
-                <Heart className="size-5" fill="currentColor" aria-hidden="true" />
-              </span>
-            </h2>
-            <div className="mt-7 space-y-5 text-lg leading-relaxed text-ink/60">
-              <p>
-                Most apps hand you a photo and ask you to decide. No context, no common ground, no
-                real reason to reach out.
-              </p>
-              <p className="font-semibold text-ink">
-                MeantGo was built on a different belief: the best connections start with intent.
-                People who know what they want and are not afraid to say it.
-              </p>
-            </div>
-          </div>
+      <section className="relative overflow-hidden bg-lilac py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          {/* Heading */}
+          <h2 className="reveal-heading flex flex-wrap items-end gap-x-4 gap-y-3 text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.02] tracking-tight text-ink">
+            <span>
+              Dating apps were
+              <br className="hidden sm:block" /> not built for depth.
+            </span>
+            <span className="inline-grid size-12 -rotate-6 place-items-center rounded-2xl bg-white shadow-[0_10px_28px_rgba(20,12,40,0.16)] sm:size-14">
+              <Heart
+                className="size-6 text-brand sm:size-7"
+                fill="currentColor"
+                aria-hidden="true"
+              />
+            </span>
+          </h2>
 
-          {/* Right: scattered floating photo cards */}
-          <div className="relative h-[26rem] sm:h-[30rem]">
-            <div className="depth-card-wrap absolute left-0 top-2 sm:left-4">
-              <FloatingPhotoCard rotate={-6} label="People near you" chips={["2.4 km", "Online"]} />
-            </div>
-            <div className="depth-card-wrap absolute right-0 top-16 sm:right-6">
-              <FloatingPhotoCard
-                rotate={5}
-                label="Shared interests"
-                chips={["Hiking", "Film", "Coffee"]}
-              />
-            </div>
-            <div className="depth-card-wrap absolute bottom-2 left-8 sm:left-20">
-              <FloatingPhotoCard
-                rotate={4}
-                label="Shared goals"
-                chips={["Serious", "Friendship"]}
-              />
-            </div>
+          {/* Tilted photo cards */}
+          <div className="relative mt-14 flex flex-col items-center gap-10 md:mt-16 md:block md:h-[27rem]">
+            <DepthCard
+              className="md:left-0 md:top-0"
+              rotate={-5}
+              label="People near you"
+              overlay={
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-ink shadow-md">
+                  <span className="grid size-4 place-items-center rounded-full bg-brand text-white">
+                    <Users className="size-2.5" aria-hidden="true" />
+                  </span>
+                  Matthew Davis and 2 Others
+                </span>
+              }
+            />
+            <DepthCard
+              className="md:left-1/2 md:top-24 md:-translate-x-1/2"
+              rotate={3}
+              label="Shared interest"
+              overlay={["Travel", "Adventure", "Fitness", "Movies"].map((c) => (
+                <span
+                  key={c}
+                  className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-ink shadow-md"
+                >
+                  {c}
+                </span>
+              ))}
+            />
+            <DepthCard
+              className="md:right-0 md:top-10"
+              rotate={5}
+              label="Shared goals"
+              src={heroCouple}
+              overlay={
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-ink shadow-md">
+                  <Heart className="size-3 text-brand" fill="currentColor" aria-hidden="true" />
+                  Serious Relationship
+                </span>
+              }
+            />
           </div>
         </div>
       </section>
@@ -871,47 +963,25 @@ export default function Home() {
               People who know what they want and are not afraid to say it.
             </p>
           </div>
-          <div className="space-y-6">
+          <div className="grid gap-5 md:grid-cols-2">
             {features.map((feature, index) => {
-              const dark = index % 2 === 1;
+              const s = featureStyles[index % featureStyles.length];
+              const wide = index === features.length - 1 && features.length % 2 === 1;
               return (
                 <article
                   key={feature.title}
-                  className={`feature-article grid items-center gap-10 rounded-[2rem] p-7 lg:grid-cols-2 lg:p-12 ${
-                    dark ? "bg-deep-purple text-white" : "bg-lilac text-ink"
-                  } ${index % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}
+                  className={`feature-article flex flex-col rounded-[2rem] p-7 lg:p-9 ${s.card} ${
+                    wide ? "md:col-span-2 md:flex-row md:items-center md:gap-10" : ""
+                  }`}
                 >
-                  <div>
-                    <p
-                      className={`mb-4 text-7xl font-bold leading-none select-none ${
-                        dark ? "text-white/10" : "text-brand/15"
-                      }`}
-                    >
-                      {feature.eyebrow}
-                    </p>
-                    <h3
-                      className={`text-2xl font-bold leading-snug md:text-3xl ${
-                        dark ? "text-white" : "text-ink"
-                      }`}
-                    >
+                  <div className={wide ? "md:flex-1" : ""}>
+                    <h3 className={`text-2xl font-bold leading-snug ${s.title}`}>
                       {feature.title}
                     </h3>
-                    <p
-                      className={`mt-5 text-base leading-relaxed ${
-                        dark ? "text-white/55" : "text-ink/60"
-                      }`}
-                    >
-                      {feature.body}
-                    </p>
+                    <p className={`mt-3 text-sm leading-relaxed ${s.body}`}>{feature.body}</p>
                   </div>
-                  <div className="relative">
-                    <div
-                      aria-hidden="true"
-                      className="absolute -inset-3 rounded-2xl bg-brand/10 blur-2xl"
-                    />
-                    <div className="relative">
-                      <FeatureVisual type={feature.visual} />
-                    </div>
+                  <div className={`mt-6 ${wide ? "md:mt-0 md:flex-1" : ""}`}>
+                    <FeatureVisual type={feature.visual} />
                   </div>
                 </article>
               );
@@ -921,56 +991,35 @@ export default function Home() {
       </section>
 
       {/* ── How it works ── */}
-      <section
-        id="how-it-works"
-        className="relative overflow-hidden bg-surface-muted py-24 lg:py-32"
-      >
-        <GridBackdrop mask="radial-gradient(ellipse 75% 70% at 50% 30%, #000 15%, transparent 85%)" />
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
-          <div className="mb-12 grid gap-8 lg:grid-cols-[0.7fr_1fr] lg:items-end">
-            <div>
-              <SectionLabel>Get Started in Minutes</SectionLabel>
-              <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
-                From download to first connection.
-              </h2>
-            </div>
-            <p className="max-w-lg text-base leading-relaxed text-ink/55 lg:justify-self-end">
+      <section id="how-it-works" className="bg-[#0B0A12] py-24 text-white lg:py-32">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="max-w-3xl">
+            <h2 className="reveal-heading text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white">
+              From download to first connection.
+            </h2>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/55">
               A calmer path from curiosity to contact. Each step gives people more context before
               anyone has to make a move.
             </p>
           </div>
 
-          <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, index) => {
+          <ol className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {steps.map((step) => {
               const Icon = step.icon;
               return (
-                <li
-                  key={step.title}
-                  className="step-card group relative rounded-3xl border border-ink/8 bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_12px_36px_rgba(124,58,237,0.12)]"
-                >
-                  <div className="mb-6 flex items-center gap-3">
-                    <span className="grid size-9 place-items-center rounded-full bg-brand text-white text-sm font-bold shadow-[0_4px_12px_rgba(124,58,237,0.35)]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand/70">
-                      {step.eyebrow}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-bold leading-snug text-ink">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink/50">{step.body}</p>
-                  <div className="mt-6 flex items-center justify-between border-t border-ink/8 pt-4">
-                    <span className="text-xs font-semibold text-ink/40">{step.cue}</span>
-                    <Icon
-                      className="size-4 text-brand/40 transition-colors group-hover:text-brand"
-                      aria-hidden="true"
-                    />
-                  </div>
+                <li key={step.title} className="step-card">
+                  <Icon className="size-7 text-brand" aria-hidden="true" />
+                  <h3 className="mt-5 text-xl font-bold leading-snug text-white">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/50">{step.body}</p>
                 </li>
               );
             })}
           </ol>
         </div>
       </section>
+
+      {/* ── Stats ── */}
+      <StatsBand />
 
       {/* ── Interests ── */}
       <section className="relative overflow-hidden bg-surface py-24 lg:py-32">
@@ -1040,57 +1089,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
-      <section className="bg-surface-muted py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6">
-          <div className="mb-12 grid gap-8 lg:grid-cols-[0.74fr_1fr] lg:items-end">
-            <div>
-              <SectionLabel>Real Stories. Real Connections.</SectionLabel>
-              <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
-                They started with one honest Intent.
-              </h2>
+      {/* ── Testimonials (hidden — not in reference design) ── */}
+      {SHOW_TESTIMONIALS && (
+        <section className="bg-surface-muted py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6">
+            <div className="mb-12 grid gap-8 lg:grid-cols-[0.74fr_1fr] lg:items-end">
+              <div>
+                <SectionLabel>Real Stories. Real Connections.</SectionLabel>
+                <h2 className="reveal-heading text-4xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
+                  They started with one honest Intent.
+                </h2>
+              </div>
+              <p className="max-w-lg text-base leading-relaxed text-ink/55 lg:justify-self-end">
+                Real connection feels less random when people can name what they want and find
+                someone already moving in the same direction.
+              </p>
             </div>
-            <p className="max-w-lg text-base leading-relaxed text-ink/55 lg:justify-self-end">
-              Real connection feels less random when people can name what they want and find someone
-              already moving in the same direction.
-            </p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {testimonials.map((item) => (
-              <figure
-                key={item.name}
-                className="testimonial-card group relative overflow-hidden rounded-3xl border border-ink/8 bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(124,58,237,0.12)]"
-              >
-                {/* Gradient top border on hover */}
-                <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-brand to-brand-light opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="grid gap-5 md:grid-cols-3">
+              {testimonials.map((item) => (
+                <figure
+                  key={item.name}
+                  className="testimonial-card group relative overflow-hidden rounded-3xl border border-ink/8 bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(124,58,237,0.12)]"
+                >
+                  {/* Gradient top border on hover */}
+                  <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-brand to-brand-light opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                <div className="mb-6 flex items-center justify-between">
-                  <Stars count={5} />
-                  <span className="text-3xl font-bold leading-none text-brand/12 select-none">
-                    "
-                  </span>
-                </div>
-
-                <blockquote className="min-h-40 text-base leading-relaxed text-ink/68">
-                  "{item.quote}"
-                </blockquote>
-
-                <figcaption className="mt-7 flex items-center gap-3 border-t border-ink/8 pt-5">
-                  <img
-                    src={item.img}
-                    alt={`Portrait of ${item.name}`}
-                    className="size-11 rounded-full object-cover ring-2 ring-brand/15 transition-all duration-200 group-hover:ring-brand/40"
-                  />
-                  <div>
-                    <p className="text-sm font-semibold text-ink">{item.name}</p>
-                    <p className="text-xs text-ink/45">{item.location}</p>
+                  <div className="mb-6 flex items-center justify-between">
+                    <Stars count={5} />
+                    <span className="text-3xl font-bold leading-none text-brand/12 select-none">
+                      "
+                    </span>
                   </div>
-                </figcaption>
-              </figure>
-            ))}
+
+                  <blockquote className="min-h-40 text-base leading-relaxed text-ink/68">
+                    "{item.quote}"
+                  </blockquote>
+
+                  <figcaption className="mt-7 flex items-center gap-3 border-t border-ink/8 pt-5">
+                    <img
+                      src={item.img}
+                      alt={`Portrait of ${item.name}`}
+                      className="size-11 rounded-full object-cover ring-2 ring-brand/15 transition-all duration-200 group-hover:ring-brand/40"
+                    />
+                    <div>
+                      <p className="text-sm font-semibold text-ink">{item.name}</p>
+                      <p className="text-xs text-ink/45">{item.location}</p>
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── Safety ── */}
       <section
