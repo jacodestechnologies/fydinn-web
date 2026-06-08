@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import mapImg from "@/assets/map-meantgo.png";
+import mapImg from "@/assets/map--meantgo.png";
 import { stats } from "./data";
 import { Stars } from "./ui";
 

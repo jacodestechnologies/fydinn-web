@@ -1,6 +1,6 @@
-import walkingImg from "@/assets/walking.png";
-import seeThemImg from "@/assets/see them.png";
-import intentsImg from "@/assets/Group 15.png";
+import walkingImg from "@/assets/walkingg.png";
+import seeThemImg from "@/assets/see-them.png";
+import intentsImg from "@/assets/Group-15.png";
 import { commonGround } from "./data";
 
 export function StarFilled({ className }: { className?: string }) {
@@ -33,17 +33,13 @@ export function Stars({ count = 5 }: { count?: number }) {
 
 export function SectionLabel({ children, light }: { children: string; light?: boolean }) {
   return (
-    <span
-      className={`mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${
-        light ? "bg-white/10 text-brand-light ring-1 ring-white/15" : "bg-brand/10 text-brand"
+    <p
+      className={`mb-5 text-xs font-bold uppercase tracking-[0.18em] ${
+        light ? "text-brand-light" : "text-brand"
       }`}
     >
-      <span
-        className={`size-1.5 rounded-full ${light ? "bg-brand-light" : "bg-brand"}`}
-        aria-hidden="true"
-      />
       {children}
-    </span>
+    </p>
   );
 }
 

@@ -94,6 +94,26 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
+  // Refresh ScrollTrigger once images load to fix stale trigger positions.
+  useLayoutEffect(() => {
+    const handleImageLoad = () => {
+      ScrollTrigger.refresh();
+    };
+
+    // Listen for image load events and refresh on completion
+    window.addEventListener("load", handleImageLoad);
+    
+    // Fallback: refresh after a short delay if images take a while
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1500);
+
+    return () => {
+      window.removeEventListener("load", handleImageLoad);
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <div ref={mainRef} className="min-h-dvh overflow-hidden bg-surface text-ink">
       <Hero />

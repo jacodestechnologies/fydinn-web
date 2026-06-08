@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import containerImg from "@/assets/Container section.png";
+import containerImg from "@/assets/Container-section.png";
 
 export function DatingApps() {
   return (
