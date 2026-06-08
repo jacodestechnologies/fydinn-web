@@ -54,11 +54,12 @@ export const features: Feature[] = [
   },
 ];
 
-// Per-card fills for the feature grid (checkerboard of light tints / dark panels).
+// Per-card fills for the feature grid. Fixed colors (not theme tokens) so the
+// showcase looks identical in light and dark mode.
 export const featureStyles: FeatureStyle[] = [
-  { card: "bg-lilac", title: "text-ink", body: "text-ink/60" },
+  { card: "bg-[#EDE9FE]", title: "text-[#1B1033]", body: "text-[#1B1033]/65" },
   { card: "bg-[#2C2466]", title: "text-white", body: "text-white/65" },
-  { card: "bg-[#F2ECDD]", title: "text-ink", body: "text-ink/60" },
+  { card: "bg-[#F2ECDD]", title: "text-[#1B1033]", body: "text-[#1B1033]/65" },
   { card: "bg-[#141118]", title: "text-white", body: "text-white/65" },
 ];
 

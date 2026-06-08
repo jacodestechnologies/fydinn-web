@@ -137,10 +137,10 @@ export function AppStoreBadges({ align = "start" }: { align?: "start" | "center"
 export function FeatureVisual({ type }: { type: string }) {
   if (type === "tags") {
     return (
-      <div className="rounded-2xl border border-ink/6 bg-warm-cream/80 p-6 shadow-soft">
+      <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-[0_8px_30px_rgba(20,12,40,0.08)]">
         <div className="mb-5 flex items-center justify-between">
-          <span className="text-sm font-semibold text-ink">Common ground</span>
-          <span className="rounded-full bg-mint px-3 py-1 text-xs font-semibold text-ink">
+          <span className="text-sm font-semibold text-[#1B1033]">Common ground</span>
+          <span className="rounded-full bg-[#E6F7FB] px-3 py-1 text-xs font-semibold text-[#1B1033]">
             87% overlap
           </span>
         </div>
@@ -149,7 +149,7 @@ export function FeatureVisual({ type }: { type: string }) {
             <span
               key={tag}
               className={`rounded-full px-4 py-2 text-sm font-medium ${
-                i % 2 === 0 ? "bg-brand text-white" : "bg-lilac text-ink"
+                i % 2 === 0 ? "bg-[#7C3AED] text-white" : "bg-[#EDE9FE] text-[#1B1033]"
               }`}
             >
               {tag}

@@ -72,15 +72,6 @@ export default function Home() {
         scrollTrigger: { trigger: ".testimonial-card", start: "top 85%" },
       });
 
-      gsap.from(".trust-point", {
-        opacity: 0,
-        y: 24,
-        duration: 0.6,
-        ease: "power3.out",
-        stagger: 0.08,
-        scrollTrigger: { trigger: ".trust-point", start: "top 85%" },
-      });
-
       Array.from(document.querySelectorAll<HTMLElement>(".reveal-heading")).forEach((el) => {
         gsap.from(el, {
           opacity: 0,
@@ -94,23 +85,30 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
-  // Refresh ScrollTrigger once images load to fix stale trigger positions.
+  // Heavy images load after ScrollTrigger first measures the page, leaving its
+  // trigger positions stale and reveal targets stuck at opacity 0. Refresh as
+  // each image finishes loading, on window load, and via timed fallbacks.
   useLayoutEffect(() => {
-    const handleImageLoad = () => {
-      ScrollTrigger.refresh();
-    };
-
-    // Listen for image load events and refresh on completion
-    window.addEventListener("load", handleImageLoad);
-    
-    // Fallback: refresh after a short delay if images take a while
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 1500);
+    const refresh = () => ScrollTrigger.refresh();
+    const pending = Array.from(mainRef.current?.querySelectorAll("img") ?? []).filter(
+      (img) => !img.complete,
+    );
+    pending.forEach((img) => {
+      img.addEventListener("load", refresh, { once: true });
+      img.addEventListener("error", refresh, { once: true });
+    });
+    window.addEventListener("load", refresh);
+    const t1 = window.setTimeout(refresh, 800);
+    const t2 = window.setTimeout(refresh, 2500);
 
     return () => {
-      window.removeEventListener("load", handleImageLoad);
-      clearTimeout(timer);
+      pending.forEach((img) => {
+        img.removeEventListener("load", refresh);
+        img.removeEventListener("error", refresh);
+      });
+      window.removeEventListener("load", refresh);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
     };
   }, []);
 

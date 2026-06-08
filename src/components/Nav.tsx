@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const navItems = [
@@ -13,19 +14,49 @@ export function Nav() {
   const { theme, toggle } = useTheme();
   const location = useLocation();
   const onHome = location.pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Transparent / white styling while sitting over the purple hero.
+  const overHero = onHome && !scrolled;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/8 bg-surface/90 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        overHero
+          ? "border-b border-transparent bg-[#7C3AED]"
+          : "border-b border-ink/8 bg-surface/90 backdrop-blur-xl"
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 font-semibold">
           <span className="grid size-8 place-items-center rounded-lg bg-brand text-white shadow-[0_4px_12px_rgba(124,58,237,0.35)]">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               <path d="M8 10h.01M12 10h.01M16 10h.01" />
             </svg>
           </span>
-          <span className="text-lg font-bold tracking-tight text-ink">MeantGo</span>
+          <span
+            className={`text-lg font-bold tracking-tight ${overHero ? "text-white" : "text-ink"}`}
+          >
+            MeantGo
+          </span>
         </Link>
 
         {/* Nav links — home only */}
@@ -35,7 +66,9 @@ export function Nav() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-ink/55 transition-colors hover:text-ink"
+                className={`text-sm font-medium transition-colors ${
+                  overHero ? "text-white/80 hover:text-white" : "text-ink/55 hover:text-ink"
+                }`}
               >
                 {item.label}
               </a>
@@ -48,7 +81,11 @@ export function Nav() {
           <button
             onClick={toggle}
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            className="grid size-9 place-items-center rounded-lg border border-ink/10 text-ink/50 transition-colors hover:border-ink/20 hover:text-ink active:scale-95"
+            className={`grid size-9 place-items-center rounded-lg border transition-colors active:scale-95 ${
+              overHero
+                ? "border-white/30 text-white hover:border-white/60"
+                : "border-ink/10 text-ink/50 hover:border-ink/20 hover:text-ink"
+            }`}
           >
             {theme === "light" ? (
               <Moon className="size-4" aria-hidden="true" />
@@ -59,7 +96,11 @@ export function Nav() {
 
           <a
             href="/#download"
-            className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(124,58,237,0.35)] transition-all hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(124,58,237,0.45)]"
+            className={`inline-flex min-h-9 items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold transition-all hover:-translate-y-px ${
+              overHero
+                ? "bg-white text-brand shadow-[0_2px_12px_rgba(0,0,0,0.18)] hover:shadow-[0_4px_18px_rgba(0,0,0,0.28)]"
+                : "bg-brand text-white shadow-[0_2px_8px_rgba(124,58,237,0.35)] hover:shadow-[0_4px_16px_rgba(124,58,237,0.45)]"
+            }`}
           >
             Get the App
           </a>
