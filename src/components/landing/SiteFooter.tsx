@@ -44,22 +44,28 @@ export function SiteFooter() {
             </span>
             <nav className="flex flex-col gap-3">
               <a
-                href="/privacy.html"
+                href="/privacy"
                 className="text-sm text-text-subtle hover:text-brand transition-colors font-light"
               >
                 Privacy Policy
               </a>
               <a
-                href="/terms.html"
+                href="/terms"
                 className="text-sm text-text-subtle hover:text-brand transition-colors font-light"
               >
                 Terms of Service
               </a>
               <a
-                href="#"
+                href="/cookies"
                 className="text-sm text-text-subtle hover:text-brand transition-colors font-light"
               >
                 Cookie Policy
+              </a>
+              <a
+                href="/delete-account"
+                className="text-sm text-text-subtle hover:text-brand transition-colors font-light"
+              >
+                Delete Account
               </a>
             </nav>
           </div>

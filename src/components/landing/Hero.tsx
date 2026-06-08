@@ -35,7 +35,7 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 lg:gap-24 items-center w-full">
         {/* Left — copy */}
         <div className="space-y-10">
-          <p className="hero-eyebrow text-[11px] font-bold uppercase tracking-[0.4em] text-brand">
+          <p className="hero-eyebrow text-[11px] text-text-muted">
             Explore with Intent
           </p>
 
