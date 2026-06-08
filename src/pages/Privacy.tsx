@@ -95,9 +95,9 @@ export default function Privacy() {
             headers={["Data", "Purpose"]}
             rows={[
               ["GPS coordinates (with permission)", "Proximity-based discovery and distance display"],
-              ["Device push token (FCM)", "Delivering push notifications"],
+              ["Device push token", "Delivering push notifications"],
               ["App usage data", "Improving app performance and user experience"],
-              ["Authentication tokens (JWT)", "Maintaining your secure login session"],
+              ["Authentication tokens", "Maintaining your secure login session"],
               ["OTP codes (temporary, max 5 min)", "Phone number verification during login"],
             ]}
           />
@@ -106,9 +106,9 @@ export default function Privacy() {
           <Table
             headers={["Source", "Data", "Why"]}
             rows={[
-              ["sent.dm", "OTP delivery confirmation", "Phone number verification"],
-              ["Firebase (Google)", "Device push token", "Push notification delivery"],
-              ["AWS S3", "Media file keys", "Confirming successful photo/video upload"],
+              ["SMS provider", "OTP delivery confirmation", "Phone number verification"],
+              ["Push notification service", "Device push token", "Push notification delivery"],
+              ["Cloud storage", "Media file keys", "Confirming successful photo/video upload"],
             ]}
           />
           <p className="mt-4">
@@ -152,12 +152,12 @@ export default function Privacy() {
             We share data with trusted processors who act strictly on our instructions:
           </p>
           <Table
-            headers={["Provider", "Data Shared", "Purpose"]}
+            headers={["Service", "Data Shared", "Purpose"]}
             rows={[
-              ["sent.dm", "Phone number", "OTP SMS delivery"],
-              ["Google Firebase (FCM)", "Device push token", "Push notification delivery"],
-              ["Amazon Web Services (S3)", "Photos and videos (encrypted)", "Cloud media storage"],
-              ["Redis", "Temporary OTP codes and rate-limit counters", "Session management"],
+              ["SMS verification", "Phone number", "OTP SMS delivery"],
+              ["Push notifications", "Device push token", "Push notification delivery"],
+              ["Cloud storage", "Photos and videos (encrypted)", "Cloud media storage"],
+              ["Session cache", "Temporary OTP codes and rate-limit counters", "Session management"],
             ]}
           />
           <p className="mt-4">
@@ -185,8 +185,8 @@ export default function Privacy() {
               ["Inactive accounts (24+ months)", "May be deleted after prior notice"],
               ["Deleted account data", "Removed from active systems within 30 days; backups purged within 90 days"],
               ["OTP codes", "5 minutes from generation"],
-              ["JWT access tokens", "12 hours"],
-              ["JWT refresh tokens", "7 days"],
+              ["Access tokens", "12 hours"],
+              ["Refresh tokens", "7 days"],
               ["Legal hold data", "As long as required by law"],
             ]}
           />
@@ -195,17 +195,17 @@ export default function Privacy() {
           <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
             <li>All data in transit is encrypted using TLS (Transport Layer Security)</li>
             <li>
-              Authentication tokens are stored in hardware-backed secure storage (iOS Keychain /
-              Android Keystore) via flutter_secure_storage
+              Authentication tokens are stored in your device's hardware-backed secure storage
+              (iOS Keychain / Android Keystore)
             </li>
-            <li>API access uses short-lived, signed JWT tokens with refresh token rotation</li>
+            <li>API access uses short-lived, signed tokens with refresh token rotation</li>
             <li>
               OTP endpoints are rate-limited: 3 send attempts per hour per phone number, with
               automatic lockout after repeated failed verifications
             </li>
             <li>
-              Photos and videos are uploaded directly to AWS S3 via time-limited presigned URLs
-              and never pass through our application servers
+              Photos and videos are uploaded directly to secure cloud storage via time-limited
+              upload URLs and never pass through our application servers
             </li>
             <li>Internal access to personal data is restricted to authorised personnel</li>
           </ul>
@@ -241,9 +241,9 @@ export default function Privacy() {
         <section id="section-7">
           <SectionTitle n={7} title="Push Notifications" />
           <p>
-            We use Firebase Cloud Messaging (FCM) to send you push notifications, including new
+            We use a push notification service to send you push notifications, including new
             Intent requests, messages from matched users, and important app updates. To do this,
-            we store your device's FCM push token on our servers.
+            we store your device's push token on our servers.
           </p>
           <p className="mt-4">You can disable push notifications at any time:</p>
           <ul className="mt-3 space-y-2 pl-5 list-disc marker:text-brand">
@@ -283,7 +283,7 @@ export default function Privacy() {
           <SectionTitle n={9} title="Media Content" />
           <p>
             You may upload up to six profile photos and one video introduction. All files are
-            transmitted directly to Amazon S3 cloud storage via pre-signed HTTPS URLs and never
+            transmitted directly to secure cloud storage via pre-signed HTTPS URLs and never
             pass through our application servers.
           </p>
           <p className="mt-4">
