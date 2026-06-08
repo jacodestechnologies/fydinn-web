@@ -7,8 +7,8 @@ export function DatingApps() {
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <h2 className="reveal-heading flex flex-wrap items-end gap-x-4 gap-y-3 text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.02] tracking-tight text-ink">
           <span>
-            Dating apps were
-            <br className="hidden sm:block" /> not built for depth.
+            Real connection
+            <br className="hidden sm:block" /> starts with intent.
           </span>
           <span className="inline-grid size-12 -rotate-6 place-items-center rounded-2xl bg-white shadow-[0_10px_28px_rgba(20,12,40,0.16)] sm:size-14">
             <Heart className="size-6 text-brand sm:size-7" fill="currentColor" aria-hidden="true" />

@@ -106,7 +106,7 @@ export default function Privacy() {
           <Table
             headers={["Source", "Data", "Why"]}
             rows={[
-              ["Twilio", "OTP delivery confirmation", "Phone number verification"],
+              ["sent.dm", "OTP delivery confirmation", "Phone number verification"],
               ["Firebase (Google)", "Device push token", "Push notification delivery"],
               ["AWS S3", "Media file keys", "Confirming successful photo/video upload"],
             ]}
@@ -154,7 +154,7 @@ export default function Privacy() {
           <Table
             headers={["Provider", "Data Shared", "Purpose"]}
             rows={[
-              ["Twilio", "Phone number", "OTP SMS delivery"],
+              ["sent.dm", "Phone number", "OTP SMS delivery"],
               ["Google Firebase (FCM)", "Device push token", "Push notification delivery"],
               ["Amazon Web Services (S3)", "Photos and videos (encrypted)", "Cloud media storage"],
               ["Redis", "Temporary OTP codes and rate-limit counters", "Session management"],
@@ -221,7 +221,7 @@ export default function Privacy() {
           <Table
             headers={["Right", "How to exercise it"]}
             rows={[
-              ["Access your data", "Contact us at privacy@meantgo.com"],
+              ["Access your data", "Contact us at support@meantgo.com"],
               ["Correct your data", "Update directly in the app or contact us"],
               ["Delete your account and data", "Settings > Delete Account, or contact us — processed within 30 days"],
               ["Withdraw location consent", "Device settings: revoke location permission at any time"],
@@ -232,7 +232,7 @@ export default function Privacy() {
           <p className="mt-4">
             Depending on your country of residence you may have additional rights under local
             privacy law (including GDPR for EEA/UK users, CCPA for California residents, and NDPA
-            for Nigerian residents). To exercise any right, contact us at privacy@meantgo.com and
+            for Nigerian residents). To exercise any right, contact us at support@meantgo.com and
             we will respond within 30 days.
           </p>
         </section>
@@ -308,7 +308,7 @@ export default function Privacy() {
             Date of birth is collected at registration to verify minimum age eligibility. If we
             discover that a user under 18 has created an account, we will immediately suspend the
             account and delete all associated data. If you believe a minor is using MeantGo,
-            contact us at privacy@meantgo.com and we will take prompt action.
+            contact us at support@meantgo.com and we will take prompt action.
           </p>
         </section>
 
@@ -336,15 +336,11 @@ export default function Privacy() {
           <div className="mt-5 grid sm:grid-cols-2 gap-4">
             <ContactCard
               title="General Privacy"
-              lines={["privacy@meantgo.com", "In-App: Settings > Help & Support"]}
-            />
-            <ContactCard
-              title="Data Protection"
-              lines={["dpo@meantgo.com"]}
+              lines={["support@meantgo.com", "In-App: Settings > Help & Support"]}
             />
             <ContactCard
               title="Mailing Address"
-              lines={["MeantGo", "[Company Legal Address]", "Nigeria"]}
+              lines={["MeantGo", "3832 Roxberry Hill Lane", "Buford, GA 30518-8541"]}
             />
           </div>
           <p className="mt-5">
@@ -359,11 +355,7 @@ export default function Privacy() {
         </section>
 
         {/* Footer */}
-        <div className="pt-6 border-t border-ink/10 text-xs text-ink/40 space-y-1">
-          <p>
-            This Privacy Policy should be reviewed by qualified legal counsel before publication.
-            It does not constitute legal advice.
-          </p>
+        <div className="pt-6 border-t border-ink/10 text-xs text-ink/40">
           <p>© 2026 MeantGo. All Rights Reserved.</p>
         </div>
       </div>

@@ -334,11 +334,7 @@ export default function Terms() {
         </section>
 
         {/* Footer */}
-        <div className="pt-6 border-t border-ink/10 text-xs text-ink/40 space-y-1">
-          <p>
-            These Terms of Service should be reviewed by qualified legal counsel before publication.
-            This document does not constitute legal advice.
-          </p>
+        <div className="pt-6 border-t border-ink/10 text-xs text-ink/40">
           <p>© 2026 MeantGo. All Rights Reserved.</p>
         </div>
       </div>

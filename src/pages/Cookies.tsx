@@ -64,20 +64,20 @@ export default function Cookies() {
             advertising or cross-app tracking:
           </p>
           <Table
-            headers={["Technology", "What It Stores", "Type"]}
+            headers={["Storage", "What It Stores", "Type"]}
             rows={[
               [
-                "FlutterSecureStorage",
-                "Authentication tokens (JWT access and refresh tokens) in your device's hardware-backed secure enclave — iOS Keychain or Android Keystore.",
+                "Secure storage",
+                "Authentication tokens that keep you signed in, held in your device's hardware-backed secure storage (iOS Keychain / Android Keystore).",
                 "Essential",
               ],
               [
-                "Hive (local cache)",
+                "Local cache",
                 "Recently fetched profiles, feed data, and app state to improve loading speed. Cleared when you log out.",
                 "Performance",
               ],
               [
-                "SharedPreferences",
+                "App preferences",
                 "Non-sensitive app settings such as your theme (light/dark mode), notification preferences, and onboarding progress.",
                 "Preference",
               ],
@@ -128,23 +128,11 @@ export default function Cookies() {
             technical identifiers on or about your device strictly to deliver their service:
           </p>
           <Table
-            headers={["Provider", "Purpose", "Identifier"]}
+            headers={["Service", "Purpose", "Identifier"]}
             rows={[
-              [
-                "Google Firebase (FCM)",
-                "Delivering push notifications to your device",
-                "Device push token",
-              ],
-              [
-                "Twilio",
-                "Sending SMS one-time passcodes for login",
-                "Phone number (transient)",
-              ],
-              [
-                "Amazon Web Services (S3)",
-                "Storing and serving your profile media",
-                "Secure file keys",
-              ],
+              ["Push notifications", "Delivering notifications to your device", "Device push token"],
+              ["SMS verification", "Sending one-time passcodes for login", "Phone number"],
+              ["Media storage", "Storing and serving your profile photos and video", "Secure file keys"],
             ]}
           />
           <p className="mt-4">
@@ -206,11 +194,7 @@ export default function Cookies() {
         </section>
 
         {/* Footer */}
-        <div className="pt-6 border-t border-ink/10 text-xs text-ink/40 space-y-1">
-          <p>
-            This policy should be reviewed by qualified legal counsel before publication. It does
-            not constitute legal advice.
-          </p>
+        <div className="pt-6 border-t border-ink/10 text-xs text-ink/40">
           <p>© 2026 MeantGo. All Rights Reserved.</p>
         </div>
       </div>
