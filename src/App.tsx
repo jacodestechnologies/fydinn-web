@@ -19,9 +19,9 @@ function Layout({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
   
   return (
-    <div className={`flex flex-col min-h-dvh transition-colors duration-300 ${
-      theme === "dark" 
-        ? "bg-surface text-text-main" 
+    <div className={`flex flex-col min-h-dvh ${
+      theme === "dark"
+        ? "bg-surface text-text-main"
         : "bg-warm-cream text-ink"
     }`}>
       <Nav />

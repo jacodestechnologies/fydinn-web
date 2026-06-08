@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { ChevronRight, MessageCircleHeart, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const navItems = [
@@ -15,26 +15,27 @@ export function Nav() {
   const onHome = location.pathname === "/";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/8 bg-warm-cream/82 backdrop-blur-xl transition-colors duration-300">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6">
+    <header className="sticky top-0 z-50 border-b border-ink/8 bg-surface/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 font-bold">
-          <span className="grid size-10 place-items-center rounded-2xl bg-brand text-white shadow-[0_10px_30px_rgba(155,91,255,0.28)]">
-            <MessageCircleHeart className="size-5" aria-hidden="true" />
+        <Link to="/" className="flex items-center gap-2.5 font-semibold">
+          <span className="grid size-8 place-items-center rounded-lg bg-brand text-white shadow-[0_4px_12px_rgba(0,180,216,0.35)]">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              <path d="M8 10h.01M12 10h.01M16 10h.01" />
+            </svg>
           </span>
-          <span className="font-display text-2xl tracking-normal text-ink">
-            MeantGo
-          </span>
+          <span className="text-lg font-bold tracking-tight text-ink">MeantGo</span>
         </Link>
 
-        {/* Links — only show on home */}
+        {/* Nav links — home only */}
         {onHome && (
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-7 md:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-semibold text-ink/62 transition hover:text-brand"
+                className="text-sm font-medium text-ink/55 transition-colors hover:text-ink"
               >
                 {item.label}
               </a>
@@ -47,7 +48,7 @@ export function Nav() {
           <button
             onClick={toggle}
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            className="grid size-10 place-items-center rounded-full border border-ink/12 text-ink/60 transition hover:border-brand/40 hover:text-brand active:scale-95"
+            className="grid size-9 place-items-center rounded-lg border border-ink/10 text-ink/50 transition-colors hover:border-ink/20 hover:text-ink active:scale-95"
           >
             {theme === "light" ? (
               <Moon className="size-4" aria-hidden="true" />
@@ -58,10 +59,9 @@ export function Nav() {
 
           <a
             href="/#download"
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 py-2 text-sm font-bold text-warm-cream transition hover:-translate-y-0.5 hover:bg-brand"
+            className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,180,216,0.35)] transition-all hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(0,180,216,0.45)]"
           >
             Get the App
-            <ChevronRight className="size-4" aria-hidden="true" />
           </a>
         </div>
       </div>
