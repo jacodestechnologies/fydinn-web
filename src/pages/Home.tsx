@@ -140,29 +140,6 @@ const interestCategories = [
   },
 ];
 
-const interests = [
-  "Art",
-  "Animation",
-  "Coffee",
-  "Baking",
-  "Yoga",
-  "Hiking",
-  "Gaming",
-  "Anime",
-  "Concerts",
-  "Reading",
-  "Programming",
-  "AI",
-  "Travel",
-  "Road Trips",
-  "Architecture",
-  "Powerlifting",
-  "Poetry",
-  "Restaurants",
-  "Movies",
-  "Language Learning",
-];
-
 const testimonials = [
   {
     quote:
@@ -301,7 +278,10 @@ function AppStoreBadges({ align = "start" }: { align?: "start" | "center" }) {
 
 function SectionLabel({ children }: { children: string }) {
   return (
-    <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-brand">{children}</p>
+    <p className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-brand">
+      <span className="h-px w-5 shrink-0 bg-brand/60" aria-hidden="true" />
+      {children}
+    </p>
   );
 }
 
@@ -635,53 +615,97 @@ export default function Home() {
       className="min-h-dvh overflow-hidden bg-warm-cream text-ink transition-colors duration-300"
     >
       {/* ── Hero ── */}
-      <section ref={heroRef} id="top" className="relative">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_12%,rgba(155,91,255,0.14),transparent_32%),radial-gradient(circle_at_82%_18%,rgba(255,225,207,0.12),transparent_28%)]" />
-        <div className="mx-auto grid min-h-[calc(86svh-5rem)] max-w-7xl items-center gap-10 px-5 py-12 sm:px-6 lg:grid-cols-[0.96fr_0.88fr] lg:py-14">
+      <section ref={heroRef} id="top" className="relative overflow-hidden">
+        {/* Animated gradient blobs */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-48 -left-48 size-[700px] rounded-full bg-brand/10 blur-[130px] animate-blob"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/4 -right-32 size-[520px] rounded-full bg-lilac/70 blur-[100px] animate-blob-alt"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-24 left-1/4 size-[460px] rounded-full bg-peach/60 blur-[90px] animate-blob"
+        />
+
+        {/* Dot grid overlay */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.32] [background-image:radial-gradient(circle,rgba(34,28,64,0.18)_1px,transparent_1px)] [background-size:30px_30px]"
+        />
+
+        <div className="relative mx-auto grid min-h-[calc(86svh-5rem)] max-w-7xl items-center gap-10 px-5 py-12 sm:px-6 lg:grid-cols-[0.96fr_0.88fr] lg:py-14">
           <div>
-            <div className="hero-label">
-              <SectionLabel>Where meaningful connections begin.</SectionLabel>
+            {/* Pill badge label */}
+            <div className="hero-label mb-5">
+              <span className="inline-flex items-center gap-2.5 rounded-full border border-brand/20 bg-brand/8 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-brand">
+                <span className="size-1.5 animate-pulse rounded-full bg-brand" aria-hidden="true" />
+                Where meaningful connections begin.
+              </span>
             </div>
+
+            {/* Headline with gradient accent */}
             <h1 className="hero-h1 max-w-4xl font-display text-[clamp(3rem,6.5vw,6.15rem)] font-black leading-[0.93] tracking-normal text-ink">
-              Find People Who Actually Get You.
+              Explore with{" "}
+              <span className="bg-gradient-to-r from-brand via-[#b97dff] to-brand-light bg-clip-text text-transparent">
+                Intent.
+              </span>
             </h1>
+
             <p className="hero-sub mt-6 max-w-2xl text-lg leading-8 text-ink/68 md:text-xl">
               Not just a face in the crowd — someone who shares your world, your passions, and your
               vision for what comes next.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3 text-sm font-bold text-ink/68">
-              {["Intent first", "Shared interests", "No pressure"].map((item, index) => (
+
+            {/* Feature pills */}
+            <div className="hero-sub mt-7 flex flex-wrap gap-2.5 text-sm font-bold text-ink/70">
+              {[
+                { label: "Intent first", icon: "ri-focus-3-line" },
+                { label: "Shared interests", icon: "ri-sparkling-2-line" },
+                { label: "No pressure", icon: "ri-slow-down-line" },
+              ].map((item) => (
                 <span
-                  key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/45 px-4 py-2 shadow-sm backdrop-blur"
+                  key={item.label}
+                  className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/65 px-4 py-2 shadow-sm backdrop-blur-sm"
                 >
-                  <i
-                    className={`${index === 0 ? "ri-focus-3-line" : index === 1 ? "ri-sparkling-2-line" : "ri-slow-down-line"} text-brand`}
-                    aria-hidden="true"
-                  />
-                  {item}
+                  <i className={`${item.icon} text-brand`} aria-hidden="true" />
+                  {item.label}
                 </span>
               ))}
             </div>
+
             <div className="hero-btns mt-9">
               <AppStoreBadges />
             </div>
-            <p className="hero-note mt-6 max-w-xl text-base leading-7 text-ink/58">
+
+            <p className="hero-note mt-6 max-w-xl text-base leading-7 text-ink/55">
               MeantGo matches you based on intent — your interests, your goals, and what you
               actually want from a connection.
             </p>
           </div>
+
+          {/* Hero image */}
           <div className="hero-img relative">
-            <div className="overflow-hidden rounded-[2rem] bg-white p-2.5 shadow-soft">
+            {/* Glow halo */}
+            <div
+              aria-hidden="true"
+              className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand/18 to-lilac/35 blur-3xl animate-glow"
+            />
+
+            <div className="relative overflow-hidden rounded-[2rem] bg-white p-2.5 shadow-[0_32px_80px_rgba(34,28,64,0.18)] ring-1 ring-brand/12">
               <img
                 src={heroCouple}
                 alt="Two people laughing together"
                 className="aspect-[4/4.55] w-full rounded-[1.45rem] object-cover"
               />
             </div>
-            <div className="hero-card absolute -bottom-7 left-2 right-2 rounded-[1.5rem] bg-warm-cream/94 p-4 shadow-soft backdrop-blur sm:left-7 sm:right-auto sm:w-80 border border-ink/8">
+
+            {/* Floating card */}
+            <div className="hero-card animate-float absolute -bottom-7 left-2 right-2 rounded-[1.5rem] border border-brand/15 bg-warm-cream/96 p-4 shadow-[0_20px_60px_rgba(155,91,255,0.2)] backdrop-blur-md sm:left-7 sm:right-auto sm:w-80">
               <div className="flex items-center gap-3">
-                <div className="grid size-12 place-items-center rounded-2xl bg-lilac text-brand">
+                <div className="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep text-white shadow-[0_8px_24px_rgba(155,91,255,0.4)]">
                   <Star className="size-5 fill-current" aria-hidden="true" />
                 </div>
                 <div>
@@ -690,39 +714,49 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute right-5 top-5 hidden items-center gap-2 rounded-full bg-ink/72 px-4 py-2 text-sm font-bold text-white shadow-xl backdrop-blur sm:flex">
+
+            {/* Location badge */}
+            <div className="animate-float-alt absolute right-5 top-5 hidden items-center gap-2 rounded-full bg-ink/80 px-4 py-2 text-sm font-bold text-white shadow-xl backdrop-blur-md sm:flex">
               <MapPinned className="size-4 text-brand-light" aria-hidden="true" />
               Explore nearby
             </div>
           </div>
         </div>
+
+        {/* Scroll cue */}
+        <div
+          aria-hidden="true"
+          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex"
+        >
+          <div className="h-9 w-px bg-gradient-to-b from-ink/35 to-transparent" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-ink/30">
+            Scroll
+          </span>
+        </div>
       </section>
 
       {/* ── Stats ── */}
-      <section className="border-y border-ink/8 bg-white/55 py-5 backdrop-blur">
-        <div className="mx-auto grid max-w-7xl gap-3 px-5 sm:px-6 md:grid-cols-4">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="stat-item group border border-ink/8 bg-warm-cream/78 p-5 transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft"
-            >
-              <div className="mb-5 flex items-center justify-between">
-                <span className="grid size-11 place-items-center rounded-2xl bg-lilac text-xl text-brand-deep transition duration-300 group-hover:bg-brand group-hover:text-white">
+      <section className="border-y border-ink/8 bg-white/55 backdrop-blur">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="grid grid-cols-2 gap-px bg-ink/8 md:grid-cols-4">
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="stat-item group bg-warm-cream/95 px-6 py-9 text-center transition-colors duration-300 hover:bg-white sm:px-8"
+              >
+                <span className="mb-3 inline-grid size-11 place-items-center rounded-xl bg-lilac text-xl text-brand-deep transition duration-300 group-hover:bg-brand group-hover:text-white">
                   <i className={stat.icon} aria-hidden="true" />
                 </span>
-                <span className="text-lg" aria-hidden="true">
-                  {stat.emoji}
-                </span>
+                <p className="font-display text-4xl font-black text-brand-deep md:text-5xl">
+                  {stat.value}
+                </p>
+                <p className="mt-2 text-xs font-black uppercase tracking-[0.1em] text-ink">
+                  {stat.label}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-ink/50">{stat.detail}</p>
               </div>
-              <p className="font-display text-4xl font-black leading-none text-brand-deep md:text-5xl">
-                {stat.value}
-              </p>
-              <p className="mt-3 text-sm font-black uppercase tracking-[0.08em] text-ink">
-                {stat.label}
-              </p>
-              <p className="mt-2 text-sm leading-6 text-ink/56">{stat.detail}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -733,6 +767,7 @@ export default function Home() {
           <h2 className="reveal-heading font-display text-5xl font-black leading-[1] text-ink md:text-6xl">
             Dating apps weren't built for depth.
           </h2>
+          <div className="mt-8 h-px w-16 bg-gradient-to-r from-brand to-brand-light" />
         </div>
         <div className="space-y-6 text-xl leading-9 text-ink/68">
           <p>
@@ -766,7 +801,7 @@ export default function Home() {
                 className={`feature-article grid items-center gap-10 rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 sm:p-8 lg:grid-cols-2 lg:p-12 ${index % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}
               >
                 <div>
-                  <p className="mb-6 font-display text-5xl font-black text-white/16">
+                  <p className="mb-4 font-display text-8xl font-black leading-none text-white/8 select-none">
                     {feature.eyebrow}
                   </p>
                   <h3 className="font-display text-4xl font-black leading-tight text-white md:text-5xl">
@@ -774,7 +809,16 @@ export default function Home() {
                   </h3>
                   <p className="mt-6 max-w-xl text-lg leading-8 text-white/68">{feature.body}</p>
                 </div>
-                <FeatureVisual type={feature.visual} />
+                {/* Glow halo behind visual */}
+                <div className="relative">
+                  <div
+                    aria-hidden="true"
+                    className="absolute -inset-4 rounded-[2.5rem] bg-brand/20 blur-2xl"
+                  />
+                  <div className="relative">
+                    <FeatureVisual type={feature.visual} />
+                  </div>
+                </div>
               </article>
             ))}
           </div>
@@ -801,37 +845,35 @@ export default function Home() {
             </p>
           </div>
 
-          <ol className="relative grid gap-4 lg:grid-cols-4">
-            <div
-              aria-hidden="true"
-              className="absolute left-0 right-0 top-10 hidden h-px bg-white/10 lg:block"
-            />
+          <ol className="grid gap-4 lg:grid-cols-4">
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
                 <li
                   key={step.title}
-                  className="step-card group relative border border-white/10 bg-white/[0.045] p-6 transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:bg-white/[0.075]"
+                  className="step-card group relative overflow-hidden border border-white/10 bg-white/[0.045] p-7 transition duration-300 hover:-translate-y-1.5 hover:border-brand/50 hover:bg-white/[0.08]"
                 >
-                  <div className="mb-8 flex items-center justify-between">
-                    <div className="grid size-20 place-items-center border border-white/12 bg-deep-purple shadow-[0_18px_45px_rgba(0,0,0,0.18)] transition duration-300 group-hover:border-brand group-hover:bg-brand">
-                      <Icon
-                        className="size-7 text-brand-light transition duration-300 group-hover:text-white"
-                        aria-hidden="true"
-                      />
+                  {/* Large background step number */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-3 -top-4 select-none font-display text-[8rem] font-black leading-none text-white/5"
+                  >
+                    0{index + 1}
+                  </span>
+
+                  <div className="relative mb-8">
+                    {/* Circular gradient icon */}
+                    <div className="grid size-16 place-items-center rounded-full bg-gradient-to-br from-brand to-brand-deep shadow-[0_12px_36px_rgba(155,91,255,0.4)] transition duration-300 group-hover:shadow-[0_16px_48px_rgba(155,91,255,0.6)]">
+                      <Icon className="size-7 text-white" aria-hidden="true" />
                     </div>
-                    <span className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-white/42">
-                      <i className={`${step.remixIcon} text-brand-light`} aria-hidden="true" />0
-                      {index + 1}
-                    </span>
                   </div>
+
                   <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-brand-light">
                     {step.eyebrow}
                   </p>
-                  <h3 className="min-h-16 text-xl font-black leading-tight text-white">
-                    {step.title}
-                  </h3>
-                  <p className="mt-4 min-h-28 leading-7 text-white/62">{step.body}</p>
+                  <h3 className="text-xl font-black leading-tight text-white">{step.title}</h3>
+                  <p className="mt-4 leading-7 text-white/62">{step.body}</p>
+
                   <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-4 text-sm font-bold text-white/70">
                     <span>{step.cue}</span>
                     <i
@@ -858,13 +900,13 @@ export default function Home() {
               MeantGo turns interests into useful discovery signals, so someone can find the parts
               of you that usually take three dates to explain.
             </p>
-            <div className="mt-8 grid max-w-md grid-cols-3 border border-ink/8 bg-warm-cream/76 text-center">
+            <div className="mt-8 grid max-w-md grid-cols-3 gap-px bg-ink/8">
               {[
                 ["60+", "interests"],
                 ["4", "signal groups"],
                 ["1", "clear intent"],
               ].map(([value, label]) => (
-                <div key={label} className="border-r border-ink/8 p-4 last:border-r-0">
+                <div key={label} className="bg-warm-cream/90 p-5 text-center">
                   <p className="font-display text-3xl font-black text-brand-deep">{value}</p>
                   <p className="mt-1 text-xs font-black uppercase tracking-[0.12em] text-ink/50">
                     {label}
@@ -877,16 +919,16 @@ export default function Home() {
             {interestCategories.map((category, categoryIndex) => (
               <div
                 key={category.label}
-                className="interest-tag border border-ink/8 bg-warm-cream/82 p-5 transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft"
+                className="interest-tag group border border-ink/8 bg-warm-cream/82 p-5 transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft"
               >
                 <div className="mb-5 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="grid size-11 place-items-center bg-brand text-xl text-white">
+                    <span className="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-brand to-brand-deep text-xl text-white shadow-[0_6px_18px_rgba(155,91,255,0.3)] transition duration-300 group-hover:shadow-[0_10px_28px_rgba(155,91,255,0.5)]">
                       <i className={category.icon} aria-hidden="true" />
                     </span>
                     <h3 className="text-lg font-black text-ink">{category.label}</h3>
                   </div>
-                  <span className="font-display text-3xl font-black text-brand/20">
+                  <span className="font-display text-3xl font-black text-brand/15">
                     0{categoryIndex + 1}
                   </span>
                 </div>
@@ -930,15 +972,26 @@ export default function Home() {
           {testimonials.map((item, index) => (
             <figure
               key={item.name}
-              className="testimonial-card group border border-ink/8 bg-white/72 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft"
+              className="testimonial-card group relative overflow-hidden border border-ink/8 bg-white/72 p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-soft"
             >
-              <div className="mb-8 flex items-center justify-between">
-                <div className="flex gap-1 text-brand">
-                  {Array.from({ length: 5 }).map((_, starIndex) => (
-                    <i key={starIndex} className="ri-star-fill text-sm" aria-hidden="true" />
+              {/* Gradient top border revealed on hover */}
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-brand via-[#b97dff] to-brand-light opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              {/* Decorative quotation mark */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute right-5 top-3 select-none font-display text-[6rem] font-black leading-none text-brand/8"
+              >
+                "
+              </span>
+
+              <div className="relative mb-7 flex items-center justify-between">
+                <div className="flex gap-0.5 text-brand">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <i key={i} className="ri-star-fill text-sm" aria-hidden="true" />
                   ))}
                 </div>
-                <span className="grid size-9 place-items-center bg-lilac text-brand-deep transition duration-300 group-hover:bg-brand group-hover:text-white">
+                <span className="grid size-9 place-items-center rounded-full bg-lilac text-brand-deep transition duration-300 group-hover:bg-brand group-hover:text-white">
                   <i
                     className={
                       index === 0
@@ -951,14 +1004,16 @@ export default function Home() {
                   />
                 </span>
               </div>
-              <blockquote className="min-h-48 text-lg leading-8 text-ink/72">
+
+              <blockquote className="relative min-h-44 text-lg leading-8 text-ink/72">
                 "{item.quote}"
               </blockquote>
+
               <figcaption className="mt-8 flex items-center gap-4 border-t border-ink/8 pt-5">
                 <img
                   src={item.img}
                   alt={`Portrait of ${item.name}`}
-                  className="size-14 rounded-full object-cover ring-2 ring-brand/20"
+                  className="size-14 rounded-full object-cover ring-2 ring-brand/20 transition duration-300 group-hover:ring-brand/50"
                 />
                 <div>
                   <p className="font-bold text-ink">{item.name}</p>
@@ -992,9 +1047,11 @@ export default function Home() {
               return (
                 <div
                   key={point.label}
-                  className="trust-point rounded-[2rem] border border-white/10 bg-white/[0.06] p-6 transition-colors duration-300 hover:bg-white/10"
+                  className="trust-point group rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 transition duration-300 hover:border-brand/40 hover:bg-white/[0.1]"
                 >
-                  <Icon className="mb-8 size-7 text-brand-light" aria-hidden="true" />
+                  <div className="mb-7 grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep shadow-[0_8px_24px_rgba(155,91,255,0.35)] transition duration-300 group-hover:shadow-[0_12px_36px_rgba(155,91,255,0.55)]">
+                    <Icon className="size-5 text-white" aria-hidden="true" />
+                  </div>
                   <h3 className="text-xl font-bold">{point.label}</h3>
                   <p className="mt-3 leading-7 text-white/62">{point.copy}</p>
                 </div>
@@ -1005,20 +1062,51 @@ export default function Home() {
       </section>
 
       {/* ── Download CTA ── */}
-      <section id="download" className="relative px-5 py-24 text-center sm:px-6 lg:py-32">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_30%,rgba(155,91,255,0.14),transparent_50%)]" />
-        <div className="mx-auto max-w-4xl">
+      <section id="download" className="relative overflow-hidden px-5 py-28 text-center sm:px-6 lg:py-36">
+        {/* Multi-layer gradient background */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(155,91,255,0.16),transparent),radial-gradient(ellipse_60%_55%_at_15%_85%,rgba(255,225,207,0.40),transparent),radial-gradient(ellipse_55%_45%_at_85%_70%,rgba(238,219,234,0.30),transparent)]" />
+
+        {/* Dot grid */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.28] [background-image:radial-gradient(circle,rgba(34,28,64,0.14)_1px,transparent_1px)] [background-size:30px_30px]"
+        />
+
+        {/* Spinning decorative rings */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
+        >
+          <div className="size-[480px] animate-spin-slow rounded-full border border-brand/10" />
+        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
+        >
+          <div className="size-[720px] animate-spin-slow-reverse rounded-full border border-brand/6" />
+        </div>
+
+        <div className="relative mx-auto max-w-4xl">
           <SectionLabel>Ready When You Are</SectionLabel>
           <h2 className="reveal-heading font-display text-5xl font-black leading-[1] md:text-7xl">
-            The connection you've been looking for is already here.
+            The connection you've been looking for is{" "}
+            <span className="bg-gradient-to-r from-brand to-brand-light bg-clip-text text-transparent">
+              already here.
+            </span>
           </h2>
           <p className="mx-auto mt-7 max-w-2xl text-xl leading-8 text-ink/68">
             Download MeantGo. Send your intent. Find someone who shares it.
           </p>
-          <div className="mt-9">
-            <AppStoreBadges align="center" />
+          <div className="relative mt-10 inline-block">
+            <div
+              aria-hidden="true"
+              className="absolute -inset-4 rounded-2xl bg-brand/15 blur-2xl animate-glow"
+            />
+            <div className="relative">
+              <AppStoreBadges align="center" />
+            </div>
           </div>
-          <p className="mt-5 text-sm font-semibold text-ink/50">
+          <p className="mt-7 text-sm font-semibold text-ink/45">
             Free to download. No subscription required to get started.
           </p>
         </div>

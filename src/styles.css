@@ -223,3 +223,66 @@
 @utility shadow-soft {
   box-shadow: var(--shadow-soft);
 }
+
+/* ── Custom animations ─────────────────────────────────────── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes blob-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  33% {
+    transform: translate(4%, -4%) scale(1.05);
+    border-radius: 30% 60% 70% 40% / 50% 40% 60% 50%;
+  }
+  66% {
+    transform: translate(-3%, 4%) scale(0.96);
+    border-radius: 50% 40% 40% 60% / 40% 60% 50% 60%;
+  }
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+@keyframes spin-cw {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-ccw {
+  to { transform: rotate(-360deg); }
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-float-alt {
+  animation: float 9s ease-in-out 2.5s infinite;
+}
+
+@utility animate-blob {
+  animation: blob-drift 16s ease-in-out infinite;
+}
+
+@utility animate-blob-alt {
+  animation: blob-drift 22s ease-in-out 7s infinite;
+}
+
+@utility animate-glow {
+  animation: glow-breathe 5s ease-in-out infinite;
+}
+
+@utility animate-spin-slow {
+  animation: spin-cw 30s linear infinite;
+}
+
+@utility animate-spin-slow-reverse {
+  animation: spin-ccw 45s linear infinite;
+}
