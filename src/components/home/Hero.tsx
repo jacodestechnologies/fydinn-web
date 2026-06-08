@@ -5,17 +5,24 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#7C3AED_0%,#6D28D9_55%,#5B21B6_100%)] text-white"
+      className="relative overflow-hidden text-white"
+      style={{
+        background: "linear-gradient(180deg, #7C3AED 0%, #6A24D6 52%, #5B1FB8 100%)",
+      }}
     >
-      {/* Concentric circle backdrop */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
-      >
-        <div className="absolute size-[34rem] rounded-full border border-white/10" />
-        <div className="absolute size-[48rem] rounded-full border border-white/[0.07]" />
-        <div className="absolute size-[64rem] rounded-full border border-white/5" />
-        <div className="absolute size-[80rem] rounded-full border border-white/[0.03]" />
+      {/* Concentric ripple arcs, centred on the bottom-centre */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        {[44, 62, 82, 104].map((size, i) => (
+          <div
+            key={size}
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-full border"
+            style={{
+              width: `${size}rem`,
+              height: `${size}rem`,
+              borderColor: `rgba(255,255,255,${(0.13 - i * 0.027).toFixed(3)})`,
+            }}
+          />
+        ))}
       </div>
 
       {/* Scattered photos */}
