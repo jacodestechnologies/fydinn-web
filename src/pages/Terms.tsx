@@ -213,8 +213,8 @@ export default function Terms() {
         <section id="section-8">
           <SectionTitle n={8} title="Intellectual Property" />
           <p>
-            The Service — including its software, design, logos, trademarks, and all content we
-            provide (excluding User Content) — is owned by MeantGo or its licensors and is
+            The Service, including its software, design, logos, trademarks, and all content we
+            provide (excluding User Content), is owned by MeantGo or its licensors and is
             protected by intellectual property laws. You may not copy, modify, distribute, sell, or
             create derivative works from any part of the Service without our prior written consent.
           </p>

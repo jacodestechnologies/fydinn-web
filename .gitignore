@@ -33,3 +33,8 @@ dist-ssr
 *.tsbuildinfo
 node_modules/
 design-idea.md
+# Admin backend
+.env
+server/admin.db
+server/admin.db-shm
+server/admin.db-wal

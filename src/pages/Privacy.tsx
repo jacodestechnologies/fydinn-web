@@ -16,9 +16,7 @@ export default function Privacy() {
 
       {/* Table of Contents */}
       <nav className="mb-14 rounded-xl border border-ink/10 bg-surface-muted p-6">
-        <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-ink/40 mb-4">
-          Contents
-        </h2>
+        <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-ink/40 mb-4">Contents</h2>
         <ol className="space-y-2 text-sm text-ink/70">
           {[
             "Introduction",
@@ -44,25 +42,24 @@ export default function Privacy() {
       </nav>
 
       <div className="space-y-14 text-sm leading-relaxed text-ink/80">
-
         {/* 1 */}
         <section id="section-1">
           <SectionTitle n={1} title="Introduction" />
           <p>
             MeantGo ("we," "our," or "us") is a mobile application that helps people discover and
-            form meaningful connections based on shared interests, compatible intentions, and genuine
-            compatibility. This Privacy Policy explains what personal information we collect, why we
-            collect it, how we protect it, and the rights you hold over your data.
+            form meaningful connections based on shared interests, compatible intentions, and
+            genuine compatibility. This Privacy Policy explains what personal information we
+            collect, why we collect it, how we protect it, and the rights you hold over your data.
           </p>
           <Callout>
-            By downloading, registering for, or using the MeantGo app, you acknowledge that you
-            have read and understood this Privacy Policy. If you do not agree, please do not use
-            the Service.
+            By downloading, registering for, or using the MeantGo app, you acknowledge that you have
+            read and understood this Privacy Policy. If you do not agree, please do not use the
+            Service.
           </Callout>
           <p className="mt-4">
             MeantGo is available on iOS (Apple App Store) and Android (Google Play Store). This
-            Policy applies to all versions of the app and any related web properties or services
-            we operate.
+            Policy applies to all versions of the app and any related web properties or services we
+            operate.
           </p>
         </section>
 
@@ -152,9 +149,7 @@ export default function Privacy() {
           </p>
 
           <SubTitle>With Service Providers</SubTitle>
-          <p>
-            We share data with trusted processors who act strictly on our instructions:
-          </p>
+          <p>We share data with trusted processors who act strictly on our instructions:</p>
           <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
             <li>
               <strong className="font-semibold text-ink">SMS verification:</strong> Your phone
@@ -174,15 +169,15 @@ export default function Privacy() {
             </li>
           </ul>
           <p className="mt-4">
-            All providers are bound by data processing agreements that prohibit them from using
-            your data for any purpose beyond their contracted service.
+            All providers are bound by data processing agreements that prohibit them from using your
+            data for any purpose beyond their contracted service.
           </p>
 
           <SubTitle>Legal Disclosures and Business Transfers</SubTitle>
           <p>
             We may disclose your information where required by law, to protect our users or
-            platform, or in connection with a merger, acquisition, or sale of assets. We will
-            notify you of any such transfer and any material changes to data handling.
+            platform, or in connection with a merger, acquisition, or sale of assets. We will notify
+            you of any such transfer and any material changes to data handling.
           </p>
         </section>
 
@@ -222,8 +217,8 @@ export default function Privacy() {
           <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
             <li>All data in transit is encrypted using TLS (Transport Layer Security)</li>
             <li>
-              Authentication tokens are stored in your device's hardware-backed secure storage
-              (iOS Keychain / Android Keystore)
+              Authentication tokens are stored in your device's hardware-backed secure storage (iOS
+              Keychain / Android Keystore)
             </li>
             <li>API access uses short-lived, signed tokens with refresh token rotation</li>
             <li>
@@ -256,7 +251,7 @@ export default function Privacy() {
             </li>
             <li>
               <strong className="font-semibold text-ink">Delete your account and data:</strong>{" "}
-              Settings &gt; Delete Account, or contact us — processed within 30 days.
+              Settings &gt; Delete Account, or contact us. Processed within 30 days.
             </li>
             <li>
               <strong className="font-semibold text-ink">Withdraw location consent:</strong> Revoke
@@ -274,8 +269,8 @@ export default function Privacy() {
           <p className="mt-4">
             Depending on your country of residence you may have additional rights under local
             privacy law (including GDPR for EEA/UK users, CCPA for California residents, and NDPA
-            for Nigerian residents). To exercise any right, contact us at support@meantgo.com and
-            we will respond within 30 days.
+            for Nigerian residents). To exercise any right, contact us at support@meantgo.com and we
+            will respond within 30 days.
           </p>
         </section>
 
@@ -283,23 +278,19 @@ export default function Privacy() {
         <section id="section-7">
           <SectionTitle n={7} title="Push Notifications" />
           <p>
-            We use a push notification service to send you push notifications, including new
-            Intent requests, messages from matched users, and important app updates. To do this,
-            we store your device's push token on our servers.
+            We use a push notification service to send you push notifications, including new Intent
+            requests, messages from matched users, and important app updates. To do this, we store
+            your device's push token on our servers.
           </p>
           <p className="mt-4">You can disable push notifications at any time:</p>
           <ul className="mt-3 space-y-2 pl-5 list-disc marker:text-brand">
-            <li>
-              iOS: Settings &gt; MeantGo &gt; Notifications
-            </li>
-            <li>
-              Android: Settings &gt; Apps &gt; MeantGo &gt; Notifications
-            </li>
+            <li>iOS: Settings &gt; MeantGo &gt; Notifications</li>
+            <li>Android: Settings &gt; Apps &gt; MeantGo &gt; Notifications</li>
             <li>Within the MeantGo app: Settings &gt; Notification Preferences</li>
           </ul>
           <p className="mt-4">
-            Disabling notifications does not affect your ability to use the app. You can still
-            check your Intents and messages manually.
+            Disabling notifications does not affect your ability to use the app. You can still check
+            your Intents and messages manually.
           </p>
         </section>
 
@@ -309,14 +300,14 @@ export default function Privacy() {
           <p>
             With your explicit permission, we collect your GPS coordinates to enable proximity-based
             discovery (e.g., the Nearby section in Explore) and calculate distances between users.
-            Your precise coordinates are never shown to other users — only a rounded distance
+            Your precise coordinates are never shown to other users; only a rounded distance
             indicator (e.g., "3 km away") appears on profile cards.
           </p>
           <p className="mt-4">
-            We request "while using the app" location access only. We do not collect location in
-            the background. You can grant or revoke location permission at any time in your device
-            settings. If you revoke access, distance-based features will be disabled but the rest
-            of the app continues to work normally.
+            We request "while using the app" location access only. We do not collect location in the
+            background. You can grant or revoke location permission at any time in your device
+            settings. If you revoke access, distance-based features will be disabled but the rest of
+            the app continues to work normally.
           </p>
         </section>
 
@@ -325,8 +316,8 @@ export default function Privacy() {
           <SectionTitle n={9} title="Media Content" />
           <p>
             You may upload up to six profile photos and one video introduction. All files are
-            transmitted directly to secure cloud storage via pre-signed HTTPS URLs and never
-            pass through our application servers.
+            transmitted directly to secure cloud storage via pre-signed HTTPS URLs and never pass
+            through our application servers.
           </p>
           <p className="mt-4">
             Your photos and video are visible to any authenticated MeantGo user who views your
@@ -349,8 +340,8 @@ export default function Privacy() {
           <p className="mt-4">
             Date of birth is collected at registration to verify minimum age eligibility. If we
             discover that a user under 18 has created an account, we will immediately suspend the
-            account and delete all associated data. If you believe a minor is using MeantGo,
-            contact us at support@meantgo.com and we will take prompt action.
+            account and delete all associated data. If you believe a minor is using MeantGo, contact
+            us at support@meantgo.com and we will take prompt action.
           </p>
         </section>
 
@@ -358,10 +349,10 @@ export default function Privacy() {
         <section id="section-11">
           <SectionTitle n={11} title="Changes to This Policy" />
           <p>
-            We may update this Privacy Policy to reflect changes in our practices or applicable
-            law. When we make material changes, we will update the "Last Updated" date above and
-            notify you through a prominent in-app notification. For significant changes that affect
-            how we process your data, we may request your renewed consent.
+            We may update this Privacy Policy to reflect changes in our practices or applicable law.
+            When we make material changes, we will update the "Last Updated" date above and notify
+            you through a prominent in-app notification. For significant changes that affect how we
+            process your data, we may request your renewed consent.
           </p>
           <p className="mt-4">
             Your continued use of MeantGo after notification constitutes acceptance of the updated
@@ -372,9 +363,7 @@ export default function Privacy() {
         {/* 12 */}
         <section id="section-12">
           <SectionTitle n={12} title="Contact Us" />
-          <p>
-            For privacy-related questions, requests, or concerns, please reach out to us:
-          </p>
+          <p>For privacy-related questions, requests, or concerns, please reach out to us:</p>
           <div className="mt-5 grid sm:grid-cols-2 gap-4">
             <ContactCard
               title="General Privacy"
@@ -417,9 +406,7 @@ function SectionTitle({ n, title }: { n: number; title: string }) {
 }
 
 function SubTitle({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="text-base font-semibold text-ink mt-7 mb-3">{children}</h3>
-  );
+  return <h3 className="text-base font-semibold text-ink mt-7 mb-3">{children}</h3>;
 }
 
 function Callout({ children }: { children: React.ReactNode }) {

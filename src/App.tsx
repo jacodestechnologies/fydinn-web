@@ -9,6 +9,7 @@ import Terms from "@/pages/Terms";
 import Cookies from "@/pages/Cookies";
 import Contact from "@/pages/Contact";
 import DeleteAccount from "@/pages/DeleteAccount";
+import AdminApp from "@/admin/AdminApp";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -86,6 +87,7 @@ export default function App() {
               </Layout>
             }
           />
+          <Route path="/admin/*" element={<AdminApp />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -16,9 +16,7 @@ export default function Cookies() {
 
       {/* Table of Contents */}
       <nav className="mb-14 rounded-xl border border-ink/10 bg-surface-muted p-6">
-        <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-ink/40 mb-4">
-          Contents
-        </h2>
+        <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-ink/40 mb-4">Contents</h2>
         <ol className="space-y-2 text-sm text-ink/70">
           {[
             "Overview",
@@ -40,7 +38,6 @@ export default function Cookies() {
       </nav>
 
       <div className="space-y-14 text-sm leading-relaxed text-ink/80">
-
         {/* 1 */}
         <section id="section-1">
           <SectionTitle n={1} title="Overview" />
@@ -70,14 +67,14 @@ export default function Cookies() {
               secure storage (iOS Keychain / Android Keystore).
             </li>
             <li>
-              <strong className="font-semibold text-ink">Local cache (performance):</strong> Recently
-              fetched profiles, feed data, and app state to improve loading speed. Cleared when you
-              log out.
+              <strong className="font-semibold text-ink">Local cache (performance):</strong>{" "}
+              Recently fetched profiles, feed data, and app state to improve loading speed. Cleared
+              when you log out.
             </li>
             <li>
               <strong className="font-semibold text-ink">App preferences:</strong> Non-sensitive
-              settings such as your theme (light/dark mode), notification preferences, and onboarding
-              progress.
+              settings such as your theme (light/dark mode), notification preferences, and
+              onboarding progress.
             </li>
           </ul>
         </section>
@@ -111,9 +108,7 @@ export default function Cookies() {
             <li>We do not use cookies or storage for behavioural advertising;</li>
             <li>We do not use cross-app or cross-site tracking technologies;</li>
             <li>We do not build advertising profiles about you;</li>
-            <li>
-              We do not share on-device data with social media platforms for ad targeting.
-            </li>
+            <li>We do not share on-device data with social media platforms for ad targeting.</li>
           </ul>
         </section>
 
@@ -134,8 +129,8 @@ export default function Cookies() {
               passcodes for login, using your phone number.
             </li>
             <li>
-              <strong className="font-semibold text-ink">Media storage:</strong> Store and serve your
-              profile photos and video, using secure file keys.
+              <strong className="font-semibold text-ink">Media storage:</strong> Store and serve
+              your profile photos and video, using secure file keys.
             </li>
           </ul>
           <p className="mt-4">
@@ -187,9 +182,7 @@ export default function Cookies() {
         {/* 8 */}
         <section id="section-8">
           <SectionTitle n={8} title="Contact Us" />
-          <p>
-            If you have questions about how MeantGo uses on-device storage, please contact us:
-          </p>
+          <p>If you have questions about how MeantGo uses on-device storage, please contact us:</p>
           <div className="mt-5 grid sm:grid-cols-2 gap-4">
             <ContactCard title="Privacy & Data" lines={["privacy@meantgo.com"]} />
             <ContactCard title="Support" lines={["support@meantgo.com"]} />
@@ -231,7 +224,6 @@ function Mail({ children }: { children: string }) {
     </a>
   );
 }
-
 
 function ContactCard({ title, lines }: { title: string; lines: string[] }) {
   return (
