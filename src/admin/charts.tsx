@@ -21,10 +21,12 @@ export const gridBase: ApexOptions["grid"] = {
   padding: { left: 8, right: 8 },
 };
 
+type ApexSeries = number[] | { name?: string; data: number[] }[];
+
 type ApexCardProps = {
   title: string;
   type: "area" | "bar" | "donut" | "radialBar" | "line";
-  series: ApexAxisChartSeries | ApexNonAxisChartSeries | number[];
+  series: ApexSeries;
   options: ApexOptions;
   height?: number;
   wide?: boolean;
