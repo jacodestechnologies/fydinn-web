@@ -16,6 +16,9 @@ dist-ssr
 .nitro
 *.local
 
+# env
+*.env
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
@@ -34,5 +37,4 @@ dist-ssr
 node_modules/
 design-idea.md
 # Admin backend
-.env
 APP-APIDOCS.md
