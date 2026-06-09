@@ -430,48 +430,6 @@ function Callout({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return (
-    <div className="mt-4 overflow-x-auto rounded-lg border border-ink/10">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-surface-muted border-b border-ink/10">
-            {headers.map((h) => (
-              <th
-                key={h}
-                className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.12em] text-ink/50 whitespace-nowrap"
-              >
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr
-              key={i}
-              className={`border-b border-ink/8 last:border-0 ${
-                i % 2 === 1 ? "bg-surface-muted/40" : ""
-              }`}
-            >
-              {row.map((cell, j) => (
-                <td
-                  key={j}
-                  className={`px-4 py-3 align-top leading-relaxed ${
-                    j === 0 ? "font-medium text-ink whitespace-nowrap" : "text-ink/65"
-                  }`}
-                >
-                  {cell}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
 function ContactCard({ title, lines }: { title: string; lines: string[] }) {
   return (
     <div className="rounded-lg border border-ink/10 bg-surface-muted/50 px-4 py-4">
