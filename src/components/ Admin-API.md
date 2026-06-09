@@ -421,3 +421,5 @@ export async function adminGet<T>(path: string): Promise<T> {
 const health = await adminGet("/admin/health");
 const users = await adminGet("/admin/users?limit=100&offset=0");
 ```
+
+Tahnlyou
