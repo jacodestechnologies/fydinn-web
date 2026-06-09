@@ -63,26 +63,23 @@ export default function Cookies() {
             The following technologies store data locally on your device. None of them are used for
             advertising or cross-app tracking:
           </p>
-          <Table
-            headers={["Storage", "What It Stores", "Type"]}
-            rows={[
-              [
-                "Secure storage",
-                "Authentication tokens that keep you signed in, held in your device's hardware-backed secure storage (iOS Keychain / Android Keystore).",
-                "Essential",
-              ],
-              [
-                "Local cache",
-                "Recently fetched profiles, feed data, and app state to improve loading speed. Cleared when you log out.",
-                "Performance",
-              ],
-              [
-                "App preferences",
-                "Non-sensitive app settings such as your theme (light/dark mode), notification preferences, and onboarding progress.",
-                "Preference",
-              ],
-            ]}
-          />
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">Secure storage (essential):</strong>{" "}
+              Authentication tokens that keep you signed in, held in your device's hardware-backed
+              secure storage (iOS Keychain / Android Keystore).
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Local cache (performance):</strong> Recently
+              fetched profiles, feed data, and app state to improve loading speed. Cleared when you
+              log out.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">App preferences:</strong> Non-sensitive
+              settings such as your theme (light/dark mode), notification preferences, and onboarding
+              progress.
+            </li>
+          </ul>
         </section>
 
         {/* 3 */}
@@ -127,14 +124,20 @@ export default function Cookies() {
             Some core features depend on trusted third-party providers, which may store limited
             technical identifiers on or about your device strictly to deliver their service:
           </p>
-          <Table
-            headers={["Service", "Purpose", "Identifier"]}
-            rows={[
-              ["Push notifications", "Delivering notifications to your device", "Device push token"],
-              ["SMS verification", "Sending one-time passcodes for login", "Phone number"],
-              ["Media storage", "Storing and serving your profile photos and video", "Secure file keys"],
-            ]}
-          />
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">Push notifications:</strong> Deliver
+              notifications to your device, using a device push token.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">SMS verification:</strong> Send one-time
+              passcodes for login, using your phone number.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Media storage:</strong> Store and serve your
+              profile photos and video, using secure file keys.
+            </li>
+          </ul>
           <p className="mt-4">
             These providers process data on our behalf under data processing agreements. Their own
             data practices are described in their respective privacy policies.

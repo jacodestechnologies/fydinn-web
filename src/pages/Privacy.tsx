@@ -155,15 +155,24 @@ export default function Privacy() {
           <p>
             We share data with trusted processors who act strictly on our instructions:
           </p>
-          <Table
-            headers={["Service", "Data Shared", "Purpose"]}
-            rows={[
-              ["SMS verification", "Phone number", "OTP SMS delivery"],
-              ["Push notifications", "Device push token", "Push notification delivery"],
-              ["Cloud storage", "Photos and videos (encrypted)", "Cloud media storage"],
-              ["Session cache", "Temporary OTP codes and rate-limit counters", "Session management"],
-            ]}
-          />
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">SMS verification:</strong> Your phone
+              number, to deliver one-time passcodes.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Push notifications:</strong> Your device
+              push token, to deliver notifications.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Cloud storage:</strong> Your photos and
+              videos (encrypted), for media hosting.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Session cache:</strong> Temporary OTP codes
+              and rate-limit counters, for session management.
+            </li>
+          </ul>
           <p className="mt-4">
             All providers are bound by data processing agreements that prohibit them from using
             your data for any purpose beyond their contracted service.
@@ -182,18 +191,32 @@ export default function Privacy() {
           <SectionTitle n={5} title="Data Retention and Security" />
 
           <SubTitle>How Long We Keep Your Data</SubTitle>
-          <Table
-            headers={["Data", "Retention"]}
-            rows={[
-              ["Active account data", "For the duration of your account"],
-              ["Inactive accounts (24+ months)", "May be deleted after prior notice"],
-              ["Deleted account data", "Removed from active systems within 30 days; backups purged within 90 days"],
-              ["OTP codes", "5 minutes from generation"],
-              ["Access tokens", "12 hours"],
-              ["Refresh tokens", "7 days"],
-              ["Legal hold data", "As long as required by law"],
-            ]}
-          />
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">Active account data:</strong> Kept for the
+              duration of your account.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Inactive accounts:</strong> May be deleted
+              after 24+ months of inactivity, with prior notice.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Deleted account data:</strong> Removed from
+              active systems within 30 days; backups purged within 90 days.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">One-time passcodes:</strong> 5 minutes from
+              generation.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Session tokens:</strong> Access tokens last
+              12 hours; refresh tokens last 7 days.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Legal hold data:</strong> Retained as long
+              as required by law.
+            </li>
+          </ul>
 
           <SubTitle>Security Measures</SubTitle>
           <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
@@ -222,17 +245,32 @@ export default function Privacy() {
         {/* 6 */}
         <section id="section-6">
           <SectionTitle n={6} title="Your Rights and Choices" />
-          <Table
-            headers={["Right", "How to exercise it"]}
-            rows={[
-              ["Access your data", "Contact us at support@meantgo.com"],
-              ["Correct your data", "Update directly in the app or contact us"],
-              ["Delete your account and data", "Settings > Delete Account, or contact us — processed within 30 days"],
-              ["Withdraw location consent", "Device settings: revoke location permission at any time"],
-              ["Withdraw notification consent", "Device settings or app notification preferences"],
-              ["Opt out of marketing", "Unsubscribe link in emails or contact us"],
-            ]}
-          />
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">Access your data:</strong> Contact us at
+              support@meantgo.com.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Correct your data:</strong> Update directly
+              in the app, or contact us.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Delete your account and data:</strong>{" "}
+              Settings &gt; Delete Account, or contact us — processed within 30 days.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Withdraw location consent:</strong> Revoke
+              location permission any time in your device settings.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Withdraw notification consent:</strong>{" "}
+              Device settings or the app's notification preferences.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Opt out of marketing:</strong> Use the
+              unsubscribe link in emails, or contact us.
+            </li>
+          </ul>
           <p className="mt-4">
             Depending on your country of residence you may have additional rights under local
             privacy law (including GDPR for EEA/UK users, CCPA for California residents, and NDPA
