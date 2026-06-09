@@ -40,3 +40,85 @@ export function ApexCard({ title, type, series, options, height = 280, wide }: A
     </Card>
   );
 }
+
+/* ── Shared option builders (dark theme) ── */
+
+export function areaOptions(categories: string[], color = "#A78BFA"): ApexOptions {
+  return {
+    chart: { ...chartBase, type: "area" },
+    colors: [color],
+    stroke: { curve: "smooth", width: 2.5 },
+    fill: {
+      type: "gradient",
+      gradient: { shadeIntensity: 1, opacityFrom: 0.45, opacityTo: 0, stops: [0, 100] },
+    },
+    grid: gridBase,
+    dataLabels: { enabled: false },
+    tooltip: { theme: "dark" },
+    xaxis: {
+      categories,
+      axisBorder: { show: false },
+      axisTicks: { show: false },
+      labels: { style: { fontSize: "11px" } },
+    },
+    yaxis: { labels: { style: { fontSize: "11px" } } },
+  };
+}
+
+export function donutOptions(labels: string[], colors: string[]): ApexOptions {
+  return {
+    chart: { ...chartBase, type: "donut" },
+    labels,
+    colors,
+    stroke: { width: 0 },
+    dataLabels: { enabled: false },
+    legend: {
+      position: "bottom",
+      labels: { colors: "rgba(255,255,255,0.6)" },
+      fontSize: "12px",
+      markers: { strokeWidth: 0 },
+    },
+    tooltip: { theme: "dark" },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: "68%",
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              label: "Total",
+              color: "rgba(255,255,255,0.5)",
+              fontSize: "12px",
+              formatter: (w) =>
+                String(w.globals.seriesTotals.reduce((a: number, b: number) => a + b, 0)),
+            },
+            value: { color: "#fff", fontSize: "22px", fontWeight: 700 },
+          },
+        },
+      },
+    },
+  };
+}
+
+export function barOptions(categories: string[], color: string, rotate = false): ApexOptions {
+  return {
+    chart: { ...chartBase, type: "bar" },
+    colors: [color],
+    plotOptions: { bar: { borderRadius: 6, columnWidth: "55%", borderRadiusApplication: "end" } },
+    grid: gridBase,
+    dataLabels: { enabled: false },
+    tooltip: { theme: "dark" },
+    xaxis: {
+      categories,
+      axisBorder: { show: false },
+      axisTicks: { show: false },
+      labels: {
+        style: { fontSize: rotate ? "10px" : "11px" },
+        rotate: rotate ? -15 : 0,
+        hideOverlappingLabels: false,
+      },
+    },
+    yaxis: { labels: { style: { fontSize: "11px" } }, forceNiceScale: true },
+  };
+}

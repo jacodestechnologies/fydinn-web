@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { NavLink, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   Activity,
-  BarChart3,
+  ChevronRight,
   LayoutDashboard,
   Loader2,
   LogOut,
@@ -14,14 +21,12 @@ import { AdminAuthProvider, useAdminAuth } from "./auth";
 import { Overview } from "./views/Overview";
 import { Monitoring } from "./views/Monitoring";
 import { Moderation } from "./views/Moderation";
-import { Analytics } from "./views/Analytics";
 import { LoginLogs } from "./views/LoginLogs";
 
 const NAV = [
-  { to: "/admin", label: "Overview", icon: LayoutDashboard, end: true },
+  { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/monitoring", label: "Monitoring", icon: Activity, end: false },
   { to: "/admin/users", label: "Users", icon: Users, end: false },
-  { to: "/admin/analytics", label: "Analytics", icon: BarChart3, end: false },
   { to: "/admin/logs", label: "Login Logs", icon: ScrollText, end: false },
 ];
 
@@ -42,57 +47,64 @@ function Gate() {
 
 function Shell() {
   const { username, role, logout } = useAdminAuth();
+  const { pathname } = useLocation();
+  const current = [...NAV].sort((a, b) => b.to.length - a.to.length).find((n) =>
+    n.end ? pathname === n.to : pathname.startsWith(n.to),
+  );
 
   return (
     <div className="flex min-h-dvh bg-[#0B0A12] text-white">
+      {/* Sidebar */}
       <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col border-r border-white/8 bg-[#0E0C16] p-4 md:flex">
         <Brand />
-        <nav className="mt-8 flex flex-1 flex-col gap-1">
+        <p className="mt-7 px-3 text-[11px] font-semibold uppercase tracking-wider text-white/30">
+          Menu
+        </p>
+        <nav className="mt-2 flex flex-1 flex-col gap-1">
           {NAV.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.end}
               className={({ isActive }) =>
-                `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                `group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                   isActive
                     ? "bg-brand/15 text-white"
                     : "text-white/55 hover:bg-white/5 hover:text-white/90"
                 }`
               }
             >
-              <item.icon className="size-4.5" />
-              {item.label}
+              {({ isActive }) => (
+                <>
+                  <item.icon
+                    className={`size-4.5 ${isActive ? "text-brand-light" : "text-white/45 group-hover:text-white/70"}`}
+                  />
+                  {item.label}
+                </>
+              )}
             </NavLink>
           ))}
         </nav>
-        <div className="border-t border-white/8 pt-4">
-          <div className="mb-2 flex items-center gap-2.5 px-1">
-            <div className="grid size-8 place-items-center rounded-full bg-brand/20 text-xs font-bold text-brand-light">
-              {(username ?? "AD").slice(0, 2).toUpperCase()}
-            </div>
-            <div className="min-w-0">
-              <p className="truncate text-sm font-semibold text-white">{username ?? "Admin"}</p>
-              <p className="text-xs capitalize text-white/40">{role ?? "Administrator"}</p>
-            </div>
-          </div>
-          <button
-            onClick={logout}
-            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-white/55 hover:bg-white/5 hover:text-rose-300"
-          >
-            <LogOut className="size-4" /> Sign out
-          </button>
-        </div>
+        <button
+          onClick={logout}
+          className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-white/55 hover:bg-white/5 hover:text-rose-300"
+        >
+          <LogOut className="size-4" /> Sign out
+        </button>
       </aside>
 
-      {/* Mobile top bar */}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-white/8 bg-[#0E0C16] px-4 py-3 md:hidden">
-          <Brand />
-          <button onClick={logout} className="text-white/55 hover:text-rose-300">
-            <LogOut className="size-5" />
-          </button>
+        {/* Top header bar */}
+        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/8 bg-[#0B0A12]/80 px-4 py-3 backdrop-blur sm:px-6">
+          <div className="flex items-center gap-2 text-sm">
+            <span className="hidden text-white/40 sm:inline">Admin</span>
+            <ChevronRight className="hidden size-3.5 text-white/25 sm:inline" />
+            <span className="font-semibold text-white">{current?.label ?? "Dashboard"}</span>
+          </div>
+          <UserChip username={username} role={role} onSignOut={logout} />
         </header>
+
+        {/* Mobile nav */}
         <nav className="flex gap-1 overflow-x-auto border-b border-white/8 bg-[#0E0C16] px-2 py-2 md:hidden">
           {NAV.map((item) => (
             <NavLink
@@ -115,7 +127,6 @@ function Shell() {
             <Route index element={<Overview />} />
             <Route path="monitoring" element={<Monitoring />} />
             <Route path="users" element={<Moderation />} />
-            <Route path="analytics" element={<Analytics />} />
             <Route path="logs" element={<LoginLogs />} />
             <Route path="*" element={<Navigate to="/admin" replace />} />
           </Routes>
@@ -127,7 +138,7 @@ function Shell() {
 
 function Brand() {
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex items-center gap-2.5 px-1">
       <div className="grid size-9 place-items-center rounded-xl bg-brand text-white">
         <ShieldCheck className="size-5" />
       </div>
@@ -135,6 +146,35 @@ function Brand() {
         <p className="text-sm font-bold text-white">MeantGo</p>
         <p className="text-xs text-white/40">Admin Console</p>
       </div>
+    </div>
+  );
+}
+
+function UserChip({
+  username,
+  role,
+  onSignOut,
+}: {
+  username: string | null;
+  role: string | null;
+  onSignOut: () => void;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="hidden text-right sm:block">
+        <p className="text-sm font-semibold leading-tight text-white">{username ?? "Admin"}</p>
+        <p className="text-xs capitalize leading-tight text-white/40">{role ?? "Administrator"}</p>
+      </div>
+      <div className="grid size-9 place-items-center rounded-full bg-brand/20 text-xs font-bold text-brand-light">
+        {(username ?? "AD").slice(0, 2).toUpperCase()}
+      </div>
+      <button
+        onClick={onSignOut}
+        title="Sign out"
+        className="rounded-lg p-1.5 text-white/45 hover:bg-white/10 hover:text-rose-300 md:hidden"
+      >
+        <LogOut className="size-5" />
+      </button>
     </div>
   );
 }
