@@ -71,46 +71,50 @@ export default function Privacy() {
           <SectionTitle n={2} title="Information We Collect" />
 
           <SubTitle>Information You Provide</SubTitle>
-          <Table
-            headers={["Data", "Purpose", "Required"]}
-            rows={[
-              ["Phone number", "Account creation and OTP-based login", "Yes"],
-              ["Email address", "Account correspondence and recovery", "Yes"],
-              ["Full name", "Profile display", "Yes"],
-              ["Date of birth", "Age verification (18+) and profile display", "Yes"],
-              ["Gender", "Personalised discovery", "Yes"],
-              ["Relationship intention", "Matching with compatible users", "Yes"],
-              ["Interests (60+ options)", "Core matching algorithm input", "Yes"],
-              ["Profile photos (up to 6)", "Profile display in discovery feed", "Yes — min. 2"],
-              ["Profile video", "Introductory video on profile card", "Optional"],
-              ["Bio", "Personal description", "Optional"],
-              ["Height", "Profile display", "Optional"],
-              ["Lifestyle preferences", "Smoking and alcohol habits", "Optional"],
-              ["Family plans", "Children and future plans", "Optional"],
-            ]}
-          />
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">Identity:</strong> Your full name, date of
+              birth, and gender.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Contact details:</strong> Your phone number
+              and email address.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Profile content:</strong> Up to six photos,
+              an optional video introduction, a short bio, your interests, height, lifestyle
+              preferences, and family plans.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Relationship intention:</strong> Whether
+              you are looking for a serious relationship, casual dating, or friendship.
+            </li>
+          </ul>
 
           <SubTitle>Information Collected Automatically</SubTitle>
-          <Table
-            headers={["Data", "Purpose"]}
-            rows={[
-              ["GPS coordinates (with permission)", "Proximity-based discovery and distance display"],
-              ["Device push token", "Delivering push notifications"],
-              ["App usage data", "Improving app performance and user experience"],
-              ["Authentication tokens", "Maintaining your secure login session"],
-              ["OTP codes (temporary, max 5 min)", "Phone number verification during login"],
-            ]}
-          />
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">Location data:</strong> With your
+              permission, your approximate GPS location for proximity-based discovery.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Device data:</strong> A push token for
+              notifications and basic app usage data that helps us improve the experience.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Authentication data:</strong> Secure
+              session tokens and temporary one-time passcodes (OTPs) that keep you signed in.
+            </li>
+          </ul>
 
           <SubTitle>Information from Third Parties</SubTitle>
-          <Table
-            headers={["Source", "Data", "Why"]}
-            rows={[
-              ["SMS provider", "OTP delivery confirmation", "Phone number verification"],
-              ["Push notification service", "Device push token", "Push notification delivery"],
-              ["Cloud storage", "Media file keys", "Confirming successful photo/video upload"],
-            ]}
-          />
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">Service confirmations:</strong> Limited
+              technical confirmations from the services that deliver our SMS verification, push
+              notifications, and media storage.
+            </li>
+          </ul>
           <p className="mt-4">
             We do not purchase or acquire personal data from data brokers or marketing providers.
           </p>

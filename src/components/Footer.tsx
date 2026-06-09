@@ -71,7 +71,7 @@ export function Footer() {
           </div>
 
           {/* Link groups */}
-          <div className="grid gap-8 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             {footerGroups.map(({ title, links }) => (
               <div key={title}>
                 <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-white/40">
