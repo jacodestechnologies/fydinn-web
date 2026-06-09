@@ -1,7 +1,7 @@
-// Picks the DB driver at runtime: Postgres when a connection string is present
-// (Neon/Supabase/prod), otherwise SQLite for zero-setup local development.
-// Drivers are dynamically imported so the unused one (and its native binding)
-// is never loaded.
+// Admin DB layer. Always Postgres (Supabase) — local and production alike.
+// Set DATABASE_URL (or MEANTGO_POSTGRES_URL) to the Supabase connection string.
+
+import { createPostgres } from "./db.postgres.js";
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "meantgo-admin";
@@ -12,16 +12,14 @@ const DATABASE_URL =
   process.env.MEANTGO_POSTGRES_URL ||
   process.env.MEANTGO_POSTGRES_URL_NON_POOLING;
 
-let impl;
-if (DATABASE_URL) {
-  const { createPostgres } = await import("./db.postgres.js");
-  impl = await createPostgres(DATABASE_URL, seed);
-  console.log("[db] Using Postgres");
-} else {
-  const { createSqlite } = await import("./db.sqlite.js");
-  impl = createSqlite(seed);
-  console.log("[db] Using SQLite (set DATABASE_URL for Postgres)");
+if (!DATABASE_URL) {
+  throw new Error(
+    "[db] DATABASE_URL is not set. Add your Supabase Postgres connection string to .env",
+  );
 }
+
+const impl = await createPostgres(DATABASE_URL, seed);
+console.log("[db] Using Postgres");
 
 export const findAdmin = (username) => impl.findAdmin(username);
 export const recordLogin = (entry) => impl.recordLogin(entry);
