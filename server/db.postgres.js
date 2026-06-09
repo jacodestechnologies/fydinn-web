@@ -19,8 +19,10 @@ export async function createPostgres(connectionString, { seedUser, seedPass }) {
       id SERIAL PRIMARY KEY,
       username TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
+      role TEXT NOT NULL DEFAULT 'admin',
       created_at TIMESTAMPTZ NOT NULL DEFAULT now()
     );
+    ALTER TABLE admins ADD COLUMN IF NOT EXISTS role TEXT NOT NULL DEFAULT 'admin';
     CREATE TABLE IF NOT EXISTS login_logs (
       id SERIAL PRIMARY KEY,
       username TEXT NOT NULL,
@@ -29,20 +31,32 @@ export async function createPostgres(connectionString, { seedUser, seedPass }) {
       user_agent TEXT,
       created_at TIMESTAMPTZ NOT NULL DEFAULT now()
     );
+
+    -- Lock these tables down: enable RLS with no policies so they are NOT
+    -- reachable through Supabase's public REST API (anon/authenticated keys).
+    -- Our backend connects as the table owner, which bypasses RLS, so direct
+    -- queries keep working. Password hashes never leak via PostgREST.
+    ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
+    ALTER TABLE login_logs ENABLE ROW LEVEL SECURITY;
   `);
 
-  const { rows } = await pool.query("SELECT id FROM admins WHERE username = $1", [seedUser]);
-  if (rows.length === 0) {
-    await pool.query("INSERT INTO admins (username, password_hash) VALUES ($1, $2)", [
-      seedUser,
-      bcrypt.hashSync(seedPass, 10),
-    ]);
-    console.log(`[db] Seeded admin user "${seedUser}"`);
+  // Bootstrap ONLY when the admins table is empty. After that, admin accounts
+  // are managed directly in Supabase (the table is the source of truth, not env).
+  const { rows: existing } = await pool.query("SELECT COUNT(*)::int AS n FROM admins");
+  if (existing[0].n === 0) {
+    await pool.query(
+      "INSERT INTO admins (username, password_hash, role) VALUES ($1, $2, 'superadmin')",
+      [seedUser, bcrypt.hashSync(seedPass, 10)],
+    );
+    console.log(`[db] Bootstrapped first admin "${seedUser}" (role: superadmin)`);
   }
 
   return {
     findAdmin: async (username) => {
-      const res = await pool.query("SELECT * FROM admins WHERE username = $1", [username]);
+      const res = await pool.query(
+        "SELECT id, username, password_hash, role, created_at FROM admins WHERE username = $1",
+        [username],
+      );
       return res.rows[0] || null;
     },
     recordLogin: ({ username, success, ip, userAgent }) =>

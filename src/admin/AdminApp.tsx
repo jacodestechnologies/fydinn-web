@@ -41,7 +41,7 @@ function Gate() {
 /* ── Authenticated shell ── */
 
 function Shell() {
-  const { username, logout } = useAdminAuth();
+  const { username, role, logout } = useAdminAuth();
 
   return (
     <div className="flex min-h-dvh bg-[#0B0A12] text-white">
@@ -73,7 +73,7 @@ function Shell() {
             </div>
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold text-white">{username ?? "Admin"}</p>
-              <p className="text-xs text-white/40">Administrator</p>
+              <p className="text-xs capitalize text-white/40">{role ?? "Administrator"}</p>
             </div>
           </div>
           <button

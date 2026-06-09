@@ -12,6 +12,7 @@ import { AuthError, adminGet, clearToken, getToken, loginRequest } from "./api";
 type AuthCtx = {
   authed: boolean;
   username: string | null;
+  role: string | null;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
 };
@@ -21,28 +22,37 @@ const Ctx = createContext<AuthCtx | null>(null);
 export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [authed, setAuthed] = useState(() => Boolean(getToken()));
   const [username, setUsername] = useState<string | null>(null);
+  const [role, setRole] = useState<string | null>(null);
 
   const logout = useCallback(() => {
     clearToken();
     setAuthed(false);
     setUsername(null);
+    setRole(null);
   }, []);
 
   const login = useCallback(async (u: string, p: string) => {
     const data = await loginRequest(u, p);
     setUsername(data.username);
+    setRole(data.role);
     setAuthed(true);
   }, []);
 
   // Confirm the stored token is still valid on mount.
   useEffect(() => {
     if (!authed) return;
-    adminGet<{ username: string }>("/me")
-      .then((d) => setUsername(d.username))
+    adminGet<{ username: string; role: string | null }>("/me")
+      .then((d) => {
+        setUsername(d.username);
+        setRole(d.role);
+      })
       .catch(() => logout());
   }, [authed, logout]);
 
-  const value = useMemo(() => ({ authed, username, login, logout }), [authed, username, login, logout]);
+  const value = useMemo(
+    () => ({ authed, username, role, login, logout }),
+    [authed, username, role, login, logout],
+  );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 

@@ -59,19 +59,31 @@ app.post("/api/admin/login", async (req, res) => {
   if (!ok) {
     return res.status(401).json({ status: "error", message: "Invalid username or password" });
   }
-  const token = jwt.sign({ sub: admin.id, username: admin.username }, JWT_SECRET, {
-    expiresIn: SESSION_TTL,
-  });
+  const token = jwt.sign(
+    { sub: admin.id, username: admin.username, role: admin.role },
+    JWT_SECRET,
+    { expiresIn: SESSION_TTL },
+  );
   res.json({
     status: "success",
-    data: { token, tokenType: "Bearer", expiresIn: SESSION_TTL, username: admin.username },
+    data: {
+      token,
+      tokenType: "Bearer",
+      expiresIn: SESSION_TTL,
+      username: admin.username,
+      role: admin.role,
+    },
   });
 });
 
 app.get("/api/admin/me", requireAuth, (req, res) => {
   res.json({
     status: "success",
-    data: { username: req.admin.username, apiConfigured: apiConfigured() },
+    data: {
+      username: req.admin.username,
+      role: req.admin.role ?? null,
+      apiConfigured: apiConfigured(),
+    },
   });
 });
 

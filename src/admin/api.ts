@@ -34,7 +34,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export async function loginRequest(username: string, password: string) {
-  const data = await request<{ token: string; username: string }>("/login", {
+  const data = await request<{ token: string; username: string; role: string }>("/login", {
     method: "POST",
     body: JSON.stringify({ username, password }),
   });
