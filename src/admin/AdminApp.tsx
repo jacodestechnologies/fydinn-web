@@ -4,11 +4,11 @@ import {
   Activity,
   BarChart3,
   LayoutDashboard,
-  ListChecks,
   Loader2,
   LogOut,
   ScrollText,
   ShieldCheck,
+  Users,
 } from "lucide-react";
 import { AdminAuthProvider, useAdminAuth } from "./auth";
 import { Overview } from "./views/Overview";
@@ -20,7 +20,7 @@ import { LoginLogs } from "./views/LoginLogs";
 const NAV = [
   { to: "/admin", label: "Overview", icon: LayoutDashboard, end: true },
   { to: "/admin/monitoring", label: "Monitoring", icon: Activity, end: false },
-  { to: "/admin/moderation", label: "Moderation", icon: ListChecks, end: false },
+  { to: "/admin/users", label: "Users", icon: Users, end: false },
   { to: "/admin/analytics", label: "Analytics", icon: BarChart3, end: false },
   { to: "/admin/logs", label: "Login Logs", icon: ScrollText, end: false },
 ];
@@ -114,7 +114,7 @@ function Shell() {
           <Routes>
             <Route index element={<Overview />} />
             <Route path="monitoring" element={<Monitoring />} />
-            <Route path="moderation" element={<Moderation />} />
+            <Route path="users" element={<Moderation />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="logs" element={<LoginLogs />} />
             <Route path="*" element={<Navigate to="/admin" replace />} />

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { AlertTriangle, Loader2 } from "lucide-react";
+import { AlertTriangle, Loader2, TrendingDown, TrendingUp } from "lucide-react";
 
 /* ── Formatting helpers ── */
 
@@ -66,28 +66,97 @@ export function Card({ className = "", children }: { className?: string; childre
   );
 }
 
+export function DeltaPill({ delta, suffix = "" }: { delta: number; suffix?: string }) {
+  const up = delta >= 0;
+  return (
+    <span
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${
+        up ? "bg-emerald-400/10 text-emerald-300" : "bg-rose-400/10 text-rose-300"
+      }`}
+    >
+      {up ? <TrendingUp className="size-3" /> : <TrendingDown className="size-3" />}
+      {up ? "+" : ""}
+      {delta}
+      {suffix}
+    </span>
+  );
+}
+
 export function StatCard({
   label,
   value,
   sub,
   icon,
   accent = "text-brand-light",
+  delta,
 }: {
   label: string;
   value: ReactNode;
   sub?: ReactNode;
   icon?: ReactNode;
   accent?: string;
+  delta?: number;
 }) {
+  const hasTop = Boolean(icon) || typeof delta === "number";
   return (
     <Card className="p-5">
-      <div className="flex items-start justify-between">
-        <p className="text-xs font-semibold uppercase tracking-wider text-white/40">{label}</p>
-        {icon && <span className={accent}>{icon}</span>}
-      </div>
-      <p className="mt-3 text-3xl font-bold tracking-tight text-white">{value}</p>
+      {hasTop && (
+        <div className="mb-4 flex items-start justify-between">
+          {icon ? (
+            <span className={`grid size-10 place-items-center rounded-xl bg-white/[0.06] ${accent}`}>
+              {icon}
+            </span>
+          ) : (
+            <span />
+          )}
+          {typeof delta === "number" && <DeltaPill delta={delta} />}
+        </div>
+      )}
+      <p className="text-3xl font-bold tracking-tight text-white">{value}</p>
+      <p className="mt-1.5 text-xs font-semibold uppercase tracking-wider text-white/40">{label}</p>
       {sub && <p className="mt-1 text-xs text-white/45">{sub}</p>}
     </Card>
+  );
+}
+
+export function GradientStatCard({
+  label,
+  value,
+  sub,
+  icon,
+  delta,
+}: {
+  label: string;
+  value: ReactNode;
+  sub?: ReactNode;
+  icon?: ReactNode;
+  delta?: number;
+}) {
+  return (
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#4C1D95] p-5 text-white">
+      <div className="absolute -right-8 -top-8 size-32 rounded-full bg-white/15 blur-2xl" />
+      <div className="relative">
+        {(icon || typeof delta === "number") && (
+          <div className="mb-4 flex items-start justify-between">
+            {icon ? (
+              <span className="grid size-10 place-items-center rounded-xl bg-white/15">{icon}</span>
+            ) : (
+              <span />
+            )}
+            {typeof delta === "number" && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-0.5 text-xs font-semibold">
+                {delta >= 0 ? <TrendingUp className="size-3" /> : <TrendingDown className="size-3" />}
+                {delta >= 0 ? "+" : ""}
+                {delta}
+              </span>
+            )}
+          </div>
+        )}
+        <p className="text-3xl font-bold tracking-tight">{value}</p>
+        <p className="mt-1.5 text-xs font-semibold uppercase tracking-wider text-white/70">{label}</p>
+        {sub && <p className="mt-1 text-xs text-white/70">{sub}</p>}
+      </div>
+    </div>
   );
 }
 
