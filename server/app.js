@@ -94,16 +94,18 @@ app.get("/api/admin/login-logs", requireAuth, async (req, res) => {
 });
 
 // ── MeantGo Admin API proxies (token stays server-side) ──
-app.get("/api/admin/health", requireAuth, (req, res) => proxy(res, () => apiGet("/admin/health")));
+app.get("/api/admin/health", requireAuth, (req, res) =>
+  proxy(res, () => apiGet("/admin-old/health")),
+);
 
 app.get("/api/admin/metrics", requireAuth, (req, res) =>
-  proxy(res, () => apiGet("/admin/metrics")),
+  proxy(res, () => apiGet("/admin-old/metrics")),
 );
 
 app.get("/api/admin/users", requireAuth, (req, res) => {
   const limit = Math.min(Number(req.query.limit) || 100, 250);
   const offset = Math.max(Number(req.query.offset) || 0, 0);
-  proxy(res, () => apiGet(`/admin/users?limit=${limit}&offset=${offset}`));
+  proxy(res, () => apiGet(`/admin-old/users?limit=${limit}&offset=${offset}`));
 });
 
 app.get("/api/admin/ping", (req, res) => res.json({ status: "success", data: { ok: true } }));
