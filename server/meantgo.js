@@ -16,7 +16,7 @@ async function login(force = false) {
   if (!MEANTGO_ADMIN_TOKEN) {
     throw new Error("MEANTGO_ADMIN_TOKEN is not configured on the server");
   }
-  const res = await fetch(`${MEANTGO_API}/admin/login`, {
+  const res = await fetch(`${MEANTGO_API}/admin-old/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token: MEANTGO_ADMIN_TOKEN }),
@@ -26,9 +26,10 @@ async function login(force = false) {
     throw new Error(body.message || `Admin API login failed (HTTP ${res.status})`);
   }
 
-  const cookies = typeof res.headers.getSetCookie === "function"
-    ? res.headers.getSetCookie()
-    : [res.headers.get("set-cookie")].filter(Boolean);
+  const cookies =
+    typeof res.headers.getSetCookie === "function"
+      ? res.headers.getSetCookie()
+      : [res.headers.get("set-cookie")].filter(Boolean);
   const sessionLine = cookies.find((c) => c?.startsWith("admin_session=")) || cookies[0];
   if (!sessionLine) {
     throw new Error("Admin API login did not return a session cookie");
