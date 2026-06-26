@@ -9,23 +9,24 @@ import Terms from "@/pages/Terms";
 import Cookies from "@/pages/Cookies";
 import Contact from "@/pages/Contact";
 import DeleteAccount from "@/pages/DeleteAccount";
-import AdminApp from "@/admin/AdminApp";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return null;
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
-  
+
   return (
-    <div className={`flex flex-col min-h-dvh ${
-      theme === "dark"
-        ? "bg-surface text-text-main"
-        : "bg-warm-cream text-ink"
-    }`}>
+    <div
+      className={`flex flex-col min-h-dvh ${
+        theme === "dark" ? "bg-surface text-text-main" : "bg-warm-cream text-ink"
+      }`}
+    >
       <Nav />
       <main className="flex-1">{children}</main>
       <Footer />
@@ -87,7 +88,6 @@ export default function App() {
               </Layout>
             }
           />
-          <Route path="/admin/*" element={<AdminApp />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

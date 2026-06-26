@@ -139,6 +139,10 @@ export default function Privacy() {
         <section id="section-4">
           <SectionTitle n={4} title="How We Share Your Information" />
           <Callout>We do not sell your personal data.</Callout>
+          <Callout>
+            No mobile information will be sold or shared with third parties for promotional or
+            marketing purposes.
+          </Callout>
 
           <SubTitle>With Other Users</SubTitle>
           <p>

@@ -20,6 +20,11 @@ export function SiteFooter() {
               Intentional connections built on shared values and authentic conversation — not
               endless swiping.
             </p>
+            <address className="text-sm text-text-subtle font-light leading-relaxed not-italic">
+              3832 Roxberry Hill Lane
+              <br />
+              Buford, GA 30518
+            </address>
             <div className="flex gap-6 pt-2">
               {[
                 { label: "Instagram", href: "#" },

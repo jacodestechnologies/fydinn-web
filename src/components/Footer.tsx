@@ -57,6 +57,11 @@ export function Footer() {
             <p className="max-w-xs text-sm leading-relaxed text-white/55">
               Where meaningful connections begin. Match by intent, not just looks.
             </p>
+            <address className="mt-4 max-w-xs text-sm not-italic leading-relaxed text-white/55">
+              3832 Roxberry Hill Lane
+              <br />
+              Buford, GA 30518
+            </address>
             <div className="mt-5 flex gap-4">
               {["Instagram", "TikTok", "X"].map((item) => (
                 <a
