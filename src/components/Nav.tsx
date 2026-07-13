@@ -2,6 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import logoColor from "@/assets/logo/meantgo-horizontal.svg";
+import logoWhite from "@/assets/logo/meantgo-horizontal-white.svg";
 
 const navItems = [
   { label: "How It Works", href: "/#how-it-works" },
@@ -25,6 +27,9 @@ export function Nav() {
 
   // Transparent / white styling while sitting over the purple hero.
   const overHero = onHome && !scrolled;
+  // The dark-text wordmark only reads on a light surface, so fall back to the
+  // white wordmark whenever the header sits over the hero or the app is in dark mode.
+  const useWhiteLogo = overHero || theme === "dark";
 
   return (
     <header
@@ -36,27 +41,12 @@ export function Nav() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 font-semibold">
-          <span className="grid size-8 place-items-center rounded-lg bg-brand text-white shadow-[0_4px_12px_rgba(124,58,237,0.35)]">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              <path d="M8 10h.01M12 10h.01M16 10h.01" />
-            </svg>
-          </span>
-          <span
-            className={`text-lg font-bold tracking-tight ${overHero ? "text-white" : "text-ink"}`}
-          >
-            MeantGo
-          </span>
+        <Link to="/" className="flex items-center">
+          <img
+            src={useWhiteLogo ? logoWhite : logoColor}
+            alt="MeantGo"
+            className="h-8 w-auto"
+          />
         </Link>
 
         {/* Nav links — home only */}

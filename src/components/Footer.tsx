@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logoWhite from "@/assets/logo/meantgo-horizontal-white.svg";
 
 const footerGroups = [
   {
@@ -36,23 +37,8 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.5fr_2fr]">
           {/* Brand */}
           <div>
-            <div className="mb-4 flex items-center gap-2.5">
-              <span className="grid size-8 place-items-center rounded-lg bg-brand text-white shadow-[0_4px_12px_rgba(124,58,237,0.40)]">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                  <path d="M8 10h.01M12 10h.01M16 10h.01" />
-                </svg>
-              </span>
-              <span className="text-lg font-bold tracking-tight text-white">MeantGo</span>
+            <div className="mb-4 flex items-center">
+              <img src={logoWhite} alt="MeantGo" className="h-8 w-auto" />
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-white/55">
               Where meaningful connections begin. Match by intent, not just looks.
