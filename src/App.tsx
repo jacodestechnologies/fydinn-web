@@ -9,6 +9,7 @@ import Terms from "@/pages/Terms";
 import Cookies from "@/pages/Cookies";
 import Contact from "@/pages/Contact";
 import DeleteAccount from "@/pages/DeleteAccount";
+import ChildSafety from "@/pages/ChildSafety";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -85,6 +86,14 @@ export default function App() {
             element={
               <Layout>
                 <DeleteAccount />
+              </Layout>
+            }
+          />
+          <Route
+            path="/child-safety"
+            element={
+              <Layout>
+                <ChildSafety />
               </Layout>
             }
           />
