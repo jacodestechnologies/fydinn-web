@@ -10,6 +10,7 @@ import Cookies from "@/pages/Cookies";
 import Contact from "@/pages/Contact";
 import DeleteAccount from "@/pages/DeleteAccount";
 import ChildSafety from "@/pages/ChildSafety";
+import SharedProfile from "@/pages/SharedProfile";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -97,6 +98,7 @@ export default function App() {
               </Layout>
             }
           />
+          <Route path="/p/:token" element={<SharedProfile />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
