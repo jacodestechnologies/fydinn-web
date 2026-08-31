@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 import logoWhite from "@/assets/logo/meantgo-horizontal-white.svg";
 
+const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/meantgo/" },
+  { label: "Facebook", href: "https://www.facebook.com/MeantGoApp." },
+  { label: "TikTok", href: "#" },
+  { label: "X", href: "#" },
+];
+
 const footerGroups = [
   {
     title: "Product",
@@ -47,16 +54,17 @@ export function Footer() {
             <address className="mt-4 max-w-xs text-sm not-italic leading-relaxed text-white/55">
               3832 Roxberry Hill Lane
               <br />
-              Buford, GA 30518
+              Buford, GA 30518-8541
             </address>
             <div className="mt-5 flex gap-4">
-              {["Instagram", "TikTok", "X"].map((item) => (
+              {socialLinks.map(({ label, href }) => (
                 <a
-                  key={item}
-                  href="#"
+                  key={label}
+                  href={href}
+                  {...(href !== "#" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="text-xs font-semibold text-white/45 transition-colors hover:text-brand-light"
                 >
-                  {item}
+                  {label}
                 </a>
               ))}
             </div>

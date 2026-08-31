@@ -20,8 +20,15 @@ const contactChannels = [
     icon: MapPin,
     title: "Headquarters",
     desc: "Where we build MeantGo.",
-    value: "Lagos, Nigeria",
+    value: "Buford, GA 30518",
   },
+];
+
+const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/meantgo/" },
+  { label: "Facebook", href: "https://www.facebook.com/MeantGoApp." },
+  { label: "TikTok", href: "#" },
+  { label: "X", href: "#" },
 ];
 
 const subjects = [
@@ -99,13 +106,14 @@ export default function Contact() {
               Follow Us
             </p>
             <div className="flex gap-5">
-              {["Instagram", "TikTok", "X"].map((platform) => (
+              {socialLinks.map(({ label, href }) => (
                 <a
-                  key={platform}
-                  href="#"
+                  key={label}
+                  href={href}
+                  {...(href !== "#" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="text-sm font-semibold text-ink/55 hover:text-brand transition-colors"
                 >
-                  {platform}
+                  {label}
                 </a>
               ))}
             </div>
