@@ -1,34 +1,29 @@
 import { useState } from "react";
-import { Mail, MapPin, Shield, Clock, Send, Check } from "lucide-react";
+import { Mail, MapPin, Shield, Clock, Send, Check, Instagram, Facebook } from "lucide-react";
 
 const contactChannels = [
   {
     icon: Mail,
-    title: "General Enquiries",
-    desc: "Questions, feedback, or partnership ideas.",
+    sub: "General questions & support",
     value: "support@meantgo.com",
     href: "mailto:support@meantgo.com",
   },
   {
     icon: Shield,
-    title: "Privacy & Data",
-    desc: "Data requests, deletion, or privacy concerns.",
+    sub: "Privacy & data requests",
     value: "privacy@meantgo.com",
     href: "mailto:privacy@meantgo.com",
   },
   {
     icon: MapPin,
-    title: "Headquarters",
-    desc: "Where we build MeantGo.",
-    value: "Buford, GA 30518",
+    sub: "Headquarters",
+    value: "3832 Roxberry Hill Lane, Buford, GA 30518-8541",
   },
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/meantgo/" },
-  { label: "Facebook", href: "https://www.facebook.com/MeantGoApp." },
-  { label: "TikTok", href: "#" },
-  { label: "X", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/meantgo/", icon: Instagram },
+  { label: "Facebook", href: "https://www.facebook.com/MeantGoApp.", icon: Facebook },
 ];
 
 const subjects = [
@@ -65,58 +60,56 @@ export default function Contact() {
 
       <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-14">
         {/* Contact details */}
-        <div className="space-y-3">
-          {contactChannels.map(({ icon: Icon, title, desc, value, href }) => (
-            <div
-              key={title}
-              className="rounded-xl border border-ink/10 bg-surface-muted/40 p-5 flex gap-4"
-            >
-              <div className="grid size-10 shrink-0 place-items-center rounded-lg bg-brand/10 text-brand">
-                <Icon className="size-5" aria-hidden="true" />
+        <div>
+          <div className="rounded-xl border border-ink/10 bg-surface-muted/40 px-5">
+            {contactChannels.map(({ icon: Icon, sub, value, href }, i) => (
+              <div
+                key={sub}
+                className={`flex items-start gap-3.5 py-4 ${
+                  i !== contactChannels.length - 1 ? "border-b border-ink/10" : ""
+                }`}
+              >
+                <Icon className="size-5 shrink-0 mt-0.5 text-brand" aria-hidden="true" />
+                <div className="min-w-0">
+                  {href ? (
+                    <a
+                      href={href}
+                      className="block text-[15px] font-medium text-ink hover:text-brand transition-colors break-all"
+                    >
+                      {value}
+                    </a>
+                  ) : (
+                    <p className="text-[15px] font-medium text-ink">{value}</p>
+                  )}
+                  <p className="text-xs text-ink/40 mt-0.5">{sub}</p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-ink mb-0.5">{title}</p>
-                <p className="text-xs text-ink/50 mb-2 leading-relaxed">{desc}</p>
-                {href ? (
-                  <a
-                    href={href}
-                    className="text-sm font-medium text-brand hover:underline break-all"
-                  >
-                    {value}
-                  </a>
-                ) : (
-                  <p className="text-sm font-medium text-ink/75">{value}</p>
-                )}
-              </div>
+            ))}
+
+            {/* Social */}
+            <div className="flex gap-5 py-4">
+              {socialLinks.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink/55 hover:text-brand transition-colors"
+                >
+                  <Icon className="size-4" aria-hidden="true" />
+                  {label}
+                </a>
+              ))}
             </div>
-          ))}
+          </div>
 
           {/* Response time */}
-          <div className="rounded-xl border border-brand/20 bg-brand/5 p-5 flex gap-3 items-center">
+          <div className="mt-3 rounded-xl border border-brand/20 bg-brand/5 p-5 flex gap-3 items-center">
             <Clock className="size-5 shrink-0 text-brand" aria-hidden="true" />
             <p className="text-sm text-ink/70">
               We typically respond within{" "}
               <strong className="font-semibold text-ink">24–48 hours</strong>.
             </p>
-          </div>
-
-          {/* Social */}
-          <div className="pt-4 px-1">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink/40 mb-3">
-              Follow Us
-            </p>
-            <div className="flex gap-5">
-              {socialLinks.map(({ label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  {...(href !== "#" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="text-sm font-semibold text-ink/55 hover:text-brand transition-colors"
-                >
-                  {label}
-                </a>
-              ))}
-            </div>
           </div>
         </div>
 

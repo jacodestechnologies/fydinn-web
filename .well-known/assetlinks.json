@@ -5,7 +5,7 @@
       "namespace": "android_app",
       "package_name": "com.meantgo",
       "sha256_cert_fingerprints": [
-        "REPLACE_WITH_RELEASE_SHA256",
+        "A2:6A:20:C5:9C:69:78:FD:98:14:C2:8E:45:F0:28:59:4F:B7:AA:7A:47:70:2E:58:05:F7:09:C0:4E:F9:8B:93",
         "REPLACE_WITH_UPLOAD_KEY_SHA256_IF_USING_PLAY_SIGNING"
       ]
     }
