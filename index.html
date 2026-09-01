@@ -2,6 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        // Share links (/p/<token>) should hand off to the Android app before
+        // anything else loads — this runs synchronously, ahead of fonts/CSS/the
+        // app bundle, so there's no flash of the website first.
+        var m = /^\/p\/([^/]+)/.exec(location.pathname);
+        if (m && /Android/i.test(navigator.userAgent)) {
+          var token = m[1];
+          var fallback = encodeURIComponent(
+            "https://play.google.com/store/apps/details?id=com.meantgo",
+          );
+          location.replace(
+            "intent://meantgo.com/p/" +
+              token +
+              "#Intent;scheme=https;package=com.meantgo;S.browser_fallback_url=" +
+              fallback +
+              ";end",
+          );
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>MeantGo — Explore with Intent</title>

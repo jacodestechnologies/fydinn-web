@@ -2,19 +2,25 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import logoWhite from "@/assets/logo/meantgo-horizontal-white.svg";
 import { DownloadAppButton } from "@/components/DownloadAppButton";
-import { APP_CONFIG } from "@/lib/config";
+
+// Deterministic from the app's package id (com.meantgo) — used for the intent
+// fallback specifically so it never depends on VITE_GOOGLE_PLAY_URL being set.
+// The visible download badges below still use APP_CONFIG.googlePlayUrl.
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.meantgo";
 
 export default function SharedProfile() {
   const { token } = useParams<{ token: string }>();
 
+  // Backstop for the inline redirect in index.html, which already runs before
+  // this component ever mounts on a real share-link tap.
   useEffect(() => {
     if (!token) return;
     const isAndroid = /Android/i.test(navigator.userAgent);
     if (!isAndroid) return;
 
-    const fallback = encodeURIComponent(APP_CONFIG.googlePlayUrl);
+    const fallback = encodeURIComponent(PLAY_STORE_URL);
     const intentUrl = `intent://meantgo.com/p/${token}#Intent;scheme=https;package=com.meantgo;S.browser_fallback_url=${fallback};end`;
-    window.location.href = intentUrl;
+    window.location.replace(intentUrl);
   }, [token]);
 
   return (
