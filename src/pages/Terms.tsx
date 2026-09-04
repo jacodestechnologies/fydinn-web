@@ -443,8 +443,8 @@ export default function Terms() {
         <section id="section-17">
           <SectionTitle n={17} title="Third-Party Services and Links" />
           <p>
-            MeantGo relies on trusted third-party providers to operate, including Twilio (SMS
-            verification), Google Firebase (push notifications), and Amazon Web Services (media
+            MeantGo relies on trusted third-party providers to operate, including Sent (SMS
+            verification), Google Firebase (push notifications), and Tigris Web Services (media
             storage). Your use of the Service may be subject to those providers' terms. We are not
             responsible for the practices or content of any third-party service.
           </p>
