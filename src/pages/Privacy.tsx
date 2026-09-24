@@ -31,7 +31,6 @@ export default function Privacy() {
             "Children's Privacy",
             "Changes to This Policy",
             "Contact Us",
-            "Apple App Privacy Details",
           ].map((item, i) => (
             <li key={i}>
               <a href={`#section-${i + 1}`} className="hover:text-brand transition-colors">
@@ -97,8 +96,7 @@ export default function Privacy() {
             </li>
             <li>
               <strong className="font-semibold text-ink">Device data:</strong> A push token for
-              notifications, basic app usage data, and, where retained in our logs, technical
-              diagnostic information such as crash or performance data.
+              notifications and basic app usage data that helps us improve the experience.
             </li>
             <li>
               <strong className="font-semibold text-ink">Authentication data:</strong> Secure
@@ -391,89 +389,6 @@ export default function Privacy() {
           </p>
         </section>
 
-        {/* 13 */}
-        <section id="section-13">
-          <SectionTitle n={13} title="Apple App Privacy Details" />
-          <p>
-            For purposes of Apple's App Privacy Details, the categories of information we may
-            collect and the reasons we use them are summarised below. This summary describes the
-            same practices explained in this Policy and does not replace the App Store disclosures
-            submitted for a particular app version.
-          </p>
-
-          <div className="mt-5 overflow-x-auto rounded-lg border border-ink/10">
-            <table className="min-w-full text-left text-sm">
-              <thead className="bg-surface-muted text-xs uppercase tracking-[0.12em] text-ink/50">
-                <tr>
-                  <th className="px-4 py-3 font-bold">Apple category</th>
-                  <th className="px-4 py-3 font-bold">Examples</th>
-                  <th className="px-4 py-3 font-bold">Purpose</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-ink/10">
-                <PrivacyRow
-                  category="Contact Info"
-                  examples="Name, phone number, email address"
-                  purpose="App functionality and account management"
-                />
-                <PrivacyRow
-                  category="Identifiers"
-                  examples="Account identifier, session token, device or push token"
-                  purpose="App functionality, security, and notifications"
-                />
-                <PrivacyRow
-                  category="User Content"
-                  examples="Bio, interests, relationship intention, lifestyle preferences, family plans, and height"
-                  purpose="App functionality and product personalisation"
-                />
-                <PrivacyRow
-                  category="Photos or Videos"
-                  examples="Profile photos and video introduction"
-                  purpose="Profile display and social discovery"
-                />
-                <PrivacyRow
-                  category="Precise Location"
-                  examples="GPS coordinates collected with permission while using the app"
-                  purpose="Proximity-based discovery and distance matching"
-                />
-                <PrivacyRow
-                  category="Product Interaction"
-                  examples="Screens visited, features used, and session activity"
-                  purpose="Analytics and app functionality"
-                />
-                <PrivacyRow
-                  category="Diagnostics"
-                  examples="Basic technical, crash, or performance data where retained in our logs"
-                  purpose="App functionality, reliability, and performance improvement"
-                />
-                <PrivacyRow
-                  category="Other Data Types"
-                  examples="Date of birth, gender, and age-verification information"
-                  purpose="Account creation, profile personalisation, and safety"
-                />
-              </tbody>
-            </table>
-          </div>
-
-          <SubTitle>Linked to You</SubTitle>
-          <p>
-            Account, profile, contact, location, device, and account-linked usage information is
-            generally linked to your account or session. Analytics that have been fully aggregated
-            and anonymised cannot reasonably be linked to you.
-          </p>
-
-          <SubTitle>Tracking and Advertising</SubTitle>
-          <Callout>
-            We do not sell personal data, use data for third-party advertising, use cross-app or
-            cross-website tracking for advertising, or share data with data brokers for those
-            purposes.
-          </Callout>
-          <p className="mt-4">
-            We share information only with service providers needed to operate MeantGo, such as SMS
-            verification, push notification, and cloud storage providers, as described in Section 4.
-          </p>
-        </section>
-
         {/* Footer */}
         <div className="pt-6 border-t border-ink/10 text-xs text-ink/40">
           <p>© 2026 MeantGo. All Rights Reserved.</p>
@@ -516,23 +431,5 @@ function ContactCard({ title, lines }: { title: string; lines: string[] }) {
         </p>
       ))}
     </div>
-  );
-}
-
-function PrivacyRow({
-  category,
-  examples,
-  purpose,
-}: {
-  category: string;
-  examples: string;
-  purpose: string;
-}) {
-  return (
-    <tr className="align-top">
-      <th className="px-4 py-3 font-semibold text-ink">{category}</th>
-      <td className="px-4 py-3 text-ink/70">{examples}</td>
-      <td className="px-4 py-3 text-ink/70">{purpose}</td>
-    </tr>
   );
 }
