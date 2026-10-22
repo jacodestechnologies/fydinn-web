@@ -6,7 +6,10 @@ export const APP_CONFIG = {
     import.meta.env.VITE_DOWNLOAD_URL ||
     import.meta.env.VITE_APP_STORE_URL ||
     import.meta.env.VITE_GOOGLE_PLAY_URL ||
-    "#",
-  appStoreUrl: import.meta.env.VITE_APP_STORE_URL || "#",
-  googlePlayUrl: import.meta.env.VITE_GOOGLE_PLAY_URL || "#",
+    "https://apps.apple.com/ng/app/meantgo/id6814640216",
+  appStoreUrl:
+    import.meta.env.VITE_APP_STORE_URL || "https://apps.apple.com/ng/app/meantgo/id6814640216",
+  googlePlayUrl:
+    import.meta.env.VITE_GOOGLE_PLAY_URL ||
+    "https://play.google.com/store/apps/details?id=com.meantgo",
 };

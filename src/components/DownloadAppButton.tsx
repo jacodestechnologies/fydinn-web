@@ -17,6 +17,8 @@ export function DownloadAppButton({ align = "start", className = "" }: Props) {
     >
       <a
         href={APP_CONFIG.appStoreUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label="Download MeantGo on the App Store"
         className="inline-flex h-10 transition hover:-translate-y-px active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
       >
@@ -35,6 +37,8 @@ export function DownloadAppButton({ align = "start", className = "" }: Props) {
       </a>
       <a
         href={APP_CONFIG.googlePlayUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label="Get MeantGo on Google Play"
         className="inline-flex h-10 transition hover:-translate-y-px active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
       >
