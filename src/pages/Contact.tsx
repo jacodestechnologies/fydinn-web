@@ -1,5 +1,15 @@
 import { useState } from "react";
-import { Mail, MapPin, Shield, Clock, Send, Check, Instagram, Facebook } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Shield,
+  ShieldAlert,
+  Clock,
+  Send,
+  Check,
+  Instagram,
+  Facebook,
+} from "lucide-react";
 
 const contactChannels = [
   {
@@ -7,6 +17,12 @@ const contactChannels = [
     sub: "General questions & support",
     value: "support@meantgo.com",
     href: "mailto:support@meantgo.com",
+  },
+  {
+    icon: ShieldAlert,
+    sub: "Safety & scam reports",
+    value: "safety@meantgo.com",
+    href: "mailto:safety@meantgo.com",
   },
   {
     icon: Shield,
@@ -28,6 +44,7 @@ const socialLinks = [
 
 const subjects = [
   "General question",
+  "Report a scam or suspicious user/ad",
   "Account or login help",
   "Report a problem",
   "Privacy request",
@@ -53,8 +70,8 @@ export default function Contact() {
           We'd love to hear from you
         </h1>
         <p className="text-base sm:text-lg leading-relaxed text-ink/60">
-          Questions, feedback, partnership ideas, or just a hello — our inbox is always open and
-          we read every message.
+          Questions, feedback, partnership ideas, or just a hello — our inbox is always open and we
+          read every message.
         </p>
       </div>
 
@@ -120,9 +137,7 @@ export default function Contact() {
               <div className="grid size-14 place-items-center rounded-full bg-brand/15 text-brand mx-auto mb-5">
                 <Check className="size-7" aria-hidden="true" />
               </div>
-              <h2 className="text-2xl font-semibold tracking-tight text-ink mb-2">
-                Message sent
-              </h2>
+              <h2 className="text-2xl font-semibold tracking-tight text-ink mb-2">Message sent</h2>
               <p className="text-ink/60 max-w-sm mx-auto">
                 Thanks for reaching out. We'll get back to you within 24–48 hours at the email you
                 provided.

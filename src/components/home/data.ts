@@ -1,4 +1,14 @@
-import { Bell, Compass, EyeOff, Flag, Lock, Send, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  Bell,
+  Compass,
+  EyeOff,
+  Flag,
+  Lock,
+  Send,
+  ShieldAlert,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import amara from "@/assets/avatar-elena.jpg";
 import chidinma from "@/assets/avatar-sarah.jpg";
@@ -125,14 +135,14 @@ export const trustPoints: TrustPoint[] = [
     copy: "Every account goes through a verification layer before going live.",
   },
   {
+    icon: ShieldAlert,
+    label: "Scam & Fraud Protection",
+    copy: "Zero financial solicitation. Never send money to anyone. We actively detect and ban scammers.",
+  },
+  {
     icon: Lock,
     label: "Secure Messaging",
     copy: "Your conversations are private. Your data is yours.",
-  },
-  {
-    icon: Bell,
-    label: "You Control Your Status",
-    copy: "Set yourself as open to Intents or take a break anytime.",
   },
   {
     icon: EyeOff,

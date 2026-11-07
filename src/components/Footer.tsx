@@ -30,6 +30,7 @@ const footerGroups = [
     links: [
       { label: "Privacy Policy", href: "/privacy", internal: true },
       { label: "Terms of Service", href: "/terms", internal: true },
+      { label: "Anti-Scam Policy", href: "/terms#section-12" },
       { label: "Cookie Policy", href: "/cookies", internal: true },
       { label: "Child Safety", href: "/child-safety", internal: true },
       { label: "Delete Account", href: "/delete-account", internal: true },

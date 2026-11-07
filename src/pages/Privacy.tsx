@@ -9,8 +9,8 @@ export default function Privacy() {
         </h1>
         <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-ink/55">
           <span>Effective Date: June 8, 2026</span>
-          <span>Last Updated: June 8, 2026</span>
-          <span>Version 1.0</span>
+          <span>Last Updated: November 7, 2026</span>
+          <span>Version 1.1</span>
         </div>
       </div>
 
@@ -114,6 +114,9 @@ export default function Privacy() {
           </ul>
           <p className="mt-4">
             We do not purchase or acquire personal data from data brokers or marketing providers.
+            Furthermore, we do NOT collect, store, or process user-to-user banking credentials,
+            payment card numbers, or cryptocurrency wallet keys. MeantGo is not a financial
+            platform, and user-to-user money solicitations are strictly prohibited.
           </p>
         </section>
 
@@ -128,7 +131,10 @@ export default function Privacy() {
             <li>Process and manage Intent requests between users</li>
             <li>Enable in-app messaging between matched users</li>
             <li>Send OTP codes, push notifications, and transactional emails</li>
-            <li>Detect and investigate accounts that violate our Community Guidelines</li>
+            <li>
+              Detect, prevent, and investigate financial scams, fraudulent profiles, impersonation,
+              phishing attempts, and Community Guidelines violations
+            </li>
             <li>Enforce age verification (18+)</li>
             <li>Analyse anonymised usage patterns to improve the app</li>
             <li>Comply with applicable laws and legal obligations</li>
@@ -177,17 +183,45 @@ export default function Privacy() {
             data for any purpose beyond their contracted service.
           </p>
 
-          <SubTitle>Legal Disclosures and Business Transfers</SubTitle>
+          <SubTitle>Legal Disclosures and Anti-Fraud Cooperation</SubTitle>
           <p>
-            We may disclose your information where required by law, to protect our users or
-            platform, or in connection with a merger, acquisition, or sale of assets. We will notify
-            you of any such transfer and any material changes to data handling.
+            We may disclose your information where required by law, to protect our users or platform
+            against fraud, financial scams, harassment, or imminent safety threats, to cooperate
+            with anti-fraud authorities and law enforcement agencies, or in connection with a
+            merger, acquisition, or sale of assets. We will notify you of any such transfer and any
+            material changes to data handling where legally permissible.
           </p>
         </section>
 
         {/* 5 */}
         <section id="section-5">
           <SectionTitle n={5} title="Data Retention and Security" />
+
+          <SubTitle>Financial Privacy &amp; Anti-Fraud Safeguards</SubTitle>
+          <p>
+            MeantGo does not collect, hold, or process user-to-user payments. To safeguard your
+            financial privacy:
+          </p>
+          <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
+            <li>
+              <strong className="font-semibold text-ink">Zero financial solicitations:</strong>{" "}
+              Users are strictly prohibited from requesting money, cryptocurrency, wire transfers,
+              or gift cards on the platform or through any advertisement.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">
+                Staff will never ask for credentials:
+              </strong>{" "}
+              Official MeantGo representatives will NEVER ask you for your bank details, credit card
+              numbers, account passwords, or one-time passcodes (OTPs) via direct message or email.
+            </li>
+            <li>
+              <strong className="font-semibold text-ink">Reporting fraud:</strong> Suspicious
+              profiles, unauthorized advertisements, and messages soliciting money are investigated
+              promptly. Confirmed fraudulent accounts are immediately terminated, and relevant
+              evidence may be shared with cybercrime authorities to protect the community.
+            </li>
+          </ul>
 
           <SubTitle>How Long We Keep Your Data</SubTitle>
           <ul className="mt-3 space-y-2.5 pl-5 list-disc marker:text-brand">
@@ -368,11 +402,12 @@ export default function Privacy() {
         <section id="section-12">
           <SectionTitle n={12} title="Contact Us" />
           <p>For privacy-related questions, requests, or concerns, please reach out to us:</p>
-          <div className="mt-5 grid sm:grid-cols-2 gap-4">
+          <div className="mt-5 grid sm:grid-cols-3 gap-4">
             <ContactCard
               title="General Privacy"
               lines={["support@meantgo.com", "In-App: Settings > Help & Support"]}
             />
+            <ContactCard title="Safety & Anti-Fraud" lines={["safety@meantgo.com"]} />
             <ContactCard
               title="Mailing Address"
               lines={["MeantGo", "3832 Roxberry Hill Lane", "Buford, GA 30518-8541"]}
