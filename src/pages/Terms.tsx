@@ -11,8 +11,8 @@ export default function Terms() {
         </h1>
         <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-ink/55">
           <span>Effective Date: June 8, 2026</span>
-          <span>Last Updated: November 7, 2026</span>
-          <span>Version 1.2</span>
+          <span>Last Updated: November 15, 2026</span>
+          <span>Version 1.3</span>
         </div>
       </div>
 
@@ -621,9 +621,34 @@ export default function Terms() {
           <SectionTitle n={18} title="Third-Party Services, Links, and Advertisements" />
           <p>
             MeantGo relies on trusted third-party providers to operate, including Twilio (SMS
-            verification), Google Firebase (push notifications), and Amazon Web Services (media
-            storage). Your use of the Service may be subject to those providers' terms. We are not
+            verification), Google Firebase (push notifications), Amazon Web Services (media
+            storage), and Cloudflare (security, DDoS mitigation, and bot protection). Your use of
+            the Service may be subject to those providers' terms and privacy policies. We are not
             responsible for the practices or content of any third-party service.
+          </p>
+          <p className="mt-4">
+            To safeguard our Service against automated abuse, malicious activity, and spam bots, we
+            utilize Cloudflare Turnstile. Your interaction with Cloudflare Turnstile is governed by
+            Cloudflare's terms and privacy documentation. You can review how Cloudflare processes
+            verification data in the{" "}
+            <a
+              href="https://www.cloudflare.com/en-gb/turnstile-privacy-policy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand font-medium hover:underline"
+            >
+              Cloudflare Turnstile Privacy Policy
+            </a>{" "}
+            and the general{" "}
+            <a
+              href="https://www.cloudflare.com/privacypolicy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand font-medium hover:underline"
+            >
+              Cloudflare Privacy Policy
+            </a>
+            .
           </p>
           <p className="mt-4">
             The Service may also contain advertisements or links to third-party websites or
